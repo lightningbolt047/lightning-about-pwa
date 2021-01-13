@@ -15,6 +15,18 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
   AnimationController _controller;
 
+  ScrollController _sliverScrollerController=ScrollController();
+
+  double _appBarCurrentSize=200;
+  bool _lowWidth=false;
+
+  void _isLowWidth(){
+    if(MediaQuery.of(context).size.shortestSide<600){
+      _lowWidth=true;
+    }
+    return;
+  }
+
 
 
   void _launchURL(String url) async{
@@ -43,9 +55,12 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   @override
   Widget build(BuildContext context) {
     Size _fullSize=MediaQuery.of(context).size;
+    _isLowWidth();
+    print(_fullSize.width.toString());
     return Scaffold(
       backgroundColor: kFinalScaffoldColor,
       body: CustomScrollView(
+        controller: _sliverScrollerController,
         slivers: [
           SliverAppBar(
             backgroundColor: Colors.black,
@@ -79,6 +94,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
             ],
             flexibleSpace: LayoutBuilder(
               builder: (context,constraints){
+                _appBarCurrentSize=constraints.biggest.height;
                 return Stack(
                   children: [
                     Positioned.fill(
@@ -133,10 +149,46 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   fillColor: Colors.white,
                   splashColor: Colors.grey,
                   onPressed: (){
-                    Navigator.push(context, CupertinoPageRoute(builder: (context)=>FortniteScreen()));
+                    //Navigator.push(context, CupertinoPageRoute(builder: (context)=>FortniteScreen()));
+                    _sliverScrollerController.animateTo(_appBarCurrentSize,duration: Duration(seconds: 1),curve: Curves.easeInExpo);
                   },
                   child: Icon(Icons.keyboard_arrow_down),
                 ),
+              ),
+            ),
+          ),
+          SliverFillRemaining(
+            child: Card(
+              color: Colors.black,
+              child: Stack(
+                children: [
+                  Container(
+                    child: Image.asset('assets/home_screen_about_me_card_image.jpg',fit: BoxFit.cover,),
+                    width: _fullSize.width,
+                    height: _fullSize.height,
+                  ),
+                  Positioned.fill(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [Colors.black,Colors.transparent],
+                          begin: Alignment.centerRight,
+                          end: Alignment.centerLeft,
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CircleAvatar(
+                            backgroundImage: NetworkImage("https://miro.medium.com/max/3000/1*MI686k5sDQrISBM6L8pf5A.jpeg"),
+                            maxRadius: MediaQuery.of(context).size.width*0.05,
+                            minRadius: 10,
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
               ),
             ),
           ),
