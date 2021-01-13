@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   bool _lowWidth=false;
 
   void _isLowWidth(){
-    if(MediaQuery.of(context).size.shortestSide<600){
+    if(MediaQuery.of(context).size.width<600){
       _lowWidth=true;
     }
     return;
@@ -172,20 +172,11 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [Colors.black,Colors.transparent],
-                          begin: Alignment.centerRight,
-                          end: Alignment.centerLeft,
+                          begin: _lowWidth?Alignment.bottomCenter:Alignment.centerRight,
+                          end: _lowWidth?Alignment.topCenter:Alignment.centerLeft,
                         ),
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CircleAvatar(
-                            backgroundImage: NetworkImage("https://miro.medium.com/max/3000/1*MI686k5sDQrISBM6L8pf5A.jpeg"),
-                            maxRadius: MediaQuery.of(context).size.width*0.05,
-                            minRadius: 10,
-                          ),
-                        ],
-                      ),
+                      child: AboutMeSection(_lowWidth,_fullSize),
                     ),
                   )
                 ],
@@ -227,3 +218,44 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     );
   }
 }
+
+
+
+class AboutMeSection extends StatelessWidget {
+  
+  final bool _lowWidth;
+  final Size _fullSize;
+
+  AboutMeSection(this._lowWidth,this._fullSize);
+  
+  @override
+  Widget build(BuildContext context) {
+    if(_lowWidth){
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: _fullSize.height*0.05,
+          ),
+          CircleAvatar(
+            backgroundImage: NetworkImage("https://miro.medium.com/max/3000/1*MI686k5sDQrISBM6L8pf5A.jpeg"),
+            maxRadius: MediaQuery.of(context).size.height*0.07,
+            minRadius: 10,
+          ),
+        ],
+      );
+    }
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        CircleAvatar(
+          backgroundImage: NetworkImage("https://miro.medium.com/max/3000/1*MI686k5sDQrISBM6L8pf5A.jpeg"),
+          maxRadius: MediaQuery.of(context).size.width*0.05,
+          minRadius: 10,
+        ),
+      ],
+    );
+  }
+}
+
