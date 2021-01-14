@@ -296,65 +296,77 @@ class _AboutMeSectionState extends State<AboutMeSection> with SingleTickerProvid
     }
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          ScaleTransition(
-            scale: _aboutTextAnimation,
-            child: CircleAvatar(
+      child: ScaleTransition(
+        scale: _aboutTextAnimation,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            CircleAvatar(
               backgroundImage: NetworkImage("https://miro.medium.com/max/3000/1*MI686k5sDQrISBM6L8pf5A.jpeg"),
               maxRadius: MediaQuery.of(context).size.width*0.05,
               minRadius: 10,
             ),
-          ),
-          SizedBox(
-            width: _fullSize.width*0.25,
-          ),
-          Flexible(
-            child: LayoutBuilder(
-              builder: (context,constraints){
-                double widgetHeight=constraints.maxHeight;
-                print("Widget height: "+widgetHeight.toString());
-                if(widgetHeight>300){
-                  _animationController.forward();
-                }
-                else{
-                  _animationController.reverse();
-                }
-                return ScaleTransition(
-                  scale: _aboutTextAnimation,
-                  child: Column(
+            SizedBox(
+              width: _fullSize.width*0.2,
+            ),
+            Flexible(
+              child: LayoutBuilder(
+                builder: (context,constraints){
+                  double widgetHeight=constraints.maxHeight;
+                  print("Widget height: "+widgetHeight.toString());
+                  if(widgetHeight>300){
+                    _animationController.forward();
+                  }
+                  else{
+                    _animationController.reverse();
+                  }
+                  return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Expanded(
                         child: Center(
-                          child: Column(
-                            mainAxisAlignment:MainAxisAlignment.center,
-                            children: [
-                              AutoSizeText(
-                                aboutText,
-                                style: _horizontalAboutTextStyle,
-                                maxFontSize: 30,
-                                minFontSize: 5,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 10,
-                              ),
-                              RawMaterialButton(
-                                fillColor: Colors.white,
-                                child: Text("Hello",style: TextStyle(color: Colors.blue),),
-                              )
-                            ],
+                          child: AutoSizeText(
+                            aboutText,
+                            style: _horizontalAboutTextStyle,
+                            maxFontSize: 30,
+                            minFontSize: 5,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 10,
                           ),
                         ),
                       ),
                     ],
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
-          )
-        ],
+            SizedBox(
+              width: _fullSize.width*0.1,
+            ),
+            RawMaterialButton(
+              fillColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(15))
+              ),
+              splashColor: Colors.blueGrey,
+              hoverElevation: 7,
+              onPressed:(){},
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Text("Hello, how are u? This is a button",style: TextStyle(color: Colors.blue),),
+                    Padding(
+                      padding: const EdgeInsets.only(left:4.0),
+                      child: Icon(Icons.chevron_right,color: Colors.blue,),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
