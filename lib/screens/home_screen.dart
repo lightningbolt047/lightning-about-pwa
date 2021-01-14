@@ -315,7 +315,7 @@ class _AboutMeSectionState extends State<AboutMeSection> with SingleTickerProvid
               builder: (context,constraints){
                 double widgetHeight=constraints.maxHeight;
                 print("Widget height: "+widgetHeight.toString());
-                if(widgetHeight>500){
+                if(widgetHeight>300){
                   _animationController.forward();
                 }
                 else{
@@ -325,14 +325,28 @@ class _AboutMeSectionState extends State<AboutMeSection> with SingleTickerProvid
                   scale: _aboutTextAnimation,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      AutoSizeText(
-                        aboutText,
-                        style: _horizontalAboutTextStyle,
-                        maxFontSize: 30,
-                        minFontSize: 15,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 10,
+                      Expanded(
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment:MainAxisAlignment.center,
+                            children: [
+                              AutoSizeText(
+                                aboutText,
+                                style: _horizontalAboutTextStyle,
+                                maxFontSize: 30,
+                                minFontSize: 5,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 10,
+                              ),
+                              RawMaterialButton(
+                                fillColor: Colors.white,
+                                child: Text("Hello",style: TextStyle(color: Colors.blue),),
+                              )
+                            ],
+                          ),
+                        ),
                       ),
                     ],
                   ),
