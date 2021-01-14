@@ -1,11 +1,14 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:myresume/const.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 import 'fortnite_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sliver_fill_remaining_box_adapter/sliver_fill_remaining_box_adapter.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -56,7 +59,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   Widget build(BuildContext context) {
     Size _fullSize=MediaQuery.of(context).size;
     _isLowWidth();
-    print(_fullSize.width.toString());
+    print("Width: "+_fullSize.width.toString());
+    print("Height: "+_fullSize.height.toString());
     return Scaffold(
       backgroundColor: kFinalScaffoldColor,
       body: CustomScrollView(
@@ -158,6 +162,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
             ),
           ),
           SliverFillRemaining(
+            hasScrollBody: true,
             child: Card(
               color: Colors.black,
               child: Stack(
@@ -221,13 +226,56 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
 
 
-class AboutMeSection extends StatelessWidget {
-  
+class AboutMeSection extends StatefulWidget {
   final bool _lowWidth;
   final Size _fullSize;
 
   AboutMeSection(this._lowWidth,this._fullSize);
-  
+
+  @override
+  _AboutMeSectionState createState() => _AboutMeSectionState(this._lowWidth,this._fullSize);
+}
+
+class _AboutMeSectionState extends State<AboutMeSection> with SingleTickerProviderStateMixin {
+  final bool _lowWidth;
+  final Size _fullSize;
+
+  _AboutMeSectionState(this._lowWidth,this._fullSize);
+
+
+  String aboutText="This is a text which is many lines long, describes me. I haven\'t decided what I'm going to do with  this space. Hopefully, everything that I write about me fits in here. This is a text which is many lines long, describes me. I haven\'t decided what I'm going to do with  this space. Hopefully, everything that I write about me fits in here. This is a text which is many lines long, describes me. I haven\'t decided what I'm going to do with  this space. Hopefully, everything that I write about me fits in here. This is a text which is many lines long, describes me. I haven\'t decided what I'm going to do with  this space. Hopefully, everything that I write about me fits in here. ";
+
+  AnimationController _animationController;
+  Animation<double> _aboutTextAnimation;
+
+  TextStyle _horizontalAboutTextStyle=TextStyle(color: Colors.white,fontSize: 25,);
+
+
+
+
+
+
+  @override
+  void initState() {
+    _animationController=AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 250)
+    );
+
+    _aboutTextAnimation=Tween<double>(
+      begin: 0,
+      end: 1
+    ).animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.fastLinearToSlowEaseIn
+    ));
+
+    super.initState();
+  }
+
+
+
+
   @override
   Widget build(BuildContext context) {
     if(_lowWidth){
@@ -246,16 +294,56 @@ class AboutMeSection extends StatelessWidget {
         ],
       );
     }
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        CircleAvatar(
-          backgroundImage: NetworkImage("https://miro.medium.com/max/3000/1*MI686k5sDQrISBM6L8pf5A.jpeg"),
-          maxRadius: MediaQuery.of(context).size.width*0.05,
-          minRadius: 10,
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          ScaleTransition(
+            scale: _aboutTextAnimation,
+            child: CircleAvatar(
+              backgroundImage: NetworkImage("https://miro.medium.com/max/3000/1*MI686k5sDQrISBM6L8pf5A.jpeg"),
+              maxRadius: MediaQuery.of(context).size.width*0.05,
+              minRadius: 10,
+            ),
+          ),
+          SizedBox(
+            width: _fullSize.width*0.25,
+          ),
+          Flexible(
+            child: LayoutBuilder(
+              builder: (context,constraints){
+                double widgetHeight=constraints.maxHeight;
+                print("Widget height: "+widgetHeight.toString());
+                if(widgetHeight>500){
+                  _animationController.forward();
+                }
+                else{
+                  _animationController.reverse();
+                }
+                return ScaleTransition(
+                  scale: _aboutTextAnimation,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      AutoSizeText(
+                        aboutText,
+                        style: _horizontalAboutTextStyle,
+                        maxFontSize: 30,
+                        minFontSize: 15,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 10,
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          )
+        ],
+      ),
     );
   }
 }
+
 
