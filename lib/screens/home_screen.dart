@@ -248,7 +248,9 @@ class _AboutMeSectionState extends State<AboutMeSection> with SingleTickerProvid
   AnimationController _animationController;
   Animation<double> _aboutTextAnimation;
 
-  TextStyle _horizontalAboutTextStyle=TextStyle(color: Colors.white,fontSize: 25,);
+  TextStyle _landscapeAboutTextStyle=TextStyle(color: Colors.white,fontSize: 25,);
+
+  TextStyle _portraitAboutTextStyle=TextStyle(color: Colors.white,fontSize: 15);
 
 
 
@@ -259,7 +261,7 @@ class _AboutMeSectionState extends State<AboutMeSection> with SingleTickerProvid
   void initState() {
     _animationController=AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 250)
+      duration: Duration(milliseconds: 500)
     );
 
     _aboutTextAnimation=Tween<double>(
@@ -279,19 +281,82 @@ class _AboutMeSectionState extends State<AboutMeSection> with SingleTickerProvid
   @override
   Widget build(BuildContext context) {
     if(_lowWidth){
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: _fullSize.height*0.05,
+      return Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ScaleTransition(
+          scale: _aboutTextAnimation,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CircleAvatar(
+                backgroundImage: NetworkImage("https://miro.medium.com/max/3000/1*MI686k5sDQrISBM6L8pf5A.jpeg"),
+                maxRadius: MediaQuery.of(context).size.height*0.07,
+                minRadius: 10,
+              ),
+              SizedBox(
+                width: _fullSize.height*0.05,
+              ),
+              Flexible(
+                child: LayoutBuilder(
+                  builder: (context,constraints){
+                    double widgetHeight=constraints.maxHeight;
+                    print("Widget height: "+widgetHeight.toString());
+                    if(widgetHeight>200){
+                      _animationController.forward();
+                    }
+                    else{
+                      _animationController.reverse();
+                    }
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Center(
+                            child: AutoSizeText(
+                              aboutText,
+                              style: _portraitAboutTextStyle,
+                              maxFontSize: 20,
+                              minFontSize: 1,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 25,
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  RawMaterialButton(
+                    fillColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(15))
+                    ),
+                    splashColor: Colors.blueGrey,
+                    hoverElevation: 7,
+                    onPressed:(){},
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Text("Hello, how are u? This is a button",style: TextStyle(color: Colors.blue),),
+                          Padding(
+                            padding: const EdgeInsets.only(left:4.0),
+                            child: Icon(Icons.chevron_right,color: Colors.blue,),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
-          CircleAvatar(
-            backgroundImage: NetworkImage("https://miro.medium.com/max/3000/1*MI686k5sDQrISBM6L8pf5A.jpeg"),
-            maxRadius: MediaQuery.of(context).size.height*0.07,
-            minRadius: 10,
-          ),
-        ],
+        ),
       );
     }
     return Padding(
@@ -328,7 +393,7 @@ class _AboutMeSectionState extends State<AboutMeSection> with SingleTickerProvid
                         child: Center(
                           child: AutoSizeText(
                             aboutText,
-                            style: _horizontalAboutTextStyle,
+                            style: _landscapeAboutTextStyle,
                             maxFontSize: 30,
                             minFontSize: 5,
                             overflow: TextOverflow.ellipsis,
