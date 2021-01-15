@@ -250,7 +250,7 @@ class _AboutMeSectionState extends State<AboutMeSection> with SingleTickerProvid
 
   TextStyle _landscapeAboutTextStyle=TextStyle(color: Colors.white,fontSize: 25,);
 
-  TextStyle _portraitAboutTextStyle=TextStyle(color: Colors.white,fontSize: 15);
+  TextStyle _portraitAboutTextStyle=TextStyle(color: Colors.white,fontSize: 16);
 
 
 
