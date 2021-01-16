@@ -90,7 +90,7 @@ class _FortniteScreenState extends State<FortniteScreen> with SingleTickerProvid
                       title: Container(
                         padding:EdgeInsets.only(bottom: 8,top: 16),
                         child: Hero(
-                          tag:"SplashIcon",
+                          tag:"HometoFortnite",
                           child: Container(
                             child: Image.asset('assets/fortnite_logo.png',fit: BoxFit.contain,),
                           ),

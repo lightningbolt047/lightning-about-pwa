@@ -207,12 +207,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                         end: Alignment.centerRight,
                       ),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-
-                      ],
-                    ),
+                    child: FortniteCardSection(_lowWidth,_fullSize),
                   )
                 ],
               ),
@@ -248,9 +243,15 @@ class _AboutMeSectionState extends State<AboutMeSection> with SingleTickerProvid
   AnimationController _animationController;
   Animation<double> _aboutTextAnimation;
 
-  TextStyle _landscapeAboutTextStyle=TextStyle(color: Colors.white,fontSize: 25,);
+  TextStyle _landscapeAboutTextStyle=TextStyle(color: Colors.white,fontSize: 20,);
 
   TextStyle _portraitAboutTextStyle=TextStyle(color: Colors.white,fontSize: 16);
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
 
 
 
@@ -261,7 +262,7 @@ class _AboutMeSectionState extends State<AboutMeSection> with SingleTickerProvid
   void initState() {
     _animationController=AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 500)
+      duration: Duration(seconds: 1)
     );
 
     _aboutTextAnimation=Tween<double>(
@@ -283,8 +284,8 @@ class _AboutMeSectionState extends State<AboutMeSection> with SingleTickerProvid
     if(_lowWidth){
       return Padding(
         padding: const EdgeInsets.all(16.0),
-        child: ScaleTransition(
-          scale: _aboutTextAnimation,
+        child: FadeTransition(
+          opacity: _aboutTextAnimation,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -300,7 +301,6 @@ class _AboutMeSectionState extends State<AboutMeSection> with SingleTickerProvid
                 child: LayoutBuilder(
                   builder: (context,constraints){
                     double widgetHeight=constraints.maxHeight;
-                    print("Widget height: "+widgetHeight.toString());
                     if(widgetHeight>200){
                       _animationController.forward();
                     }
@@ -361,8 +361,8 @@ class _AboutMeSectionState extends State<AboutMeSection> with SingleTickerProvid
     }
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: ScaleTransition(
-        scale: _aboutTextAnimation,
+      child: FadeTransition(
+        opacity: _aboutTextAnimation,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -372,13 +372,12 @@ class _AboutMeSectionState extends State<AboutMeSection> with SingleTickerProvid
               minRadius: 10,
             ),
             SizedBox(
-              width: _fullSize.width*0.2,
+              width: _fullSize.width*0.1,
             ),
             Flexible(
               child: LayoutBuilder(
                 builder: (context,constraints){
                   double widgetHeight=constraints.maxHeight;
-                  print("Widget height: "+widgetHeight.toString());
                   if(widgetHeight>300){
                     _animationController.forward();
                   }
@@ -394,10 +393,10 @@ class _AboutMeSectionState extends State<AboutMeSection> with SingleTickerProvid
                           child: AutoSizeText(
                             aboutText,
                             style: _landscapeAboutTextStyle,
-                            maxFontSize: 30,
+                            maxFontSize: 25,
                             minFontSize: 5,
                             overflow: TextOverflow.ellipsis,
-                            maxLines: 10,
+                            maxLines: 25,
                           ),
                         ),
                       ),
@@ -436,5 +435,95 @@ class _AboutMeSectionState extends State<AboutMeSection> with SingleTickerProvid
     );
   }
 }
+
+
+
+class FortniteCardSection extends StatefulWidget {
+
+  final bool _lowWidth;
+  final Size _fullSize;
+
+  FortniteCardSection(this._lowWidth,this._fullSize);
+
+  @override
+  _FortniteCardSectionState createState() => _FortniteCardSectionState(this._lowWidth,this._fullSize);
+}
+
+class _FortniteCardSectionState extends State<FortniteCardSection> with SingleTickerProviderStateMixin {
+  AnimationController _controller;
+  final bool _lowWidth;
+  final Size _fullSize;
+
+  double _minFontSize,_maxFontSize;
+
+  _FortniteCardSectionState(this._lowWidth,this._fullSize);
+
+  @override
+  void initState() {
+    _controller = AnimationController(vsync: this);
+    super.initState();
+    if(_lowWidth){
+      _minFontSize=10;
+      _maxFontSize=15;
+    }
+    else{
+      _minFontSize=10;
+      _maxFontSize=20;
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                  width:_fullSize.width*0.3,
+                  child: AutoSizeText("Did I tell you that I spend some of my free hours playing games?",minFontSize:_minFontSize,maxFontSize:_maxFontSize,maxLines:4,style: TextStyle(color: Colors.white,fontSize: _maxFontSize),)),
+              Hero(
+                tag: "HometoFortnite",
+                child: RawMaterialButton(
+                  fillColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(15))
+                  ),
+                  splashColor: Colors.blueGrey,
+                  hoverElevation: 7,
+                  onPressed:(){
+                    Navigator.push(context, CupertinoPageRoute(builder: (context)=>FortniteScreen()));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Text("Check out my game stats",style: TextStyle(color: Colors.blue),),
+                        Padding(
+                          padding: const EdgeInsets.only(left:4.0),
+                          child: Icon(Icons.chevron_right,color: Colors.blue,),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        )
+      ],
+    );
+  }
+}
+
 
 
