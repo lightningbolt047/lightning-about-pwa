@@ -9,6 +9,7 @@ import 'package:visibility_detector/visibility_detector.dart';
 import 'fortnite_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sliver_fill_remaining_box_adapter/sliver_fill_remaining_box_adapter.dart';
+import 'about_me_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -22,6 +23,9 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
   double _appBarCurrentSize=200;
   bool _lowWidth=false;
+
+
+
 
   void _isLowWidth(){
     if(MediaQuery.of(context).size.width<600){
@@ -91,7 +95,29 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                       onPressed: (){
                         _launchURL(githubProfileURL);
                       },
-                    )
+                    ),
+                    IconButton(
+                      icon: Icon(FontAwesomeIcons.infoCircle,color: Colors.white,),
+                      onPressed:(){
+                        showDialog(
+                          context: context,
+                          builder: (context)=>AlertDialog(
+                            title: Text("Alert"),
+                            content: Text("Flutter web is still in beta (as of 17 Jan 2021)\nThere is a chance that you might experience weird glitches"),
+                            contentPadding: EdgeInsets.all(16),
+                            actionsPadding: EdgeInsets.all(8),
+                            actions: [
+                              TextButton(
+                                child:Text("OK"),
+                                onPressed: (){
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                    ),
                   ],
                 ),
               ),
@@ -247,6 +273,14 @@ class _AboutMeSectionState extends State<AboutMeSection> with SingleTickerProvid
 
   TextStyle _portraitAboutTextStyle=TextStyle(color: Colors.white,fontSize: 16);
 
+
+
+  Function _onButtonPressedAction=(BuildContext context){
+    Navigator.push(context, CupertinoPageRoute(builder: (context)=>AboutMe()));
+  };
+
+
+
   @override
   void dispose() {
     _animationController.dispose();
@@ -338,7 +372,9 @@ class _AboutMeSectionState extends State<AboutMeSection> with SingleTickerProvid
                     ),
                     splashColor: Colors.blueGrey,
                     hoverElevation: 7,
-                    onPressed:(){},
+                    onPressed:(){
+                      _onButtonPressedAction(context);
+                    },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
@@ -415,7 +451,9 @@ class _AboutMeSectionState extends State<AboutMeSection> with SingleTickerProvid
               ),
               splashColor: Colors.blueGrey,
               hoverElevation: 7,
-              onPressed:(){},
+              onPressed:(){
+                _onButtonPressedAction(context);
+              },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
