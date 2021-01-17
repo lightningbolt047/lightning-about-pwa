@@ -464,7 +464,7 @@ class _FortniteCardSectionState extends State<FortniteCardSection> with SingleTi
     super.initState();
     if(_lowWidth){
       _minFontSize=10;
-      _maxFontSize=15;
+      _maxFontSize=17;
     }
     else{
       _minFontSize=10;
@@ -487,9 +487,10 @@ class _FortniteCardSectionState extends State<FortniteCardSection> with SingleTi
           padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                  width:_fullSize.width*0.3,
+                  width:_lowWidth?_fullSize.width*0.5:_fullSize.width*0.3,
                   child: AutoSizeText("Did I tell you that I spend some of my free hours playing games?",minFontSize:_minFontSize,maxFontSize:_maxFontSize,maxLines:4,style: TextStyle(color: Colors.white,fontSize: _maxFontSize),)),
               Hero(
                 tag: "HometoFortnite",
