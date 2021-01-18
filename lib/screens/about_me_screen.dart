@@ -29,6 +29,9 @@ class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     _tabController=TabController(length: 3,vsync: this,initialIndex: 0);
+    _tabController.addListener(() {
+      setState(() {});
+    });
     super.initState();
   }
 
@@ -60,37 +63,25 @@ class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
             children: [
               GestureDetector(
                 behavior: HitTestBehavior.opaque,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("Skills",style: TextStyle(color: Colors.white,fontWeight: (_tabController.index==0)?FontWeight.bold:FontWeight.normal,fontSize: bottomNavBarOptionTextSize),),
-                ),
+                child: Text("Skills",style: TextStyle(color: Colors.white,fontWeight: (_tabController.index==0)?FontWeight.bold:FontWeight.normal,fontSize: bottomNavBarOptionTextSize),),
                 onTap: () {
                   _tabController.animateTo(0);
-                  setState(() {});
                 },
               ),
               GestureDetector(
                 behavior: HitTestBehavior.translucent,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("Projects",style: TextStyle(color: Colors.white,fontWeight:(_tabController.index==1)?FontWeight.bold:FontWeight.normal,fontSize: bottomNavBarOptionTextSize),),
-                ),
+                child: Text("Projects",style: TextStyle(color: Colors.white,fontWeight:(_tabController.index==1)?FontWeight.bold:FontWeight.normal,fontSize: bottomNavBarOptionTextSize),),
                 onTap: (){
                   print("Settings pressed");
                   _tabController.animateTo(1);
-                  setState(() {});
                 },
               ),
               GestureDetector(
                 behavior: HitTestBehavior.translucent,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("Contact Me",style: TextStyle(color: Colors.white,fontWeight:(_tabController.index==2)?FontWeight.bold:FontWeight.normal,fontSize: bottomNavBarOptionTextSize),),
-                ),
+                child: Text("Contact Me",style: TextStyle(color: Colors.white,fontWeight:(_tabController.index==2)?FontWeight.bold:FontWeight.normal,fontSize: bottomNavBarOptionTextSize),),
                 onTap: (){
                   print("Settings pressed");
                   _tabController.animateTo(2);
-                  setState(() {});
                 },
               )
             ],
@@ -323,7 +314,7 @@ class _MySkillsState extends State<MySkills> with SingleTickerProviderStateMixin
                                 children: [
                                   Column(
                                     children: [
-                                      Icon(CommunityMaterialIcons.firebase,color: Colors.white,size: _lowWidth?35:60,),
+                                      Icon(CommunityMaterialIcons.firebase,color: Colors.white,size: (_lowWidth || _fullSize.height<600)?35:60,),
                                       Text("Firebase",style: TextStyle(color: Colors.white,fontSize: _lowWidth?8:15),),
                                     ],
                                   ),
@@ -332,7 +323,7 @@ class _MySkillsState extends State<MySkills> with SingleTickerProviderStateMixin
                                   ),
                                   Column(
                                     children: [
-                                      Image.asset('assets/mongodb_icon.png',fit: BoxFit.contain,color: Colors.white,scale: _lowWidth?4:2.2,),
+                                      Image.asset('assets/mongodb_icon.png',fit: BoxFit.contain,color: Colors.white,scale: (_lowWidth || _fullSize.height<600)?4:2.2,),
                                       Text("MongoDB",style: TextStyle(color: Colors.white,fontSize: _lowWidth?8:15),),
                                     ],
                                   ),
@@ -342,7 +333,7 @@ class _MySkillsState extends State<MySkills> with SingleTickerProviderStateMixin
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
-                                      Image.asset('assets/sql_icon.png',fit: BoxFit.contain,color: Colors.white,scale: _lowWidth?4:2.2,),
+                                      Image.asset('assets/sql_icon.png',fit: BoxFit.contain,color: Colors.white,scale: (_lowWidth || _fullSize.height<600)?4:2.2,),
                                       Text("SQL",style: TextStyle(color: Colors.white,fontSize: _lowWidth?8:15),),
                                     ],
                                   ),
