@@ -265,6 +265,8 @@ class _AboutMeSectionState extends State<AboutMeSection> with SingleTickerProvid
 
 
   String aboutText="This is a text which is many lines long, describes me. I haven\'t decided what I'm going to do with  this space. Hopefully, everything that I write about me fits in here. This is a text which is many lines long, describes me. I haven\'t decided what I'm going to do with  this space. Hopefully, everything that I write about me fits in here. This is a text which is many lines long, describes me. I haven\'t decided what I'm going to do with  this space. Hopefully, everything that I write about me fits in here. This is a text which is many lines long, describes me. I haven\'t decided what I'm going to do with  this space. Hopefully, everything that I write about me fits in here. ";
+  String buttonText="More info";
+
 
   AnimationController _animationController;
   Animation<double> _aboutTextAnimation;
@@ -379,7 +381,7 @@ class _AboutMeSectionState extends State<AboutMeSection> with SingleTickerProvid
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
-                          Text("Hello, how are u? This is a button",style: TextStyle(color: Colors.blue),),
+                          Text(buttonText,style: TextStyle(color: Colors.blue),),
                           Padding(
                             padding: const EdgeInsets.only(left:4.0),
                             child: Icon(Icons.chevron_right,color: Colors.blue,),
@@ -458,7 +460,7 @@ class _AboutMeSectionState extends State<AboutMeSection> with SingleTickerProvid
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
-                    Text("Hello, how are u? This is a button",style: TextStyle(color: Colors.blue),),
+                    Text(buttonText,style: TextStyle(color: Colors.blue),),
                     Padding(
                       padding: const EdgeInsets.only(left:4.0),
                       child: Icon(Icons.chevron_right,color: Colors.blue,),

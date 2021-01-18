@@ -14,11 +14,13 @@ class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
 
   TabController _tabController;
   bool _lowWidth=false;
+  double bottomNavBarOptionTextSize=20;
 
 
   void _isLowWidth(){
     if(MediaQuery.of(context).size.width<600){
       _lowWidth=true;
+      bottomNavBarOptionTextSize=17;
     }
     return;
   }
@@ -46,6 +48,54 @@ class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
         title: Text("Skills",style: TextStyle(fontWeight: FontWeight.bold),),
         backgroundColor: kFinalScaffoldColor,
         centerTitle: true,
+      ),
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        color: kFinalScaffoldColor,
+        elevation: 0,
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("Skills",style: TextStyle(color: Colors.white,fontWeight: (_tabController.index==0)?FontWeight.bold:FontWeight.normal,fontSize: bottomNavBarOptionTextSize),),
+                ),
+                onTap: () {
+                  _tabController.animateTo(0);
+                  setState(() {});
+                },
+              ),
+              GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("Projects",style: TextStyle(color: Colors.white,fontWeight:(_tabController.index==1)?FontWeight.bold:FontWeight.normal,fontSize: bottomNavBarOptionTextSize),),
+                ),
+                onTap: (){
+                  print("Settings pressed");
+                  _tabController.animateTo(1);
+                  setState(() {});
+                },
+              ),
+              GestureDetector(
+                behavior: HitTestBehavior.translucent,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("Contact Me",style: TextStyle(color: Colors.white,fontWeight:(_tabController.index==2)?FontWeight.bold:FontWeight.normal,fontSize: bottomNavBarOptionTextSize),),
+                ),
+                onTap: (){
+                  print("Settings pressed");
+                  _tabController.animateTo(2);
+                  setState(() {});
+                },
+              )
+            ],
+          ),
+        ),
       ),
       body: TabBarView(
         controller: _tabController,
@@ -77,6 +127,7 @@ class _MySkillsState extends State<MySkills> with SingleTickerProviderStateMixin
   Animation<Offset> _stackNameSlideAnimation;
   Animation<Offset> _frameworkSlideAnimation;
   Animation<Offset> _otherSkillsAnimation;
+  Animation<double> _dividerScaleAnimation;
 
 
 
@@ -117,6 +168,14 @@ class _MySkillsState extends State<MySkills> with SingleTickerProviderStateMixin
     ).animate(CurvedAnimation(
       parent: _controller,
       curve: Curves.easeInOut
+    ));
+
+    _dividerScaleAnimation=Tween<double>(
+      begin: 0,
+      end: 1
+    ).animate(CurvedAnimation(
+      parent: _controller,
+      curve: Curves.linear
     ));
 
     _controller.forward();
@@ -191,12 +250,15 @@ class _MySkillsState extends State<MySkills> with SingleTickerProviderStateMixin
                         ),
                       ),
 
-                      VerticalDivider(
-                        width: 1,
-                        thickness: 1,
-                        color: Colors.white,
-                        indent: 40,
-                        endIndent: 40,
+                      ScaleTransition(
+                        scale: _dividerScaleAnimation,
+                        child: VerticalDivider(
+                          width: 1,
+                          thickness: 1,
+                          color: Colors.white,
+                          indent: 40,
+                          endIndent: 40,
+                        ),
                       ),
                       SlideTransition(
                         position: _frameworkSlideAnimation,
