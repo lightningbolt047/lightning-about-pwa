@@ -419,13 +419,11 @@ class _MyProjectsState extends State<MyProjects> with SingleTickerProviderStateM
     Size _fullSize=MediaQuery.of(context).size;
     return Center(
       child: Container(
-        width: _fullSize.width*0.7,
+        width: _lowWidth?_fullSize.width*0.9:_fullSize.width*0.7,
         child: ListView(
           children: [
             GitProjectCard(),
-            GitProjectCard(),
-            GitProjectCard(),
-            GitProjectCard()
+
           ],
         ),
       ),
