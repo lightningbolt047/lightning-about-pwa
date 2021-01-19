@@ -3,7 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:myresume/const.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:myresume/widgets/cards.dart';
+import 'package:list_wheel_scroll_view_x/list_wheel_scroll_view_x.dart';
 
 class AboutMe extends StatefulWidget {
   @override
@@ -390,6 +391,16 @@ class MyProjects extends StatefulWidget {
 class _MyProjectsState extends State<MyProjects> with SingleTickerProviderStateMixin {
   AnimationController _controller;
 
+  bool _lowWidth=false;
+
+
+  void _isLowWidth(){
+    if(MediaQuery.of(context).size.width<600){
+      _lowWidth=true;
+    }
+    return;
+  }
+
   @override
   void initState() {
     _controller = AnimationController(vsync: this);
@@ -403,8 +414,22 @@ class _MyProjectsState extends State<MyProjects> with SingleTickerProviderStateM
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Container();
+  Widget build(BuildContext context) {        //TODO Fix Broken Widget
+    _isLowWidth();
+    Size _fullSize=MediaQuery.of(context).size;
+    return Center(
+      child: Container(
+        width: _fullSize.width*0.7,
+        child: ListView(
+          children: [
+            GitProjectCard(),
+            GitProjectCard(),
+            GitProjectCard(),
+            GitProjectCard()
+          ],
+        ),
+      ),
+    );
   }
 }
 
