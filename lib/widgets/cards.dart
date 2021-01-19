@@ -36,14 +36,12 @@ class _GitProjectCardState extends State<GitProjectCard> {
 
   @override
   Widget build(BuildContext context) {
-    Size _fullSize=MediaQuery.of(context).size;
     _isLowWidth();
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: (){
-          print("Tapped");
           onCardTapAction();
         },
         child: Card(
@@ -59,13 +57,16 @@ class _GitProjectCardState extends State<GitProjectCard> {
                 ),
               ),
               Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AutoSizeText("Project Name",overflow:TextOverflow.ellipsis,minFontSize:10,maxFontSize:30,style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold,fontSize: 25),),
-                    AutoSizeText("Dart",overflow:TextOverflow.ellipsis,minFontSize:5,maxFontSize:20,style: TextStyle(color: Colors.blue,fontSize: 15),),
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 4.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AutoSizeText("Project Name",overflow:TextOverflow.ellipsis,minFontSize:10,maxFontSize:_lowWidth?20:30,maxLines: 1,style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold,fontSize: 25),),
+                      AutoSizeText("Dart",overflow:TextOverflow.ellipsis,minFontSize:5,maxFontSize:20,maxLines:1,style: TextStyle(color: Colors.blue,fontSize: 15),),
+                    ],
+                  ),
                 ),
               ),
               Padding(
