@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:community_material_icon/community_material_icon.dart';
@@ -16,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   AnimationController _colorAnimationController;
 
   Animation<Offset> _slideAnimation;
-  Animation<Color> _scaffoldColorAnimaiton;
+  Animation<Color> _scaffoldColorAnimation;
   bool _circleContainer=false;
 
 
@@ -48,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       curve: Curves.easeIn
     ));
 
-    _scaffoldColorAnimaiton=ColorTween(
+    _scaffoldColorAnimation=ColorTween(
       begin: kInitialScaffoldColor,
       end: kFinalScaffoldColor
     ).animate(CurvedAnimation(
@@ -73,7 +75,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     Size _fullSize=MediaQuery.of(context).size;
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: _scaffoldColorAnimaiton.value,
+        backgroundColor: _scaffoldColorAnimation.value,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
