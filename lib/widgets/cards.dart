@@ -2,7 +2,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:myresume/const.dart';
 
 class GitProjectCard extends StatefulWidget {
   @override
@@ -112,10 +114,56 @@ class _ProjectDialogState extends State<ProjectDialog> with SingleTickerProvider
 
 
   Widget getDialogContent(){
-    if(_lowWidth){
-      return Column();
-    }
-    return Column();
+    return CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          title: AutoSizeText("Project Name",minFontSize: _lowWidth?5:10,maxFontSize: _lowWidth?20:25,style: TextStyle(color: Colors.white,fontSize: _lowWidth?15:20),),
+          stretch: true,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(25))
+          ),
+          leading: Container(),
+          actions: [
+            Container(
+              padding: EdgeInsets.only(right: 8,top: 2,bottom: 2,left: 2),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left:4.0,right: 8),
+                    child: Text("Find it on",),
+                  ),
+                  VerticalDivider(
+                    color: Colors.white,
+                    thickness: 1,
+                    indent: 4,
+                    endIndent: 4,
+                    width: 1,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left:8.0,right:4),
+                    child: Icon(FontAwesomeIcons.github),
+                  )
+                ],
+              ),
+              decoration: BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.all(Radius.circular(25)),
+              ),
+            ),
+          ],
+        ),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CircleAvatar(
+              backgroundImage: NetworkImage("https://miro.medium.com/max/3000/1*MI686k5sDQrISBM6L8pf5A.jpeg",),
+              maxRadius: _fullSize.width*0.075,
+              minRadius: _fullSize.width*0.05,
+            ),
+          ),
+        ),
+      ],
+    );
   }
 
 
@@ -142,7 +190,7 @@ class _ProjectDialogState extends State<ProjectDialog> with SingleTickerProvider
         height: _fullSize.height*0.75,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(25)),
-          color: Colors.white,
+          color: kFinalScaffoldColor,
         ),
         child: getDialogContent(),
       ),

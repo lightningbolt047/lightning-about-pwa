@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:myresume/const.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:myresume/widgets/dialog_boxes.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'fortnite_screen.dart';
@@ -234,6 +235,31 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                       ),
                     ),
                     child: FortniteCardSection(_lowWidth,_fullSize),
+                  )
+                ],
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Card(
+              color: Colors.black,
+              child: Stack(
+                children: [
+                  Container(
+                    child: Image.asset('assets/home_screen_contact_me_card_image.jpg',fit: BoxFit.cover,),
+                    height: _fullSize.height*0.3,
+                    width: _fullSize.width,
+                  ),
+                  Container(
+                    height: _fullSize.height*0.3,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Colors.black,Colors.transparent],
+                        begin: Alignment.centerRight,
+                        end: Alignment.centerLeft,
+                      ),
+                    ),
+                    child: ContactMeCardSection(_lowWidth,_fullSize),
                   )
                 ],
               ),
@@ -565,6 +591,105 @@ class _FortniteCardSectionState extends State<FortniteCardSection> with SingleTi
     );
   }
 }
+
+
+
+
+
+class ContactMeCardSection extends StatefulWidget {
+
+  final bool _lowWidth;
+  final Size _fullSize;
+
+  ContactMeCardSection(this._lowWidth,this._fullSize);
+
+  @override
+  _ContactMeCardSectionState createState() => _ContactMeCardSectionState(this._lowWidth,this._fullSize);
+}
+
+class _ContactMeCardSectionState extends State<ContactMeCardSection> with SingleTickerProviderStateMixin {
+  AnimationController _controller;
+  final bool _lowWidth;
+  final Size _fullSize;
+
+  double _minFontSize,_maxFontSize;
+  BuildContext _mainContext;
+
+  _ContactMeCardSectionState(this._lowWidth,this._fullSize);
+
+  @override
+  void initState() {
+    _controller = AnimationController(vsync: this);
+    super.initState();
+    if(_lowWidth){
+      _minFontSize=10;
+      _maxFontSize=17;
+    }
+    else{
+      _minFontSize=10;
+      _maxFontSize=20;
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    _mainContext=context;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Container(
+                  alignment: Alignment.centerRight,
+                  width:_lowWidth?_fullSize.width*0.5:_fullSize.width*0.3,
+                  child: AutoSizeText("Want to contact me?",minFontSize:_minFontSize,maxFontSize:_maxFontSize,maxLines:4,style: TextStyle(color: Colors.white,fontSize: _maxFontSize),)),
+              RawMaterialButton(
+                fillColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(15))
+                ),
+                splashColor: Colors.blueGrey,
+                hoverElevation: 7,
+                onPressed:(){
+                  showDialog(
+                    context: context,
+                    builder: (context)=>SocialMediaHandles()
+                  );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right:4.0),
+                        child: Icon(Icons.chevron_left,color: Colors.blue,),
+                      ),
+                      Text("Find Me",style: TextStyle(color: Colors.blue),),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        )
+      ],
+    );
+  }
+}
+
+
+
+
 
 
 
