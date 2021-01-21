@@ -17,5 +17,24 @@ class GameStats{
     else{
       print("Not OK");
     }
+    return {};
   }
+}
+
+class GitServices{
+
+
+  Future<List<dynamic>> getGithubProjects() async{
+    http.Response response=await http.get(githubAPIUrl);
+    print(response.statusCode);
+
+    if(response.statusCode==200){
+      return jsonDecode(response.body);
+    }
+    else{
+      return [];
+    }
+  }
+
+
 }

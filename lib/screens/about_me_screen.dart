@@ -1,8 +1,10 @@
+import 'dart:async';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:myresume/const.dart';
+import 'package:myresume/services/http_services.dart';
 import 'package:myresume/widgets/cards.dart';
 import 'package:list_wheel_scroll_view_x/list_wheel_scroll_view_x.dart';
 
@@ -17,6 +19,8 @@ class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
   bool _lowWidth=false;
   double bottomNavBarOptionTextSize=20;
 
+  List<String> _tabBarNames=['Skills','Projects','Updates'];
+
 
   void _isLowWidth(){
     if(MediaQuery.of(context).size.width<600){
@@ -25,6 +29,7 @@ class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
     }
     return;
   }
+
 
 
   @override
@@ -49,7 +54,7 @@ class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
     return Scaffold(
       backgroundColor: kFinalScaffoldColor,
       appBar: AppBar(
-        title: Text("Skills",style: TextStyle(fontWeight: FontWeight.bold),),
+        title: Text(_tabBarNames[_tabController.index],style: TextStyle(fontWeight: FontWeight.bold),),
         backgroundColor: kFinalScaffoldColor,
         centerTitle: true,
       ),
@@ -64,14 +69,14 @@ class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
             children: [
               GestureDetector(
                 behavior: HitTestBehavior.opaque,
-                child: Text("Skills",style: TextStyle(color: Colors.white,fontWeight: (_tabController.index==0)?FontWeight.bold:FontWeight.normal,fontSize: bottomNavBarOptionTextSize),),
+                child: Text(_tabBarNames[0],style: TextStyle(color: Colors.white,fontWeight: (_tabController.index==0)?FontWeight.bold:FontWeight.normal,fontSize: bottomNavBarOptionTextSize),),
                 onTap: () {
                   _tabController.animateTo(0);
                 },
               ),
               GestureDetector(
                 behavior: HitTestBehavior.translucent,
-                child: Text("Projects",style: TextStyle(color: Colors.white,fontWeight:(_tabController.index==1)?FontWeight.bold:FontWeight.normal,fontSize: bottomNavBarOptionTextSize),),
+                child: Text(_tabBarNames[1],style: TextStyle(color: Colors.white,fontWeight:(_tabController.index==1)?FontWeight.bold:FontWeight.normal,fontSize: bottomNavBarOptionTextSize),),
                 onTap: (){
                   print("Settings pressed");
                   _tabController.animateTo(1);
@@ -79,7 +84,7 @@ class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
               ),
               GestureDetector(
                 behavior: HitTestBehavior.translucent,
-                child: Text("Contact Me",style: TextStyle(color: Colors.white,fontWeight:(_tabController.index==2)?FontWeight.bold:FontWeight.normal,fontSize: bottomNavBarOptionTextSize),),
+                child: Text(_tabBarNames[2],style: TextStyle(color: Colors.white,fontWeight:(_tabController.index==2)?FontWeight.bold:FontWeight.normal,fontSize: bottomNavBarOptionTextSize),),
                 onTap: (){
                   print("Settings pressed");
                   _tabController.animateTo(2);
@@ -393,6 +398,16 @@ class _MyProjectsState extends State<MyProjects> with SingleTickerProviderStateM
 
   bool _lowWidth=false;
 
+  GitServices _gitServices=GitServices();
+
+  Future<List<dynamic>> _projectList;
+
+  void populateData() async{
+    _projectList=_gitServices.getGithubProjects();
+    return;
+  }
+
+
 
   void _isLowWidth(){
     if(MediaQuery.of(context).size.width<600){
@@ -404,6 +419,7 @@ class _MyProjectsState extends State<MyProjects> with SingleTickerProviderStateM
   @override
   void initState() {
     _controller = AnimationController(vsync: this);
+    populateData();
     super.initState();
   }
 
@@ -420,11 +436,19 @@ class _MyProjectsState extends State<MyProjects> with SingleTickerProviderStateM
     return Center(
       child: Container(
         width: _lowWidth?_fullSize.width*0.9:_fullSize.width*0.7,
-        child: ListView(
-          children: [
-            GitProjectCard(),
-
-          ],
+        child: FutureBuilder(
+          future: _projectList,
+          builder: (context,snapshot){
+            if(snapshot.data==null){
+              return LinearProgressIndicator();
+            }
+            return ListView.builder(
+              itemCount: snapshot.data.length,
+              itemBuilder: (context,index){
+                return GitProjectCard(snapshot.data[index]);
+              },
+            );
+          },
         ),
       ),
     );
