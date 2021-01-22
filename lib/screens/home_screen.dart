@@ -1,15 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:myresume/const.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:myresume/widgets/dialog_boxes.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:visibility_detector/visibility_detector.dart';
 import 'fortnite_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:sliver_fill_remaining_box_adapter/sliver_fill_remaining_box_adapter.dart';
 import 'about_me_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -613,7 +610,6 @@ class _ContactMeCardSectionState extends State<ContactMeCardSection> with Single
   final Size _fullSize;
 
   double _minFontSize,_maxFontSize;
-  BuildContext _mainContext;
 
   _ContactMeCardSectionState(this._lowWidth,this._fullSize);
 
@@ -639,7 +635,6 @@ class _ContactMeCardSectionState extends State<ContactMeCardSection> with Single
 
   @override
   Widget build(BuildContext context) {
-    _mainContext=context;
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [

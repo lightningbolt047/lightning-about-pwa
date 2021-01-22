@@ -1,12 +1,8 @@
-import 'package:assets_audio_player_web/web/assets_audio_player_web.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myresume/const.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:sliver_fill_remaining_box_adapter/sliver_fill_remaining_box_adapter.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:myresume/services/http_services.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 

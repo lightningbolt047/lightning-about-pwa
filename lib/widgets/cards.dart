@@ -1,10 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:myresume/const.dart';
 import 'dialog_boxes.dart';
 
 class GitProjectCard extends StatefulWidget {

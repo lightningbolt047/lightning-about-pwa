@@ -17,3 +17,19 @@ final String linkedInProfileURL="https://www.linkedin.com/in/sashank-visweshwara
 final String instagramProfileURL="https://www.instagram.com/sashankvisweshwaran/";
 final String twitterProfileURL="https://www.twitter.com/Sashank47";
 final String email="sashankvisweshwaran@gmail.com";
+
+final Function getLanguageLogo=(String language){
+  if(language=="Dart"){
+    return "assets/flutter_icon.png";
+  }
+  if(language=="Javascript"){
+    return "assets/javascript_icon.png";
+  }
+  if(language=="c++"){
+    return "assets/c++_icon.png";
+  }
+  if(language=="java"){
+    return "assets/java_icon.png";
+  }
+  return "assets/code.png";
+};

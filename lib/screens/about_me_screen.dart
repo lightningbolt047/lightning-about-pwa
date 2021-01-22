@@ -6,7 +6,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:myresume/const.dart';
 import 'package:myresume/services/http_services.dart';
 import 'package:myresume/widgets/cards.dart';
-import 'package:list_wheel_scroll_view_x/list_wheel_scroll_view_x.dart';
 
 class AboutMe extends StatefulWidget {
   @override
@@ -16,19 +15,11 @@ class AboutMe extends StatefulWidget {
 class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
 
   TabController _tabController;
-  bool _lowWidth=false;
   double bottomNavBarOptionTextSize=20;
 
   List<String> _tabBarNames=['Skills','Projects','Updates'];
 
 
-  void _isLowWidth(){
-    if(MediaQuery.of(context).size.width<600){
-      _lowWidth=true;
-      bottomNavBarOptionTextSize=17;
-    }
-    return;
-  }
 
 
 
@@ -49,8 +40,6 @@ class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
   
   @override
   Widget build(BuildContext context) {
-    Size _fullSize=MediaQuery.of(context).size;
-    _isLowWidth();
     return Scaffold(
       backgroundColor: kFinalScaffoldColor,
       appBar: AppBar(
