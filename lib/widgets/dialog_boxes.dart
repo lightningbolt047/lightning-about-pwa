@@ -7,6 +7,7 @@ import 'package:clipboard/clipboard.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:animated_icon_button/animated_icon_button.dart';
 
 
 class SocialMediaHandles extends StatefulWidget {
@@ -14,8 +15,8 @@ class SocialMediaHandles extends StatefulWidget {
   _SocialMediaHandlesState createState() => _SocialMediaHandlesState();
 }
 
-class _SocialMediaHandlesState extends State<SocialMediaHandles> with SingleTickerProviderStateMixin {
-  AnimationController _controller;
+class _SocialMediaHandlesState extends State<SocialMediaHandles> with TickerProviderStateMixin {
+  AnimationController _controller,_emailCopyAnimationController;
   Animation<Offset> _emailSlideTransition;
   Animation<Offset> _handleSlideTransition;
   Animation<double> _dividerAnimation;
@@ -55,6 +56,7 @@ class _SocialMediaHandlesState extends State<SocialMediaHandles> with SingleTick
   @override
   void initState() {
     _controller = AnimationController(vsync: this,duration: Duration(seconds: 1));
+    _emailCopyAnimationController = AnimationController(vsync: this,duration: Duration(milliseconds: 250));
     _emailSlideTransition=Tween<Offset>(
       begin: Offset(0,-0.5),
       end: Offset(0,0),
@@ -88,6 +90,7 @@ class _SocialMediaHandlesState extends State<SocialMediaHandles> with SingleTick
   @override
   void dispose() {
     _controller.dispose();
+    _emailCopyAnimationController.dispose();
     super.dispose();
   }
   
@@ -219,23 +222,22 @@ class _SocialMediaHandlesState extends State<SocialMediaHandles> with SingleTick
                     children: [
                       Icon(Icons.email_outlined,color: Colors.white,),
                       AutoSizeText(email,minFontSize:1,maxFontSize:15,style: TextStyle(color: Colors.white,fontSize: _lowWidth?12:15),),
-                      AnimatedSwitcher(
-                        duration:Duration(seconds: 1),
-                        transitionBuilder: (Widget child,Animation<double> animation)=>ScaleTransition(child: child,scale: animation,),
-                        child: IconButton(
-                          icon: _copied?Icon(Icons.check,color: Colors.white,):Icon(Icons.copy,color: Colors.white,),
-                          onPressed: () async{
-                            await FlutterClipboard.copy(email);
-                            setState(() {
-                              _copied=true;
-                            });
-                            Timer(Duration(seconds: 5), (){
-                              setState(() {
-                                _copied=false;
-                              });
-                            });
-                          },
-                        ),
+                      AnimatedIconButton(
+                        startIcon: Icon(Icons.copy,color: Colors.white,),
+                        endIcon: Icon(Icons.check,color: Colors.white,),
+                        animationController: _emailCopyAnimationController,
+                        enableFeedback: true,
+                        onPressed: () async{
+                          await FlutterClipboard.copy(email);
+                          _copied=true;
+                          _emailCopyAnimationController.forward();
+                          Timer(Duration(seconds: 5), (){
+                            _copied=false;
+                            if(mounted){
+                              _emailCopyAnimationController.reverse();
+                            }
+                          });
+                        },
                       )
                     ],
                   ),
