@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:myresume/const.dart';
 import 'package:myresume/services/http_services.dart';
 import 'package:myresume/widgets/cards.dart';
+import 'package:myresume/widgets/my_updates_expandable.dart';
 
 class AboutMe extends StatefulWidget {
   @override
@@ -455,6 +456,15 @@ class ContactMe extends StatefulWidget {
 class _ContactMeState extends State<ContactMe> with SingleTickerProviderStateMixin {
   AnimationController _controller;
 
+  bool _lowWidth=false;
+
+  void _isLowWidth(){
+    if(MediaQuery.of(context).size.width<600){
+      _lowWidth=true;
+    }
+    return;
+  }
+
   @override
   void initState() {
     _controller = AnimationController(vsync: this);
@@ -469,6 +479,23 @@ class _ContactMeState extends State<ContactMe> with SingleTickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    _isLowWidth();
+    return CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          backgroundColor: kFinalScaffoldColor,
+          elevation: 0,
+          title: Text("Download my resume"),
+          automaticallyImplyLeading: false,
+        ),
+        SliverList(
+          delegate: SliverChildListDelegate(
+            [
+              MyUpdateExpandable(_lowWidth)
+            ]
+          ),
+        )
+      ],
+    );
   }
 }
