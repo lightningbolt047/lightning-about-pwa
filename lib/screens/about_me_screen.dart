@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:myresume/const.dart';
 import 'package:myresume/services/http_services.dart';
 import 'package:myresume/widgets/cards.dart';
 import 'package:myresume/widgets/my_updates_expandable.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AboutMe extends StatefulWidget {
   @override
@@ -464,6 +466,16 @@ class _ContactMeState extends State<ContactMe> with SingleTickerProviderStateMix
     }
     return;
   }
+  
+  void _launchURL(String url) async{
+    if(await canLaunch(url)){
+      launch(url);
+    }
+    else{
+      print("Couldn\'t launch URL ");
+      throw "Can\'t launch $url";
+    }
+  }
 
   @override
   void initState() {
@@ -479,14 +491,46 @@ class _ContactMeState extends State<ContactMe> with SingleTickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
+    Size _fullSize=MediaQuery.of(context).size;
     _isLowWidth();
     return CustomScrollView(
       slivers: [
-        SliverAppBar(
-          backgroundColor: kFinalScaffoldColor,
-          elevation: 0,
-          title: Text("Download my resume"),
-          automaticallyImplyLeading: false,
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              mainAxisAlignment: _lowWidth?MainAxisAlignment.spaceAround:MainAxisAlignment.spaceEvenly,
+              children: [
+                AutoSizeText("My Resume",minFontSize:5,style: TextStyle(color: Colors.white, fontSize: _lowWidth?20:25,fontWeight: FontWeight.bold),),
+                RawMaterialButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(30))
+                  ),
+                  fillColor: Colors.white,
+                  hoverElevation: 7,
+                  onPressed: (){
+                    _launchURL(websiteURL+'assets/assets/SashankVisweshwaran-CB.EN.U4CSE18354.pdf');
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right:4.0),
+                          child: Icon(Icons.cloud_download,color: Colors.blue,),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left:4.0),
+                          child: Text("Download",style: TextStyle(color: Colors.blue),),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
         SliverList(
           delegate: SliverChildListDelegate(

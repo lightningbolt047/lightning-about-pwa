@@ -18,6 +18,13 @@ final String instagramProfileURL="https://www.instagram.com/sashankvisweshwaran/
 final String twitterProfileURL="https://www.twitter.com/Sashank47";
 final String email="sashankvisweshwaran@gmail.com";
 
+
+
+final String websiteURL="http://lightning-about.web.app/";
+
+
+
+
 final Function getLanguageLogo=(String language){
   if(language=="Dart"){
     return "assets/flutter_icon.png";
