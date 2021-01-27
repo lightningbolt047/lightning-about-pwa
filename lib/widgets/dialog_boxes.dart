@@ -210,7 +210,7 @@ class _SocialMediaHandlesState extends State<SocialMediaHandles> with TickerProv
             SlideTransition(
               position: _emailSlideTransition,
               child: Container(
-                width: _lowWidth?_fullSize.width*0.7:_fullSize.width*0.25,
+                width: _lowWidth?_fullSize.width*0.725:_fullSize.width*0.35,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(25)),
                   color: Colors.black
@@ -220,8 +220,11 @@ class _SocialMediaHandlesState extends State<SocialMediaHandles> with TickerProv
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Icon(Icons.email_outlined,color: Colors.white,),
-                      AutoSizeText(email,minFontSize:1,maxFontSize:15,style: TextStyle(color: Colors.white,fontSize: _lowWidth?12:15),),
+                      Padding(
+                        padding: const EdgeInsets.only(left:4.0),
+                        child: Icon(Icons.email_outlined,color: Colors.white,),
+                      ),
+                      AutoSizeText(email,minFontSize:1,maxFontSize:15,style: TextStyle(color: Colors.white,fontSize: _lowWidth?12:15,fontWeight: FontWeight.w600),),
                       AnimatedIconButton(
                         startIcon: Icon(Icons.copy,color: Colors.white,),
                         endIcon: Icon(Icons.check,color: Colors.white,),
