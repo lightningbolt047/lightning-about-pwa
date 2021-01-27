@@ -24,7 +24,6 @@ class _SocialMediaHandlesState extends State<SocialMediaHandles> with TickerProv
 
   bool _lowWidth=false;
 
-  bool _copied=false;
 
   void _isLowWidth(){
     if(MediaQuery.of(context).size.width<600){
@@ -232,10 +231,8 @@ class _SocialMediaHandlesState extends State<SocialMediaHandles> with TickerProv
                         enableFeedback: true,
                         onPressed: () async{
                           await FlutterClipboard.copy(email);
-                          _copied=true;
                           _emailCopyAnimationController.forward();
                           Timer(Duration(seconds: 5), (){
-                            _copied=false;
                             if(mounted){
                               _emailCopyAnimationController.reverse();
                             }

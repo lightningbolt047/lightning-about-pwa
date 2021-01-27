@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myresume/const.dart';
@@ -297,7 +298,7 @@ class _GlobalStatCardState extends State<GlobalStatCard> with SingleTickerProvid
                             opacity: _fadeAnimation,
                             child: SlideTransition(
                               position: _headingSlideAnimation,
-                              child: Text(gameMode,overflow: TextOverflow.ellipsis,style: TextStyle(
+                              child: AutoSizeText(gameMode,minFontSize:5,overflow: TextOverflow.ellipsis,style: TextStyle(
                                   fontSize: _fullSize.width*0.05,
                                   color: Colors.white
                               ),),

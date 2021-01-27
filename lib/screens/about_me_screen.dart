@@ -491,7 +491,6 @@ class _ContactMeState extends State<ContactMe> with SingleTickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    Size _fullSize=MediaQuery.of(context).size;
     _isLowWidth();
     return CustomScrollView(
       slivers: [
