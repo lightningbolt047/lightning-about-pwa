@@ -66,6 +66,11 @@ class _GitProjectCardState extends State<GitProjectCard> with SingleTickerProvid
     _controller.forward().orCancel;
   }
 
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

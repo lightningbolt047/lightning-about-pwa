@@ -535,7 +535,12 @@ class _ContactMeState extends State<ContactMe> with SingleTickerProviderStateMix
         SliverList(
           delegate: SliverChildListDelegate(
             [
-              MyUpdateExpandable(_lowWidth)
+              MyUpdateExpandable(_lowWidth),
+              MyUpdateExpandable(_lowWidth),
+              MyUpdateExpandable(_lowWidth),
+              MyUpdateExpandable(_lowWidth),
+              MyUpdateExpandable(_lowWidth),
+              MyUpdateExpandable(_lowWidth),
             ]
           ),
         )

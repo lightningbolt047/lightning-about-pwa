@@ -54,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   @override
   void dispose() {
     _controller.dispose();
+    _sliverScrollerController.dispose();
     super.dispose();
   }
 
