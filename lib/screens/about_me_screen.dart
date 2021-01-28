@@ -46,7 +46,7 @@ class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
     return Scaffold(
       backgroundColor: kFinalScaffoldColor,
       appBar: AppBar(
-        title: Text(_tabBarNames[_tabController.index],style: TextStyle(fontWeight: FontWeight.bold),),
+        title: Text(_tabBarNames[_tabController.index],overflow:TextOverflow.visible,style: TextStyle(fontWeight: FontWeight.bold),),
         backgroundColor: kFinalScaffoldColor,
         centerTitle: true,
       ),
@@ -70,7 +70,6 @@ class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
                 behavior: HitTestBehavior.translucent,
                 child: Text(_tabBarNames[1],style: TextStyle(color: Colors.white,fontWeight:(_tabController.index==1)?FontWeight.bold:FontWeight.normal,fontSize: bottomNavBarOptionTextSize),),
                 onTap: (){
-                  print("Settings pressed");
                   _tabController.animateTo(1);
                 },
               ),
@@ -78,7 +77,6 @@ class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
                 behavior: HitTestBehavior.translucent,
                 child: Text(_tabBarNames[2],style: TextStyle(color: Colors.white,fontWeight:(_tabController.index==2)?FontWeight.bold:FontWeight.normal,fontSize: bottomNavBarOptionTextSize),),
                 onTap: (){
-                  print("Settings pressed");
                   _tabController.animateTo(2);
                 },
               )
@@ -422,7 +420,7 @@ class _MyProjectsState extends State<MyProjects> with SingleTickerProviderStateM
   }
 
   @override
-  Widget build(BuildContext context) {        //TODO Fix Broken Widget
+  Widget build(BuildContext context) {
     _isLowWidth();
     Size _fullSize=MediaQuery.of(context).size;
     return Center(
@@ -500,7 +498,7 @@ class _ContactMeState extends State<ContactMe> with SingleTickerProviderStateMix
             child: Row(
               mainAxisAlignment: _lowWidth?MainAxisAlignment.spaceAround:MainAxisAlignment.spaceEvenly,
               children: [
-                AutoSizeText("My Resume",minFontSize:5,style: TextStyle(color: Colors.white, fontSize: _lowWidth?20:25,fontWeight: FontWeight.bold),),
+                AutoSizeText("My Resume",minFontSize:5,style: TextStyle(color: Colors.white, fontSize: _lowWidth?15:25,fontWeight: FontWeight.bold),),
                 RawMaterialButton(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(30))
