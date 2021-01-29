@@ -8,6 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'fortnite_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'about_me_screen.dart';
+import 'package:myresume/content.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -135,7 +136,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                               Hero(
                                 tag:"SplashIcon",
                                 child: CircleAvatar(
-                                  backgroundImage: NetworkImage("https://miro.medium.com/max/3000/1*MI686k5sDQrISBM6L8pf5A.jpeg"),
+                                  backgroundImage: AssetImage("assets/me.jpg"),
                                   maxRadius: MediaQuery.of(context).size.width*0.1,
                                   minRadius: 20,
                                 ),
@@ -147,7 +148,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                                 text:["Sashank Visweshwaran","LightningBolt047"],
                                 textStyle: TextStyle(
                                   color: Colors.white,
-                                  fontSize: _fullSize.width*0.05
+                                  fontSize: _fullSize.width*0.05,
+                                  fontFamily: "Josefin"
                                 ),
                                 isRepeatingAnimation: true,
                               ),
@@ -288,7 +290,7 @@ class _AboutMeSectionState extends State<AboutMeSection> with SingleTickerProvid
   _AboutMeSectionState(this._lowWidth,this._fullSize);
 
 
-  String aboutText="This is a text which is many lines long, describes me. I haven\'t decided what I'm going to do with  this space. Hopefully, everything that I write about me fits in here. This is a text which is many lines long, describes me. I haven\'t decided what I'm going to do with  this space. Hopefully, everything that I write about me fits in here. This is a text which is many lines long, describes me. I haven\'t decided what I'm going to do with  this space. Hopefully, everything that I write about me fits in here. This is a text which is many lines long, describes me. I haven\'t decided what I'm going to do with  this space. Hopefully, everything that I write about me fits in here. ";
+  String aboutText=frontPageContent;
   String buttonText="More info";
 
 
@@ -350,7 +352,7 @@ class _AboutMeSectionState extends State<AboutMeSection> with SingleTickerProvid
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CircleAvatar(
-                backgroundImage: NetworkImage("https://miro.medium.com/max/3000/1*MI686k5sDQrISBM6L8pf5A.jpeg"),
+                backgroundImage: AssetImage("assets/me.jpg"),
                 maxRadius: MediaQuery.of(context).size.height*0.07,
                 minRadius: 10,
               ),
@@ -429,7 +431,7 @@ class _AboutMeSectionState extends State<AboutMeSection> with SingleTickerProvid
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             CircleAvatar(
-              backgroundImage: NetworkImage("https://miro.medium.com/max/3000/1*MI686k5sDQrISBM6L8pf5A.jpeg"),
+              backgroundImage: AssetImage("assets/me.jpg"),
               maxRadius: MediaQuery.of(context).size.width*0.05,
               minRadius: 10,
             ),

@@ -78,6 +78,10 @@ flutter:
     - family: QuickSand
       fonts:
         - asset: fonts/Quicksand-VariableFont.ttf
+
+    - family: JosefinSans
+      fonts:
+        - asset: fonts/JosefinSans-VariableFont_wght.ttf
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:

@@ -7,10 +7,11 @@ import 'package:myresume/const.dart';
 class MyUpdateExpandable extends StatefulWidget {
 
   final bool _lowWidth;
-  MyUpdateExpandable(this._lowWidth);
+  final String heading,body;
+  MyUpdateExpandable(this._lowWidth,this.heading,this.body);
 
   @override
-  _MyUpdateExpandableState createState() => _MyUpdateExpandableState(this._lowWidth);
+  _MyUpdateExpandableState createState() => _MyUpdateExpandableState(this._lowWidth,this.heading,this.body);
 }
 
 class _MyUpdateExpandableState extends State<MyUpdateExpandable> with SingleTickerProviderStateMixin{
@@ -18,7 +19,9 @@ class _MyUpdateExpandableState extends State<MyUpdateExpandable> with SingleTick
   AnimationController _animationController;
   Animation<double> _cardScaleAnimation;
 
-  _MyUpdateExpandableState(this._lowWidth);
+  final String heading,body;
+
+  _MyUpdateExpandableState(this._lowWidth,this.heading,this.body);
 
 
 
@@ -65,7 +68,7 @@ class _MyUpdateExpandableState extends State<MyUpdateExpandable> with SingleTick
                 child: Padding(
                   padding: EdgeInsets.all(8),
                   child: Card(
-                    color: kFinalScaffoldColor,
+                    color: Colors.grey[800],
                     elevation: 5,
                     child: Column(
                       children: [
@@ -80,12 +83,12 @@ class _MyUpdateExpandableState extends State<MyUpdateExpandable> with SingleTick
                             ),
                             header: Padding(
                               padding: EdgeInsets.all(10),
-                              child: AutoSizeText("Latest About Me",style: TextStyle(color: Colors.white,fontSize:25,fontWeight: FontWeight.bold),),
+                              child: AutoSizeText(heading,style: TextStyle(color: Colors.white,fontSize:25,fontWeight: FontWeight.bold),),
                             ),
                             expanded: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                AutoSizeText("wbug wuigfb iwgfuwa ewuygf biwegf bewig faiwbfg iieg bcegbfgesjgtyuwatbrvg uywredrbtciuwaetb73g bvuiawge vuwegbytewagvisgvgw3rgfrwaevvwegrfyiesgvieisvgesugesuygerfg vg wewfgcwaehesyryrgiuweubwilcwhbcusdfbuyewrhawebfu3e3",maxLines: 40,minFontSize: 1,style: TextStyle(color: Colors.white),),
+                                AutoSizeText(body,maxLines: 40,minFontSize: 1,style: TextStyle(color: Colors.white,fontSize: 17),),
                               ],
                             ),
                             builder: (context,collapsed,expanded){

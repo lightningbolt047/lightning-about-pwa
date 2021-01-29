@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,6 +10,7 @@ import 'package:myresume/services/http_services.dart';
 import 'package:myresume/widgets/cards.dart';
 import 'package:myresume/widgets/my_updates_expandable.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:myresume/content.dart';
 
 class AboutMe extends StatefulWidget {
   @override
@@ -89,7 +91,7 @@ class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
         children: [
           MySkills(),
           MyProjects(),
-          ContactMe(),
+          MoreAboutMe(),
         ],
 
       ),
@@ -448,12 +450,12 @@ class _MyProjectsState extends State<MyProjects> with SingleTickerProviderStateM
 
 
 
-class ContactMe extends StatefulWidget {
+class MoreAboutMe extends StatefulWidget {
   @override
-  _ContactMeState createState() => _ContactMeState();
+  _MoreAboutMeState createState() => _MoreAboutMeState();
 }
 
-class _ContactMeState extends State<ContactMe> with SingleTickerProviderStateMixin {
+class _MoreAboutMeState extends State<MoreAboutMe> with SingleTickerProviderStateMixin {
   AnimationController _controller;
 
   bool _lowWidth=false;
@@ -530,15 +532,11 @@ class _ContactMeState extends State<ContactMe> with SingleTickerProviderStateMix
           ),
         ),
         SliverList(
-          delegate: SliverChildListDelegate(
-            [
-              MyUpdateExpandable(_lowWidth),
-              MyUpdateExpandable(_lowWidth),
-              MyUpdateExpandable(_lowWidth),
-              MyUpdateExpandable(_lowWidth),
-              MyUpdateExpandable(_lowWidth),
-              MyUpdateExpandable(_lowWidth),
-            ]
+          delegate: SliverChildBuilderDelegate(
+            (BuildContext context,int index){
+              return MyUpdateExpandable(_lowWidth,moreAboutMeHeading[index],moreAboutMeBody[index]);
+            },
+            childCount: min(moreAboutMeBody.length, moreAboutMeHeading.length)
           ),
         )
       ],
