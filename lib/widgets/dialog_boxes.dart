@@ -225,7 +225,7 @@ class _SocialMediaHandlesState extends State<SocialMediaHandles> with TickerProv
                         padding: const EdgeInsets.only(left:4.0),
                         child: Icon(Icons.email_outlined,color: Colors.white,),
                       ),
-                      AutoSizeText(email,minFontSize:1,maxFontSize:15,style: TextStyle(color: Colors.white,fontSize: _lowWidth?12:15,fontWeight: FontWeight.w600),),
+                      AutoSizeText(email,minFontSize:1,maxFontSize:15,style: TextStyle(color: Colors.white,fontSize: _lowWidth?_fullSize.width*0.03:_fullSize.width*0.015,fontWeight: FontWeight.w600),),
                       AnimatedIconButton(
                         startIcon: Icon(Icons.copy,color: Colors.white,),
                         endIcon: Icon(Icons.check,color: Colors.white,),
