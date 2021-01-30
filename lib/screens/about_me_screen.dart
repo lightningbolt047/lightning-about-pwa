@@ -24,6 +24,17 @@ class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
 
   List<String> _tabBarNames=['Skills','Projects','Updates'];
 
+  bool _lowWidth=false;
+
+
+
+  void _isLowWidth(){
+    if(MediaQuery.of(context).size.width<600){
+      _lowWidth=true;
+    }
+    return;
+  }
+
 
 
 
@@ -45,6 +56,7 @@ class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
   
   @override
   Widget build(BuildContext context) {
+    _isLowWidth();
     return Scaffold(
       backgroundColor: kFinalScaffoldColor,
       appBar: AppBar(
@@ -86,14 +98,48 @@ class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
           ),
         ),
       ),
-      body: TabBarView(
-        controller: _tabController,
+      body: Stack(
         children: [
-          MySkills(),
-          MyProjects(),
-          MoreAboutMe(),
+          TabBarView(
+            controller: _tabController,
+            children: [
+              MySkills(),
+              MyProjects(),
+              MoreAboutMe(),
+            ],
+          ),
+          Visibility(
+            visible: !_lowWidth,
+            child: Align(
+              alignment: Alignment.center,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  RawMaterialButton(
+                    shape: CircleBorder(),
+                    fillColor: Colors.white,
+                    child: Icon(Icons.chevron_left,color: Colors.blue,),
+                    onPressed: (){
+                      if(_tabController.index!=0){
+                        _tabController.animateTo(_tabController.index-1);
+                      }
+                    },
+                  ),
+                  RawMaterialButton(
+                    shape: CircleBorder(),
+                    fillColor: Colors.white,
+                    child: Icon(Icons.chevron_right,color: Colors.blue,),
+                    onPressed: (){
+                      if(_tabController.index!=_tabBarNames.length-1){
+                        _tabController.animateTo(_tabController.index+1);
+                      }
+                    },
+                  )
+                ],
+              ),
+            ),
+          )
         ],
-
       ),
     );
   }
@@ -385,8 +431,7 @@ class MyProjects extends StatefulWidget {
   _MyProjectsState createState() => _MyProjectsState();
 }
 
-class _MyProjectsState extends State<MyProjects> with SingleTickerProviderStateMixin {
-  AnimationController _controller;
+class _MyProjectsState extends State<MyProjects> {
 
   bool _lowWidth=false;
 
@@ -410,15 +455,8 @@ class _MyProjectsState extends State<MyProjects> with SingleTickerProviderStateM
 
   @override
   void initState() {
-    _controller = AnimationController(vsync: this);
     populateData();
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 
   @override

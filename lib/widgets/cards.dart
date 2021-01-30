@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:myresume/content.dart';
 import 'dialog_boxes.dart';
 
 class GitProjectCard extends StatefulWidget {
@@ -63,7 +64,7 @@ class _GitProjectCardState extends State<GitProjectCard> with SingleTickerProvid
 
     super.initState();
 
-    _controller.forward().orCancel;
+    _controller.forward();
   }
 
   @override
@@ -92,7 +93,8 @@ class _GitProjectCardState extends State<GitProjectCard> with SingleTickerProvid
                 Padding(
                   padding: const EdgeInsets.all(4),
                   child: CircleAvatar(
-                    backgroundImage: NetworkImage("https://miro.medium.com/max/3000/1*MI686k5sDQrISBM6L8pf5A.jpeg"),
+                    backgroundImage: AssetImage(getLanguageLogo(projectInfo['language'])),
+                    backgroundColor: Colors.transparent,
                     radius: 40,
                   ),
                 ),

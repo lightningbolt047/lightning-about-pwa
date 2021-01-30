@@ -19,3 +19,28 @@ final List<String> moreAboutMeBody=[
 
 
 final String frontPageContent="Hey, I'm Sashank! I'm a B.Tech undergraduate student at Amrita School of Engineering. I've just stepped into the world of Web/App development (the line keeps blurring). I am a very good problem solver, so I come up with innovative ideas which can make whatever I do better. I'm currently in ♥ with Flutter and exploring different concepts and widgets with it. Ping me on one of my social media handles if you want to collab with me";
+
+
+final Function getLanguageLogo=(String language){
+  if(language=="Dart"){
+    return "assets/flutter_icon_blue.png";
+  }
+  else if(language=="Javascript"){
+    return "assets/javascript_icon_green.png";
+  }
+  else if(language=="C++"){
+    return "assets/cpp_icon_blue.png";
+  }
+  else if(language=="Java"){
+    return "assets/java_icon.png";
+  }
+  else if(language=="HTML"){
+    return "assets/html5_icon.orange.png";
+  }
+  else if(language=="Python"){
+    return "assets/python_icon.png";
+  }
+  else{
+    return "assets/code_icon_blue.png";
+  }
+};

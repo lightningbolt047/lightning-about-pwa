@@ -9,6 +9,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:animated_icon_button/animated_icon_button.dart';
 
+import '../content.dart';
+
 
 class SocialMediaHandles extends StatefulWidget {
   @override
@@ -447,9 +449,10 @@ class _ProjectDialogState extends State<ProjectDialog> with SingleTickerProvider
                     width: _lowWidth?_fullSize.width*0.2:_fullSize.width*0.1,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
+                      color: Colors.transparent,
                       image: DecorationImage(
-                          image: NetworkImage("https://miro.medium.com/max/3000/1*MI686k5sDQrISBM6L8pf5A.jpeg"),
-                          fit: BoxFit.cover
+                          image: AssetImage(getLanguageLogo(projectInfo['language'])),
+                          fit: BoxFit.scaleDown
                       ),
                     ),
                   ),
