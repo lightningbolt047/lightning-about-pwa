@@ -250,34 +250,31 @@ class _MySkillsState extends State<MySkills> with SingleTickerProviderStateMixin
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Card(
-                                elevation: 0,
+                              Container(
                                 color: kFinalScaffoldColor,
                                 child: Padding(
                                   padding: EdgeInsets.all(8),
-                                  child: Text("FrontEnd",style: TextStyle(color: Colors.white,fontSize: 30),),
+                                  child: AutoSizeText("FrontEnd",minFontSize:15,style: TextStyle(color: Colors.white,fontSize: _lowWidth?25:30),),
                                 ),
                               ),
                               SizedBox(
                                 height: _fullSize.height*0.1,
                               ),
-                              Card(
-                                elevation: 0,
+                              Container(
                                 color: kFinalScaffoldColor,
                                 child: Padding(
                                   padding: EdgeInsets.all(8),
-                                  child: Text("BackEnd",style: TextStyle(color: Colors.white,fontSize: 30),),
+                                  child: AutoSizeText("BackEnd",minFontSize:15,style: TextStyle(color: Colors.white,fontSize: _lowWidth?25:30),),
                                 ),
                               ),
                               SizedBox(
                                 height: _fullSize.height*0.1,
                               ),
-                              Card(
-                                elevation: 0,
+                              Container(
                                 color: kFinalScaffoldColor,
                                 child: Padding(
                                   padding: EdgeInsets.all(8),
-                                  child: Text("Database",style: TextStyle(color: Colors.white,fontSize: 30),),
+                                  child: AutoSizeText("Database",minFontSize:15,style: TextStyle(color: Colors.white,fontSize: _lowWidth?25:30),),
                                 ),
                               ),
                             ],
