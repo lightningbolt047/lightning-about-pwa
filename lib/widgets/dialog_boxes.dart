@@ -482,7 +482,7 @@ class _ProjectDialogState extends State<ProjectDialog> with SingleTickerProvider
                 child: Container(
                   padding: EdgeInsets.all(16),
                   child: AutoSizeText(
-                    (projectInfo['name']=="lightning-about-pwa")?projectInfo['description']+"\n\nCodebase for the Progressive Web App that you are currently using":projectInfo['description'],
+                    (projectInfo['name']=="lightning-about-pwa")?projectInfo['description']+"\n\nCodebase for the Progressive Web App that you are currently using":(projectInfo['description']==null?" ":projectInfo['description']),
                     maxLines: 40,
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.w500,),

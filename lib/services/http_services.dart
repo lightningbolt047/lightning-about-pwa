@@ -11,7 +11,6 @@ class GameStats{
       "Authorization":fortniteStatsAPIKey
     });
     if(response.statusCode==200){
-      print("OK");
       return jsonDecode(response.body)['global_stats'];
     }
     else{
@@ -26,7 +25,6 @@ class GitServices{
 
   Future<List<dynamic>> getGithubProjects() async{
     http.Response response=await http.get(githubAPIUrl);
-    print(response.statusCode);
 
     if(response.statusCode==200){
       return jsonDecode(response.body);

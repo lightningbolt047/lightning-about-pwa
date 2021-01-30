@@ -25,7 +25,7 @@ final Function getLanguageLogo=(String language){
   if(language=="Dart"){
     return "assets/flutter_icon_blue.png";
   }
-  else if(language=="Javascript"){
+  else if(language=="JavaScript"){
     return "assets/javascript_icon_green.png";
   }
   else if(language=="C++"){

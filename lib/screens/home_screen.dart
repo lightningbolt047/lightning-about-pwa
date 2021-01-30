@@ -63,8 +63,6 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   Widget build(BuildContext context) {
     Size _fullSize=MediaQuery.of(context).size;
     _isLowWidth();
-    print("Width: "+_fullSize.width.toString());
-    print("Height: "+_fullSize.height.toString());
     return Scaffold(
       backgroundColor: kFinalScaffoldColor,
       body: CustomScrollView(

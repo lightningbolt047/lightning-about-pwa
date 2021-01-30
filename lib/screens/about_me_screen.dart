@@ -474,8 +474,11 @@ class _MyProjectsState extends State<MyProjects> {
             }
             return ListView.builder(
               itemCount: snapshot.data.length,
+              // ignore: missing_return
               itemBuilder: (context,index){
-                return GitProjectCard(snapshot.data[index]);
+                if(snapshot.data[index]['name']!="sashankvisweshwaran.github.io"){
+                  return GitProjectCard(snapshot.data[index]);
+                }
               },
             );
           },
