@@ -448,7 +448,7 @@ class _MyProjectsState extends State<MyProjects> {
               itemCount: snapshot.data.length,
               // ignore: missing_return
               itemBuilder: (context,index){
-                if(snapshot.data[index]['name']!="sashankvisweshwaran.github.io"){
+                if(snapshot.data[index]['name']!="lightningbolt047.github.io"){
                   return GitProjectCard(snapshot.data[index]);
                 }
               },
