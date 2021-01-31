@@ -101,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                           context: context,
                           builder: (context)=>AlertDialog(
                             title: Text("Alert"),
-                            content: Text("Flutter web is still in beta (as of 27 Jan 2021)\nThere is a chance that you might experience weird glitches"),
+                            content: Text("Flutter web is still in beta (as of 31 Jan 2021)\nThere is a chance that you might experience weird glitches"),
                             contentPadding: EdgeInsets.all(16),
                             actionsPadding: EdgeInsets.all(8),
                             actions: [
