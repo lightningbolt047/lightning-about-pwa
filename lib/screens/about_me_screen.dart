@@ -60,42 +60,17 @@ class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
     return Scaffold(
       backgroundColor: kFinalScaffoldColor,
       appBar: AppBar(
-        title: Text(_tabBarNames[_tabController.index],overflow:TextOverflow.visible,style: TextStyle(fontWeight: FontWeight.bold),),
+        title: Text("About Me",overflow:TextOverflow.visible,style: TextStyle(fontWeight: FontWeight.bold),),
         backgroundColor: kFinalScaffoldColor,
         centerTitle: true,
-      ),
-      bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
-        color: kFinalScaffoldColor,
-        elevation: 0,
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                child: Text(_tabBarNames[0],style: TextStyle(color: Colors.white,fontWeight: (_tabController.index==0)?FontWeight.bold:FontWeight.normal,fontSize: bottomNavBarOptionTextSize),),
-                onTap: () {
-                  _tabController.animateTo(0);
-                },
-              ),
-              GestureDetector(
-                behavior: HitTestBehavior.translucent,
-                child: Text(_tabBarNames[1],style: TextStyle(color: Colors.white,fontWeight:(_tabController.index==1)?FontWeight.bold:FontWeight.normal,fontSize: bottomNavBarOptionTextSize),),
-                onTap: (){
-                  _tabController.animateTo(1);
-                },
-              ),
-              GestureDetector(
-                behavior: HitTestBehavior.translucent,
-                child: Text(_tabBarNames[2],style: TextStyle(color: Colors.white,fontWeight:(_tabController.index==2)?FontWeight.bold:FontWeight.normal,fontSize: bottomNavBarOptionTextSize),),
-                onTap: (){
-                  _tabController.animateTo(2);
-                },
-              )
-            ],
-          ),
+        bottom: TabBar(
+          controller: _tabController,
+          enableFeedback: true,
+          tabs:[
+            Tab(text: _tabBarNames[0],),
+            Tab(text: _tabBarNames[1]),
+            Tab(text: _tabBarNames[2]),
+          ]
         ),
       ),
       body: Stack(
@@ -254,7 +229,7 @@ class _MySkillsState extends State<MySkills> with SingleTickerProviderStateMixin
                                 color: kFinalScaffoldColor,
                                 child: Padding(
                                   padding: EdgeInsets.all(8),
-                                  child: AutoSizeText("FrontEnd",minFontSize:15,style: TextStyle(color: Colors.white,fontSize: _lowWidth?25:30),),
+                                  child: AutoSizeText("FrontEnd ",minFontSize:15,style: TextStyle(color: Colors.white,fontSize: _lowWidth?25:30),),
                                 ),
                               ),
                               SizedBox(
@@ -264,7 +239,7 @@ class _MySkillsState extends State<MySkills> with SingleTickerProviderStateMixin
                                 color: kFinalScaffoldColor,
                                 child: Padding(
                                   padding: EdgeInsets.all(8),
-                                  child: AutoSizeText("BackEnd",minFontSize:15,style: TextStyle(color: Colors.white,fontSize: _lowWidth?25:30),),
+                                  child: AutoSizeText("BackEnd ",minFontSize:15,style: TextStyle(color: Colors.white,fontSize: _lowWidth?25:30),),
                                 ),
                               ),
                               SizedBox(
@@ -274,7 +249,7 @@ class _MySkillsState extends State<MySkills> with SingleTickerProviderStateMixin
                                 color: kFinalScaffoldColor,
                                 child: Padding(
                                   padding: EdgeInsets.all(8),
-                                  child: AutoSizeText("Database",minFontSize:15,style: TextStyle(color: Colors.white,fontSize: _lowWidth?25:30),),
+                                  child: AutoSizeText("Database ",minFontSize:15,style: TextStyle(color: Colors.white,fontSize: _lowWidth?25:30),),
                                 ),
                               ),
                             ],
