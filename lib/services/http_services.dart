@@ -27,7 +27,13 @@ class GitServices{
     http.Response response=await http.get(githubAPIUrl);
 
     if(response.statusCode==200){
-      return jsonDecode(response.body);
+      List<dynamic> data=jsonDecode(response.body);
+      for(int i=0;i<data.length;i++){
+        if(data[i]['name']=="lightningbolt047.github.io"){
+          data.removeAt(i);
+        }
+      }
+      return data;
     }
     else{
       return [];

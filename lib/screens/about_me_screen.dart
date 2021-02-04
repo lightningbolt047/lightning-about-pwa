@@ -446,11 +446,8 @@ class _MyProjectsState extends State<MyProjects> {
             }
             return ListView.builder(
               itemCount: snapshot.data.length,
-              // ignore: missing_return
               itemBuilder: (context,index){
-                if(snapshot.data[index]['name']!="lightningbolt047.github.io"){
                   return GitProjectCard(snapshot.data[index]);
-                }
               },
             );
           },
