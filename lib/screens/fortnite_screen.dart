@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myresume/const.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
-import 'package:sliver_fill_remaining_box_adapter/sliver_fill_remaining_box_adapter.dart';
 import 'package:myresume/services/http_services.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 
@@ -157,7 +156,8 @@ class _FortniteScreenState extends State<FortniteScreen> with SingleTickerProvid
                   );
                 },
               ),
-              SliverFillRemainingBoxAdapter(
+              SliverFillRemaining(
+                hasScrollBody: false,
                 child: Container(
                   color: kGameScreenBackgroundColor,
                 ),
