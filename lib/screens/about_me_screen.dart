@@ -281,8 +281,18 @@ class _MySkillsState extends State<MySkills> with SingleTickerProviderStateMixin
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
-                                      Image.asset('assets/flutter_icon.png',fit: BoxFit.contain,color: Colors.white,scale: 2.2,),
-                                      Text("Flutter",style: TextStyle(color: Colors.white),)
+                                      Icon(FontAwesomeIcons.react,color: Colors.white,size: (_lowWidth || _fullSize.height<600)?35:60,),
+                                      Text("ReactJS",style: TextStyle(color: Colors.white, fontSize: _lowWidth?8:15),),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    width: _fullSize.width*0.02,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Image.asset('assets/flutter_icon.png',fit: BoxFit.contain,color: Colors.white,scale: (_lowWidth || _fullSize.height<600)?4:2.2,),
+                                      Text("Flutter",style: TextStyle(color: Colors.white,fontSize: _lowWidth?8:15),)
                                     ],
                                   ),
                                   SizedBox(
@@ -290,8 +300,8 @@ class _MySkillsState extends State<MySkills> with SingleTickerProviderStateMixin
                                   ),
                                   Column(
                                     children: [
-                                      Icon(FontAwesomeIcons.html5,color: Colors.white,size: 60,),
-                                      Text("HTML",style: TextStyle(color: Colors.white),)
+                                      Icon(FontAwesomeIcons.html5,color: Colors.white,size: (_lowWidth || _fullSize.height<600)?35:60,),
+                                      Text("HTML",style: TextStyle(color: Colors.white,fontSize: _lowWidth?8:15),)
                                     ],
                                   ),
 
