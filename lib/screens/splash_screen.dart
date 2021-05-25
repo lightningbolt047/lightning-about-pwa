@@ -15,7 +15,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   AnimationController _animationController;
   AnimationController _colorAnimationController;
 
-  Animation<Offset> _slideAnimation;
+  Animation<double> _scaleAnimation;
   Animation<Color> _scaffoldColorAnimation;
   bool _circleContainer=false;
 
@@ -40,12 +40,12 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       vsync: this
     );
 
-    _slideAnimation=Tween<Offset>(
-      begin: Offset(0,0),
-      end: Offset(0,-20)
+    _scaleAnimation=Tween<double>(
+      begin: 1,
+      end: 0
     ).animate(CurvedAnimation(
       parent: _animationController,
-      curve: Curves.easeIn
+      curve: Curves.easeInOutExpo
     ));
 
     _scaffoldColorAnimation=ColorTween(
@@ -81,24 +81,27 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SlideTransition(
-                  child: AnimatedContainer(
-                      duration: Duration(seconds: 2),
-                      height: _circleContainer?150:150,
-                      width: _circleContainer?150:150,
-                      child: Center(
-                        child: Hero(
-                          tag: "SplashIcon",
-                          child: Icon(CommunityMaterialIcons.lightning_bolt,color: Colors.yellow,size: _circleContainer?100:150,),
+                RotationTransition(
+                  turns:Tween(begin:1.0,end:4.0).animate(CurvedAnimation(parent: _animationController, curve: Curves.easeInOutExpo)),
+                  child: ScaleTransition(
+                    child: AnimatedContainer(
+                        duration: Duration(seconds: 2),
+                        height: _circleContainer?150:150,
+                        width: _circleContainer?150:150,
+                        child: Center(
+                          child: Hero(
+                            tag: "SplashIcon",
+                            child: Icon(CommunityMaterialIcons.lightning_bolt,color: Colors.yellow,size: _circleContainer?100:150,),
+                          ),
                         ),
-                      ),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: _circleContainer?Colors.blue:Colors.transparent,
-                      ),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: _circleContainer?Colors.blue:Colors.transparent,
+                        ),
 
+                    ),
+                    scale: _scaleAnimation,
                   ),
-                  position: _slideAnimation,
                 ),
               ],
             ),
