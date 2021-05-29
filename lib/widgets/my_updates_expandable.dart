@@ -75,6 +75,7 @@ class _MyUpdateExpandableState extends State<MyUpdateExpandable> with SingleTick
                           scrollOnExpand: true,
                           scrollOnCollapse: true,
                           child: ExpandablePanel(
+                            collapsed: Text(body,overflow:TextOverflow.ellipsis,maxLines: 1,style: TextStyle(color: Colors.white,fontSize: 17),),
                             theme: ExpandableThemeData(
                               iconColor: Colors.white,
                               headerAlignment: ExpandablePanelHeaderAlignment.center,

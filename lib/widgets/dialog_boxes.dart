@@ -145,7 +145,7 @@ class _SocialMediaHandlesState extends State<SocialMediaHandles> with TickerProv
     }
     else{
       handlesNormal=[
-        FlatButton(
+        MaterialButton(
           shape: CircleBorder(),
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
           child: CircleAvatar(
@@ -157,7 +157,7 @@ class _SocialMediaHandlesState extends State<SocialMediaHandles> with TickerProv
             _launchURL(instagramProfileURL);
           },
         ),
-        FlatButton(
+        MaterialButton(
           shape: CircleBorder(),
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
           child: CircleAvatar(
@@ -169,7 +169,7 @@ class _SocialMediaHandlesState extends State<SocialMediaHandles> with TickerProv
             _launchURL(linkedInProfileURL);
           },
         ),
-        FlatButton(
+        MaterialButton(
           shape: CircleBorder(),
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
           child: CircleAvatar(
@@ -181,7 +181,7 @@ class _SocialMediaHandlesState extends State<SocialMediaHandles> with TickerProv
             _launchURL(githubProfileURL);
           },
         ),
-        FlatButton(
+        MaterialButton(
           shape: CircleBorder(),
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
           child: CircleAvatar(
@@ -227,8 +227,10 @@ class _SocialMediaHandlesState extends State<SocialMediaHandles> with TickerProv
                       ),
                       AutoSizeText(email,minFontSize:1,maxFontSize:15,style: TextStyle(color: Colors.white,fontSize: _lowWidth?_fullSize.width*0.03:_fullSize.width*0.015,fontWeight: FontWeight.w600),),
                       AnimatedIconButton(
-                        startIcon: Icon(Icons.copy,color: Colors.white,),
-                        endIcon: Icon(Icons.check,color: Colors.white,),
+                        icons: [
+                          AnimatedIconItem(icon:Icon(Icons.copy,color: Colors.white,)),
+                          AnimatedIconItem(icon:Icon(Icons.check,color: Colors.white,)),
+                        ],
                         animationController: _emailCopyAnimationController,
                         enableFeedback: true,
                         onPressed: () async{

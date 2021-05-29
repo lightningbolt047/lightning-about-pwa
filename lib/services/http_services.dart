@@ -7,7 +7,7 @@ class GameStats{
   final String _accountID="75a4a793c0534623aa46ab978d564492";
 
   Future<Map> getAccountStats() async{
-    http.Response response=await http.get(fortniteAPIUrl+"?account=$_accountID",headers: {
+    http.Response response=await http.get(Uri.parse(fortniteAPIUrl+"?account=$_accountID"),headers: {
       "Authorization":fortniteStatsAPIKey
     });
     if(response.statusCode==200){
@@ -24,7 +24,7 @@ class GitServices{
 
 
   Future<List<dynamic>> getGithubProjects() async{
-    http.Response response=await http.get(githubAPIUrl);
+    http.Response response=await http.get(Uri.parse(githubAPIUrl));
 
     if(response.statusCode==200){
       List<dynamic> data=jsonDecode(response.body);

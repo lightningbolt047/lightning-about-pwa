@@ -142,13 +142,19 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                               SizedBox(
                                 width: _fullSize.width*0.1,
                               ),
-                              TypewriterAnimatedTextKit(
-                                text:["Sashank Visweshwaran","LightningBolt047"],
-                                textStyle: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: _fullSize.width*0.05,
-                                  fontFamily: "Josefin"
-                                ),
+                              AnimatedTextKit(
+                                animatedTexts: [
+                                  TypewriterAnimatedText("Sashank Visweshwaran", textStyle:TextStyle(
+                                      color: Colors.white,
+                                      fontSize: _fullSize.width*0.05,
+                                      fontFamily: "Josefin"
+                                  )),
+                                  TypewriterAnimatedText("LightningBolt047", textStyle:TextStyle(
+                                      color: Colors.white,
+                                      fontSize: _fullSize.width*0.05,
+                                      fontFamily: "Josefin"
+                                  )),
+                                ],
                                 isRepeatingAnimation: true,
                               ),
                             ],
