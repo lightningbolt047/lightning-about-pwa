@@ -12,11 +12,11 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMixin{
 
-  late AnimationController _animationController;
-  late AnimationController _colorAnimationController;
+  AnimationController _animationController;
+  AnimationController _colorAnimationController;
 
-  late Animation<double> _scaleAnimation;
-  late Animation<Color?> _scaffoldColorAnimation;
+  Animation<double> _scaleAnimation;
+  Animation<Color> _scaffoldColorAnimation;
   bool _circleContainer=false;
 
 

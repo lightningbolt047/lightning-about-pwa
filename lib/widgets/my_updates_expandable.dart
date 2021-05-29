@@ -15,8 +15,8 @@ class MyUpdateExpandable extends StatefulWidget {
 
 class _MyUpdateExpandableState extends State<MyUpdateExpandable> with SingleTickerProviderStateMixin{
   final bool _lowWidth;
-  late AnimationController _animationController;
-  late Animation<double> _cardScaleAnimation;
+  AnimationController _animationController;
+  Animation<double> _cardScaleAnimation;
 
   final String heading,body;
 

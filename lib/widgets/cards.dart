@@ -7,7 +7,7 @@ import 'dialog_boxes.dart';
 
 class GitProjectCard extends StatefulWidget {
 
-  final Map? projectInfo;
+  final Map projectInfo;
 
   GitProjectCard(this.projectInfo);
 
@@ -16,12 +16,12 @@ class GitProjectCard extends StatefulWidget {
 }
 
 class _GitProjectCardState extends State<GitProjectCard> with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
+  AnimationController _controller;
 
-  late Animation<Offset> _contentSlideTransition;
+  Animation<Offset> _contentSlideTransition;
 
   bool _lowWidth=false;
-  final Map? projectInfo;
+  final Map projectInfo;
 
   _GitProjectCardState(this.projectInfo);
 
@@ -93,7 +93,7 @@ class _GitProjectCardState extends State<GitProjectCard> with SingleTickerProvid
                 Padding(
                   padding: const EdgeInsets.all(4),
                   child: CircleAvatar(
-                    backgroundImage: AssetImage(getLanguageLogo(projectInfo!['language'])),
+                    backgroundImage: AssetImage(getLanguageLogo(projectInfo['language'])),
                     backgroundColor: Colors.transparent,
                     radius: 40,
                   ),
@@ -105,8 +105,8 @@ class _GitProjectCardState extends State<GitProjectCard> with SingleTickerProvid
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        AutoSizeText(projectInfo!['name']+" ",overflow: TextOverflow.visible,minFontSize:5,maxFontSize:_lowWidth?20:30,maxLines: 1,style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold,fontSize: 25),),
-                        AutoSizeText(projectInfo!['language']+" ",overflow:TextOverflow.ellipsis,minFontSize:5,maxFontSize:20,maxLines:1,style: TextStyle(color: Colors.blue,fontSize: 15),),
+                        AutoSizeText(projectInfo['name']+" ",overflow: TextOverflow.visible,minFontSize:5,maxFontSize:_lowWidth?20:30,maxLines: 1,style: TextStyle(color: Colors.blue,fontWeight: FontWeight.bold,fontSize: 25),),
+                        AutoSizeText(projectInfo['language']+" ",overflow:TextOverflow.ellipsis,minFontSize:5,maxFontSize:20,maxLines:1,style: TextStyle(color: Colors.blue,fontSize: 15),),
                       ],
                     ),
                   ),

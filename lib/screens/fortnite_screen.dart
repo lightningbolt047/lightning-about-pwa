@@ -13,11 +13,11 @@ class FortniteScreen extends StatefulWidget {
 }
 
 class _FortniteScreenState extends State<FortniteScreen> with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
+  AnimationController _controller;
 
   GameStats _gameStats=GameStats();
 
-  Future<Map?>? _gameStatsResult;
+  Future<Map> _gameStatsResult;
 
   final assetsAudioPlayer=AssetsAudioPlayer();
 
@@ -117,30 +117,30 @@ class _FortniteScreenState extends State<FortniteScreen> with SingleTickerProvid
                     );
                   }
 
-                  double? soloWins,duoWins,squadWins,totalWins;
-                  double? soloElims,duoElims,squadElims,totalElims;
-                  double? soloMatchesPlayed,duoMatchesPlayed,squadMatchesPlayed,totalMatchesPlayed;
-                  double? soloPlayHours,duoPlayHours,squadPlayHours,totalPlayHours;
+                  double soloWins,duoWins,squadWins,totalWins;
+                  double soloElims,duoElims,squadElims,totalElims;
+                  double soloMatchesPlayed,duoMatchesPlayed,squadMatchesPlayed,totalMatchesPlayed;
+                  double soloPlayHours,duoPlayHours,squadPlayHours,totalPlayHours;
 
                   soloWins=snapshot.data['solo']['placetop1'];
                   duoWins=snapshot.data['duo']['placetop1'];
                   squadWins=snapshot.data['squad']['placetop1'];
-                  totalWins=soloWins!+duoWins!+squadWins!;
+                  totalWins=soloWins+duoWins+squadWins;
 
                   soloElims=snapshot.data['solo']['kills'];
                   duoElims=snapshot.data['duo']['kills'];
                   squadElims=snapshot.data['squad']['kills'];
-                  totalElims=soloElims!+duoElims!+squadElims!;
+                  totalElims=soloElims+duoElims+squadElims;
 
                   soloMatchesPlayed=snapshot.data['solo']['matchesplayed'];
                   duoMatchesPlayed=snapshot.data['duo']['matchesplayed'];
                   squadMatchesPlayed=snapshot.data['squad']['matchesplayed'];
-                  totalMatchesPlayed=soloMatchesPlayed!+duoMatchesPlayed!+squadMatchesPlayed!;
+                  totalMatchesPlayed=soloMatchesPlayed+duoMatchesPlayed+squadMatchesPlayed;
 
                   soloPlayHours=snapshot.data['solo']['minutesplayed']/60;
                   duoPlayHours=snapshot.data['duo']['minutesplayed']/60;
                   squadPlayHours=snapshot.data['squad']['minutesplayed']/60;
-                  totalPlayHours=soloPlayHours!+duoPlayHours!+squadPlayHours!;
+                  totalPlayHours=soloPlayHours+duoPlayHours+squadPlayHours;
 
 
 
@@ -173,10 +173,10 @@ class _FortniteScreenState extends State<FortniteScreen> with SingleTickerProvid
 
 class GlobalStatCard extends StatefulWidget {
   final String gameMode;
-  final double? wins,totalWins;
-  final double? elims,totalElims;
-  final double? matchesPlayed,totalMatchesPlayed;
-  final double? playHours,totalPlayHours;
+  final double wins,totalWins;
+  final double elims,totalElims;
+  final double matchesPlayed,totalMatchesPlayed;
+  final double playHours,totalPlayHours;
 
   GlobalStatCard(this.gameMode,this.wins,this.totalWins,this.elims,this.totalElims,this.matchesPlayed,this.totalMatchesPlayed,this.playHours,this.totalPlayHours);
 
@@ -185,16 +185,16 @@ class GlobalStatCard extends StatefulWidget {
 }
 
 class _GlobalStatCardState extends State<GlobalStatCard> with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
+  AnimationController _controller;
   Animation _headingSlideAnimation,_contentSlideAnimation;
-  late Animation<double> _fadeAnimation;
+  Animation<double> _fadeAnimation;
   bool _lowWidth=false;
 
   String gameMode;
-  double? wins,totalWins;
-  double? elims,totalElims;
-  double? matchesPlayed,totalMatchesPlayed;
-  double? playHours,totalPlayHours;
+  double wins,totalWins;
+  double elims,totalElims;
+  double matchesPlayed,totalMatchesPlayed;
+  double playHours,totalPlayHours;
 
   _GlobalStatCardState(this.gameMode,this.wins,this.totalWins,this.elims,this.totalElims,this.matchesPlayed,this.totalMatchesPlayed,this.playHours,this.totalPlayHours);
 
@@ -297,7 +297,7 @@ class _GlobalStatCardState extends State<GlobalStatCard> with SingleTickerProvid
                           FadeTransition(
                             opacity: _fadeAnimation,
                             child: SlideTransition(
-                              position: _headingSlideAnimation as Animation<Offset>,
+                              position: _headingSlideAnimation,
                               child: AutoSizeText(gameMode,minFontSize:5,overflow: TextOverflow.ellipsis,style: TextStyle(
                                   fontSize: _fullSize.width*0.05,
                                   color: Colors.white
@@ -320,7 +320,7 @@ class _GlobalStatCardState extends State<GlobalStatCard> with SingleTickerProvid
                     FadeTransition(
                       opacity: _fadeAnimation,
                       child: SlideTransition(
-                        position: _contentSlideAnimation as Animation<Offset>,
+                        position: _contentSlideAnimation,
                         child: Column(
                           children: [
                             Padding(
@@ -337,7 +337,7 @@ class _GlobalStatCardState extends State<GlobalStatCard> with SingleTickerProvid
                                     padding: EdgeInsets.only(left: 8,right: 8),
                                     width:_lowWidth?_fullSize.width*0.25:_fullSize.width*0.1,
                                     child: FAProgressBar(
-                                      currentValue: (wins!*100)~/totalWins!,
+                                      currentValue: (wins*100)~/totalWins,
                                       maxValue: 100,
                                       size: 5,
                                       direction: Axis.horizontal,
@@ -365,7 +365,7 @@ class _GlobalStatCardState extends State<GlobalStatCard> with SingleTickerProvid
                                     padding: EdgeInsets.only(left: 8,right: 8),
                                     width:_lowWidth?_fullSize.width*0.25:_fullSize.width*0.1,
                                     child: FAProgressBar(
-                                      currentValue: (elims!*100)~/totalElims!,
+                                      currentValue: (elims*100)~/totalElims,
                                       maxValue: 100,
                                       size: 5,
                                       direction: Axis.horizontal,
@@ -393,7 +393,7 @@ class _GlobalStatCardState extends State<GlobalStatCard> with SingleTickerProvid
                                     padding: EdgeInsets.only(left: 8,right: 8),
                                     width:_lowWidth?_fullSize.width*0.25:_fullSize.width*0.1,
                                     child: FAProgressBar(
-                                      currentValue: (matchesPlayed!*100)~/totalMatchesPlayed!,
+                                      currentValue: (matchesPlayed*100)~/totalMatchesPlayed,
                                       maxValue: 100,
                                       size: 5,
                                       direction: Axis.horizontal,
@@ -421,7 +421,7 @@ class _GlobalStatCardState extends State<GlobalStatCard> with SingleTickerProvid
                                     padding: EdgeInsets.only(left: 8,right: 8),
                                     width:_lowWidth?_fullSize.width*0.25:_fullSize.width*0.1,
                                     child: FAProgressBar(
-                                      currentValue: ((playHours!*100)~/totalPlayHours!),
+                                      currentValue: ((playHours*100)~/totalPlayHours),
                                       maxValue: 100,
                                       size: 5,
                                       direction: Axis.horizontal,
@@ -431,7 +431,7 @@ class _GlobalStatCardState extends State<GlobalStatCard> with SingleTickerProvid
                                       animatedDuration: Duration(seconds: 2),
                                     ),
                                   ),
-                                  Text(playHours!.toStringAsFixed(1),style: TextStyle(color: Colors.white),)
+                                  Text(playHours.toStringAsFixed(1),style: TextStyle(color: Colors.white),)
                                 ],
                               ),
                             ),

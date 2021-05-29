@@ -16,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
+  AnimationController _controller;
 
   ScrollController _sliverScrollerController=ScrollController();
 
@@ -298,8 +298,8 @@ class _AboutMeSectionState extends State<AboutMeSection> with SingleTickerProvid
   String buttonText="More info";
 
 
-  late AnimationController _animationController;
-  late Animation<double> _aboutTextAnimation;
+  AnimationController _animationController;
+  Animation<double> _aboutTextAnimation;
 
   TextStyle _landscapeAboutTextStyle=TextStyle(color: Colors.white,fontSize: 20,);
 
@@ -520,11 +520,11 @@ class FortniteCardSection extends StatefulWidget {
 }
 
 class _FortniteCardSectionState extends State<FortniteCardSection> with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
+  AnimationController _controller;
   final bool _lowWidth;
   final Size _fullSize;
 
-  double? _minFontSize,_maxFontSize;
+  double _minFontSize,_maxFontSize;
 
   _FortniteCardSectionState(this._lowWidth,this._fullSize);
 
@@ -561,7 +561,7 @@ class _FortniteCardSectionState extends State<FortniteCardSection> with SingleTi
             children: [
               Container(
                   width:_lowWidth?_fullSize.width*0.5:_fullSize.width*0.3,
-                  child: AutoSizeText("Did I tell you that I spend some of my free hours playing games?",minFontSize:_minFontSize!,maxFontSize:_maxFontSize!,maxLines:4,style: TextStyle(color: Colors.white,fontSize: _maxFontSize),)),
+                  child: AutoSizeText("Did I tell you that I spend some of my free hours playing games?",minFontSize:_minFontSize,maxFontSize:_maxFontSize,maxLines:4,style: TextStyle(color: Colors.white,fontSize: _maxFontSize),)),
               Hero(
                 tag: "HometoFortnite",
                 child: RawMaterialButton(
@@ -612,11 +612,11 @@ class ContactMeCardSection extends StatefulWidget {
 }
 
 class _ContactMeCardSectionState extends State<ContactMeCardSection> with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
+  AnimationController _controller;
   final bool _lowWidth;
   final Size _fullSize;
 
-  double? _minFontSize,_maxFontSize;
+  double _minFontSize,_maxFontSize;
 
   _ContactMeCardSectionState(this._lowWidth,this._fullSize);
 
@@ -654,7 +654,7 @@ class _ContactMeCardSectionState extends State<ContactMeCardSection> with Single
               Container(
                   alignment: Alignment.centerRight,
                   width:_lowWidth?_fullSize.width*0.5:_fullSize.width*0.3,
-                  child: AutoSizeText("Want to contact me?",minFontSize:_minFontSize!,maxFontSize:_maxFontSize!,maxLines:4,style: TextStyle(color: Colors.white,fontSize: _maxFontSize),)),
+                  child: AutoSizeText("Want to contact me?",minFontSize:_minFontSize,maxFontSize:_maxFontSize,maxLines:4,style: TextStyle(color: Colors.white,fontSize: _maxFontSize),)),
               RawMaterialButton(
                 fillColor: Colors.white,
                 shape: RoundedRectangleBorder(

@@ -19,7 +19,7 @@ class AboutMe extends StatefulWidget {
 
 class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
 
-  TabController? _tabController;
+  TabController _tabController;
   double bottomNavBarOptionTextSize=20;
 
   List<String> _tabBarNames=['Skills','Projects','Updates'];
@@ -42,7 +42,7 @@ class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     _tabController=TabController(length: 3,vsync: this,initialIndex: 0);
-    _tabController!.addListener(() {
+    _tabController.addListener(() {
       setState(() {});
     });
     super.initState();
@@ -50,7 +50,7 @@ class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
 
   @override
   void dispose() {
-    _tabController!.dispose();
+    _tabController.dispose();
     super.dispose();
   }
   
@@ -95,8 +95,8 @@ class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
                     fillColor: Colors.white,
                     child: Icon(Icons.chevron_left,color: Colors.blue,),
                     onPressed: (){
-                      if(_tabController!.index!=0){
-                        _tabController!.animateTo(_tabController!.index-1);
+                      if(_tabController.index!=0){
+                        _tabController.animateTo(_tabController.index-1);
                       }
                     },
                   ),
@@ -105,8 +105,8 @@ class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
                     fillColor: Colors.white,
                     child: Icon(Icons.chevron_right,color: Colors.blue,),
                     onPressed: (){
-                      if(_tabController!.index!=_tabBarNames.length-1){
-                        _tabController!.animateTo(_tabController!.index+1);
+                      if(_tabController.index!=_tabBarNames.length-1){
+                        _tabController.animateTo(_tabController.index+1);
                       }
                     },
                   )
@@ -130,14 +130,14 @@ class MySkills extends StatefulWidget {
 }
 
 class _MySkillsState extends State<MySkills> with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
+  AnimationController _controller;
 
   bool _lowWidth=false;
 
-  late Animation<Offset> _stackNameSlideAnimation;
-  late Animation<Offset> _frameworkSlideAnimation;
-  late Animation<Offset> _otherSkillsAnimation;
-  late Animation<double> _dividerScaleAnimation;
+  Animation<Offset> _stackNameSlideAnimation;
+  Animation<Offset> _frameworkSlideAnimation;
+  Animation<Offset> _otherSkillsAnimation;
+  Animation<double> _dividerScaleAnimation;
 
 
 
@@ -419,7 +419,7 @@ class _MyProjectsState extends State<MyProjects> {
 
   GitServices _gitServices=GitServices();
 
-  Future<List<dynamic>>? _projectList;
+  Future<List<dynamic>> _projectList;
 
   void populateData() async{
     _projectList=_gitServices.getGithubProjects();
@@ -476,7 +476,7 @@ class MoreAboutMe extends StatefulWidget {
 }
 
 class _MoreAboutMeState extends State<MoreAboutMe> with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
+  AnimationController _controller;
 
   bool _lowWidth=false;
 
