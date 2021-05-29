@@ -18,10 +18,10 @@ class SocialMediaHandles extends StatefulWidget {
 }
 
 class _SocialMediaHandlesState extends State<SocialMediaHandles> with TickerProviderStateMixin {
-  AnimationController _controller,_emailCopyAnimationController;
-  Animation<Offset> _emailSlideTransition;
-  Animation<Offset> _handleSlideTransition;
-  Animation<double> _dividerAnimation;
+  AnimationController? _controller,_emailCopyAnimationController;
+  late Animation<Offset> _emailSlideTransition;
+  late Animation<Offset> _handleSlideTransition;
+  late Animation<double> _dividerAnimation;
 
 
   bool _lowWidth=false;
@@ -63,7 +63,7 @@ class _SocialMediaHandlesState extends State<SocialMediaHandles> with TickerProv
       end: Offset(0,0),
     ).animate(
       CurvedAnimation(
-        parent: _controller,
+        parent: _controller!,
         curve: Curves.easeInOutQuad,
       )
     );
@@ -72,7 +72,7 @@ class _SocialMediaHandlesState extends State<SocialMediaHandles> with TickerProv
       end: Offset(0,0),
     ).animate(
         CurvedAnimation(
-          parent: _controller,
+          parent: _controller!,
           curve: Curves.easeInOutQuad,
         )
     );
@@ -80,18 +80,18 @@ class _SocialMediaHandlesState extends State<SocialMediaHandles> with TickerProv
       begin: 0,
       end: 1,
     ).animate(CurvedAnimation(
-      parent: _controller,
+      parent: _controller!,
       curve: Curves.decelerate
     ));
-    _controller.forward().orCancel;
+    _controller!.forward().orCancel;
 
     super.initState();
   }
 
   @override
   void dispose() {
-    _controller.dispose();
-    _emailCopyAnimationController.dispose();
+    _controller!.dispose();
+    _emailCopyAnimationController!.dispose();
     super.dispose();
   }
   
@@ -235,10 +235,10 @@ class _SocialMediaHandlesState extends State<SocialMediaHandles> with TickerProv
                         enableFeedback: true,
                         onPressed: () async{
                           await FlutterClipboard.copy(email);
-                          _emailCopyAnimationController.forward();
+                          _emailCopyAnimationController!.forward();
                           Timer(Duration(seconds: 5), (){
                             if(mounted){
-                              _emailCopyAnimationController.reverse();
+                              _emailCopyAnimationController!.reverse();
                             }
                           });
                         },
@@ -300,7 +300,7 @@ class _SocialMediaHandlesState extends State<SocialMediaHandles> with TickerProv
 
 class ProjectDialog extends StatefulWidget {
 
-  final Map projectInfo;
+  final Map? projectInfo;
 
   ProjectDialog(this.projectInfo);
 
@@ -309,13 +309,13 @@ class ProjectDialog extends StatefulWidget {
 }
 
 class _ProjectDialogState extends State<ProjectDialog> with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  Animation<double> _headingScaleTransition;
-  Animation<double> _contentFadeTransition;
+  late AnimationController _controller;
+  late Animation<double> _headingScaleTransition;
+  late Animation<double> _contentFadeTransition;
 
   bool _lowWidth=false;
 
-  final Map projectInfo;
+  final Map? projectInfo;
 
   _ProjectDialogState(this.projectInfo);
 
@@ -404,7 +404,7 @@ class _ProjectDialogState extends State<ProjectDialog> with SingleTickerProvider
               actions: [
                 GestureDetector(
                   onTap: (){
-                    _launchURL(projectInfo['html_url']);
+                    _launchURL(projectInfo!['html_url']);
                   },
                   child: Container(
                     padding: EdgeInsets.only(right: 8,top: 2,bottom: 2,left: 2),
@@ -453,7 +453,7 @@ class _ProjectDialogState extends State<ProjectDialog> with SingleTickerProvider
                       shape: BoxShape.circle,
                       color: Colors.transparent,
                       image: DecorationImage(
-                          image: AssetImage(getLanguageLogo(projectInfo['language'])),
+                          image: AssetImage(getLanguageLogo(projectInfo!['language'])),
                           fit: BoxFit.scaleDown
                       ),
                     ),
@@ -467,8 +467,8 @@ class _ProjectDialogState extends State<ProjectDialog> with SingleTickerProvider
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    AutoSizeText(projectInfo['name'],style: TextStyle(color: Colors.white,fontSize: 22,fontWeight: FontWeight.w800),),
-                    AutoSizeText(projectInfo['language'],style: TextStyle(color: Colors.white,fontSize: 17,fontWeight: FontWeight.w600),),
+                    AutoSizeText(projectInfo!['name'],style: TextStyle(color: Colors.white,fontSize: 22,fontWeight: FontWeight.w800),),
+                    AutoSizeText(projectInfo!['language'],style: TextStyle(color: Colors.white,fontSize: 17,fontWeight: FontWeight.w600),),
                   ],
                 ),
               ),
@@ -484,7 +484,7 @@ class _ProjectDialogState extends State<ProjectDialog> with SingleTickerProvider
                 child: Container(
                   padding: EdgeInsets.all(16),
                   child: AutoSizeText(
-                    (projectInfo['name']=="lightning-about-pwa")?projectInfo['description']+"\n\nCodebase for the Progressive Web App that you are currently using":(projectInfo['description']==null?" ":projectInfo['description']),
+                    (projectInfo!['name']=="lightning-about-pwa")?projectInfo!['description']+"\n\nCodebase for the Progressive Web App that you are currently using":(projectInfo!['description']==null?" ":projectInfo!['description']),
                     maxLines: 40,
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.w500,),

@@ -6,7 +6,7 @@ import 'package:myresume/const.dart';
 class GameStats{
   final String _accountID="75a4a793c0534623aa46ab978d564492";
 
-  Future<Map> getAccountStats() async{
+  Future<Map?> getAccountStats() async{
     http.Response response=await http.get(Uri.parse(fortniteAPIUrl+"?account=$_accountID"),headers: {
       "Authorization":fortniteStatsAPIKey
     });
