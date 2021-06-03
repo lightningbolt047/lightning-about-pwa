@@ -21,8 +21,6 @@ class GameStats{
 }
 
 class GitServices{
-
-
   Future<List<dynamic>> getGithubProjects() async{
     http.Response response=await http.get(Uri.parse(githubAPIUrl));
 
