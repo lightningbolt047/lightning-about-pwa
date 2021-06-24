@@ -71,8 +71,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   @override
   Widget build(BuildContext context) {
     Size _fullSize=MediaQuery.of(context).size;
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         backgroundColor: _scaffoldColorAnimation.value,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -123,7 +122,6 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
 
           ],
         ),
-      ),
-    );
+      );
   }
 }

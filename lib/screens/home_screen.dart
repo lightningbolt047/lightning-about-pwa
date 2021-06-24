@@ -16,7 +16,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
-  AnimationController _controller;
 
   ScrollController _sliverScrollerController=ScrollController();
 
@@ -48,13 +47,11 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
   @override
   void initState() {
-    _controller = AnimationController(vsync: this);
     super.initState();
   }
 
   @override
   void dispose() {
-    _controller.dispose();
     _sliverScrollerController.dispose();
     super.dispose();
   }

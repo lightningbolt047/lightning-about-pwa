@@ -22,8 +22,6 @@ class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
   TabController _tabController;
   double bottomNavBarOptionTextSize=20;
 
-  List<String> _tabBarNames=['Skills','Projects','Updates'];
-
   bool _lowWidth=false;
 
 
@@ -67,9 +65,9 @@ class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
           controller: _tabController,
           enableFeedback: true,
           tabs:[
-            Tab(text: _tabBarNames[0],),
-            Tab(text: _tabBarNames[1]),
-            Tab(text: _tabBarNames[2]),
+            Tab(text: aboutMeTabBarNames[0],),
+            Tab(text: aboutMeTabBarNames[1]),
+            Tab(text: aboutMeTabBarNames[2]),
           ]
         ),
       ),
@@ -105,7 +103,7 @@ class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
                     fillColor: Colors.white,
                     child: Icon(Icons.chevron_right,color: Colors.blue,),
                     onPressed: (){
-                      if(_tabController.index!=_tabBarNames.length-1){
+                      if(_tabController.index!=aboutMeTabBarNames.length-1){
                         _tabController.animateTo(_tabController.index+1);
                       }
                     },
