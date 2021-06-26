@@ -522,7 +522,7 @@ class _MoreAboutMeState extends State<MoreAboutMe> with SingleTickerProviderStat
                   fillColor: Colors.white,
                   hoverElevation: 7,
                   onPressed: (){
-                    _launchURL(websiteURL+'assets/assets/SashankVisweshwaran-CB.EN.U4CSE18354.pdf');
+                    _launchURL(websiteURL+'assets/assets/SashankVisweshwaran-Resume.pdf');
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
