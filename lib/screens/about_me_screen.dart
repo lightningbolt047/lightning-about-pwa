@@ -33,10 +33,6 @@ class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
     return;
   }
 
-
-
-
-
   @override
   void initState() {
     _tabController=TabController(length: 3,vsync: this,initialIndex: 0);
