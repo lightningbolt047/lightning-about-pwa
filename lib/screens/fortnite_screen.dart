@@ -205,6 +205,7 @@ class _GlobalStatCardState extends State<GlobalStatCard> with SingleTickerProvid
       return 0;
     }
     else{
+      _lowWidth=false;
       return MediaQuery.of(context).size.width*0.1;
     }
   }

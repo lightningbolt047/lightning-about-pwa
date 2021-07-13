@@ -26,11 +26,12 @@ class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
 
 
 
-  void _isLowWidth(){
-    if(MediaQuery.of(context).size.width<600){
+  void _isLowWidth(BoxConstraints constraints){
+    if(constraints.maxWidth<600){
       _lowWidth=true;
+    }else{
+      _lowWidth=false;
     }
-    return;
   }
 
   @override
@@ -50,7 +51,6 @@ class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
   
   @override
   Widget build(BuildContext context) {
-    _isLowWidth();
     return Scaffold(
       backgroundColor: kFinalScaffoldColor,
       appBar: AppBar(
@@ -67,48 +67,54 @@ class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
           ]
         ),
       ),
-      body: Stack(
-        children: [
-          TabBarView(
-            controller: _tabController,
+      body: LayoutBuilder(
+        builder:(context,constraints){
+          _isLowWidth(constraints);
+          return Stack(
             children: [
-              MySkills(),
-              MyProjects(),
-              MoreAboutMe(),
-            ],
-          ),
-          Visibility(
-            visible: !_lowWidth,
-            child: Align(
-              alignment: Alignment.center,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              TabBarView(
+                controller: _tabController,
                 children: [
-                  RawMaterialButton(
-                    shape: CircleBorder(),
-                    fillColor: Colors.white,
-                    child: Icon(Icons.chevron_left,color: Colors.blue,),
-                    onPressed: (){
-                      if(_tabController.index!=0){
-                        _tabController.animateTo(_tabController.index-1);
-                      }
-                    },
-                  ),
-                  RawMaterialButton(
-                    shape: CircleBorder(),
-                    fillColor: Colors.white,
-                    child: Icon(Icons.chevron_right,color: Colors.blue,),
-                    onPressed: (){
-                      if(_tabController.index!=aboutMeTabBarNames.length-1){
-                        _tabController.animateTo(_tabController.index+1);
-                      }
-                    },
-                  )
+                  MySkills(),
+                  MyProjects(),
+                  MoreAboutMe(),
                 ],
               ),
-            ),
-          )
-        ],
+              Visibility(
+                visible: !_lowWidth,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      RawMaterialButton(
+                        shape: CircleBorder(),
+                        fillColor: Colors.white,
+                        child: Icon(Icons.chevron_left, color: Colors.blue,),
+                        onPressed: () {
+                          if (_tabController.index != 0) {
+                            _tabController.animateTo(_tabController.index - 1);
+                          }
+                        },
+                      ),
+                      RawMaterialButton(
+                        shape: CircleBorder(),
+                        fillColor: Colors.white,
+                        child: Icon(Icons.chevron_right, color: Colors.blue,),
+                        onPressed: () {
+                          if (_tabController.index !=
+                              aboutMeTabBarNames.length - 1) {
+                            _tabController.animateTo(_tabController.index + 1);
+                          }
+                        },
+                      )
+                    ],
+                  ),
+                ),
+              )
+            ],
+        );
+        }
       ),
     );
   }
@@ -135,11 +141,12 @@ class _MySkillsState extends State<MySkills> with SingleTickerProviderStateMixin
 
 
 
-  void _isLowWidth(){
-    if(MediaQuery.of(context).size.width<600){
+  void _isLowWidth(BoxConstraints constraints){
+    if(constraints.maxWidth<600){
       _lowWidth=true;
+    }else{
+      _lowWidth=false;
     }
-    return;
   }
 
 
@@ -197,203 +204,202 @@ class _MySkillsState extends State<MySkills> with SingleTickerProviderStateMixin
   @override
   Widget build(BuildContext context) {
 
-    Size _fullSize=MediaQuery.of(context).size;
-    _isLowWidth();
-
-
-    return CustomScrollView(
-      slivers: [
-        SliverFillRemaining(
-          child: Center(
-            child: Column(
-              children: [
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SlideTransition(
-                        position: _stackNameSlideAnimation,
-                        child: Container(
-                          padding: const EdgeInsets.all(16.0),
-                          width: _fullSize.width*0.5,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                color: kFinalScaffoldColor,
-                                child: Padding(
-                                  padding: EdgeInsets.all(8),
-                                  child: AutoSizeText("FrontEnd ",minFontSize:15,style: TextStyle(color: Colors.white,fontSize: _lowWidth?25:30),),
-                                ),
-                              ),
-                              SizedBox(
-                                height: _fullSize.height*0.1,
-                              ),
-                              Container(
-                                color: kFinalScaffoldColor,
-                                child: Padding(
-                                  padding: EdgeInsets.all(8),
-                                  child: AutoSizeText("BackEnd ",minFontSize:15,style: TextStyle(color: Colors.white,fontSize: _lowWidth?25:30),),
-                                ),
-                              ),
-                              SizedBox(
-                                height: _fullSize.height*0.1,
-                              ),
-                              Container(
-                                color: kFinalScaffoldColor,
-                                child: Padding(
-                                  padding: EdgeInsets.all(8),
-                                  child: AutoSizeText("Database ",minFontSize:15,style: TextStyle(color: Colors.white,fontSize: _lowWidth?25:30),),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-
-                      ScaleTransition(
-                        scale: _dividerScaleAnimation,
-                        child: VerticalDivider(
-                          width: 1,
-                          thickness: 1,
-                          color: Colors.white,
-                          indent: 40,
-                          endIndent: 40,
-                        ),
-                      ),
-                      SlideTransition(
-                        position: _frameworkSlideAnimation,
-                        child: Container(
-                          padding: const EdgeInsets.all(16.0),
-                          width: _fullSize.width*0.45,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      Icon(FontAwesomeIcons.react,color: Colors.white,size: (_lowWidth || _fullSize.height<600)?35:60,),
-                                      Text("ReactJS",style: TextStyle(color: Colors.white, fontSize: _lowWidth?8:15),),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    width: _fullSize.width*0.02,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      Image.asset('assets/flutter_icon.png',fit: BoxFit.contain,color: Colors.white,scale: (_lowWidth || _fullSize.height<600)?4:2.2,),
-                                      Text("Flutter",style: TextStyle(color: Colors.white,fontSize: _lowWidth?8:15),)
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    width: _fullSize.width*0.02,
-                                  ),
-                                  Column(
-                                    children: [
-                                      Icon(FontAwesomeIcons.html5,color: Colors.white,size: (_lowWidth || _fullSize.height<600)?35:60,),
-                                      Text("HTML",style: TextStyle(color: Colors.white,fontSize: _lowWidth?8:15),)
-                                    ],
-                                  ),
-
-                                ],
-                              ),
-                              SizedBox(
-                                height: _fullSize.height*0.08,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      Icon(CommunityMaterialIcons.nodejs,color: Colors.white,size: 60,),
-                                      Text("NodeJS",style: TextStyle(color: Colors.white),)
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    width: _fullSize.width*0.02,
-                                  ),
-                                  Column(
-                                    children: [
-                                      Icon(CommunityMaterialIcons.language_php,color: Colors.white,size: 60,),
-                                      Text("PHP",style: TextStyle(color: Colors.white),)
-                                    ],
-                                  ),
-
-                                ],
-                              ),
-                              SizedBox(
-                                height: _fullSize.height*0.08,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Column(
-                                    children: [
-                                      Icon(CommunityMaterialIcons.firebase,color: Colors.white,size: (_lowWidth || _fullSize.height<600)?35:60,),
-                                      Text("Firebase",style: TextStyle(color: Colors.white,fontSize: _lowWidth?8:15),),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    width: _lowWidth?_fullSize.width*0.01:_fullSize.width*0.02,
-                                  ),
-                                  Column(
-                                    children: [
-                                      Image.asset('assets/mongodb_icon.png',fit: BoxFit.contain,color: Colors.white,scale: (_lowWidth || _fullSize.height<600)?4:2.2,),
-                                      Text("MongoDB",style: TextStyle(color: Colors.white,fontSize: _lowWidth?8:15),),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    width: _lowWidth?_fullSize.width*0.01:_fullSize.width*0.02,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      Image.asset('assets/sql_icon.png',fit: BoxFit.contain,color: Colors.white,scale: (_lowWidth || _fullSize.height<600)?4:2.2,),
-                                      Text("SQL",style: TextStyle(color: Colors.white,fontSize: _lowWidth?8:15),),
-                                    ],
-                                  ),
-                                ],
-                              ),
-
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SlideTransition(position: _otherSkillsAnimation,child: Text("Other Skills",style: TextStyle(color: Colors.white,fontSize: 25),)),
-                SlideTransition(
-                  position: _otherSkillsAnimation,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+    return LayoutBuilder(builder: (context,constraints){
+      _isLowWidth(constraints);
+      return CustomScrollView(
+        slivers: [
+          SliverFillRemaining(
+            child: Center(
+              child: Column(
+                children: [
+                  Expanded(
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Icon(FontAwesomeIcons.python,color: Colors.white,size: 60,),
-                        SizedBox(
-                          width: _fullSize.width*0.05,
+                        SlideTransition(
+                          position: _stackNameSlideAnimation,
+                          child: Container(
+                            padding: const EdgeInsets.all(16.0),
+                            width: constraints.maxWidth*0.5,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  color: kFinalScaffoldColor,
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8),
+                                    child: AutoSizeText("FrontEnd ",minFontSize:15,style: TextStyle(color: Colors.white,fontSize: _lowWidth?25:30),),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: constraints.maxHeight*0.1,
+                                ),
+                                Container(
+                                  color: kFinalScaffoldColor,
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8),
+                                    child: AutoSizeText("BackEnd ",minFontSize:15,style: TextStyle(color: Colors.white,fontSize: _lowWidth?25:30),),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: constraints.maxHeight*0.1,
+                                ),
+                                Container(
+                                  color: kFinalScaffoldColor,
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8),
+                                    child: AutoSizeText("Database ",minFontSize:15,style: TextStyle(color: Colors.white,fontSize: _lowWidth?25:30),),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
-                        Icon(FontAwesomeIcons.java,color: Colors.white,size: 60,),
-                        SizedBox(
-                          width: _fullSize.width*0.05,
+
+                        ScaleTransition(
+                          scale: _dividerScaleAnimation,
+                          child: VerticalDivider(
+                            width: 1,
+                            thickness: 1,
+                            color: Colors.white,
+                            indent: 40,
+                            endIndent: 40,
+                          ),
                         ),
-                        Icon(CommunityMaterialIcons.language_cpp,color: Colors.white,size: 60,),
+                        SlideTransition(
+                          position: _frameworkSlideAnimation,
+                          child: Container(
+                            padding: const EdgeInsets.all(16.0),
+                            width: constraints.maxWidth*0.45,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Icon(FontAwesomeIcons.react,color: Colors.white,size: (_lowWidth || constraints.maxHeight<600)?35:60,),
+                                        Text("ReactJS",style: TextStyle(color: Colors.white, fontSize: _lowWidth?8:15),),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      width: constraints.maxWidth*0.02,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Image.asset('assets/flutter_icon.png',fit: BoxFit.contain,color: Colors.white,scale: (_lowWidth || constraints.maxHeight<600)?4:2.2,),
+                                        Text("Flutter",style: TextStyle(color: Colors.white,fontSize: _lowWidth?8:15),)
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      width: constraints.maxWidth*0.02,
+                                    ),
+                                    Column(
+                                      children: [
+                                        Icon(FontAwesomeIcons.html5,color: Colors.white,size: (_lowWidth || constraints.maxHeight<600)?35:60,),
+                                        Text("HTML",style: TextStyle(color: Colors.white,fontSize: _lowWidth?8:15),)
+                                      ],
+                                    ),
+
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: constraints.maxWidth*0.08,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Icon(CommunityMaterialIcons.nodejs,color: Colors.white,size: 60,),
+                                        Text("NodeJS",style: TextStyle(color: Colors.white),)
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      width: constraints.maxWidth*0.02,
+                                    ),
+                                    Column(
+                                      children: [
+                                        Icon(CommunityMaterialIcons.language_php,color: Colors.white,size: 60,),
+                                        Text("PHP",style: TextStyle(color: Colors.white),)
+                                      ],
+                                    ),
+
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: constraints.maxHeight*0.08,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Column(
+                                      children: [
+                                        Icon(CommunityMaterialIcons.firebase,color: Colors.white,size: (_lowWidth || constraints.maxHeight<600)?35:60,),
+                                        Text("Firebase",style: TextStyle(color: Colors.white,fontSize: _lowWidth?8:15),),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      width: _lowWidth?constraints.maxWidth*0.01:constraints.maxWidth*0.02,
+                                    ),
+                                    Column(
+                                      children: [
+                                        Image.asset('assets/mongodb_icon.png',fit: BoxFit.contain,color: Colors.white,scale: (_lowWidth || constraints.maxHeight<600)?4:2.2,),
+                                        Text("MongoDB",style: TextStyle(color: Colors.white,fontSize: _lowWidth?8:15),),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      width: _lowWidth?constraints.maxWidth*0.01:constraints.maxWidth*0.02,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Image.asset('assets/sql_icon.png',fit: BoxFit.contain,color: Colors.white,scale: (_lowWidth || constraints.maxHeight<600)?4:2.2,),
+                                        Text("SQL",style: TextStyle(color: Colors.white,fontSize: _lowWidth?8:15),),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+
+                              ],
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
-                )
-              ],
+                  SlideTransition(position: _otherSkillsAnimation,child: Text("Other Skills",style: TextStyle(color: Colors.white,fontSize: 25),)),
+                  SlideTransition(
+                    position: _otherSkillsAnimation,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(FontAwesomeIcons.python,color: Colors.white,size: 60,),
+                          SizedBox(
+                            width: constraints.maxWidth*0.05,
+                          ),
+                          Icon(FontAwesomeIcons.java,color: Colors.white,size: 60,),
+                          SizedBox(
+                            width: constraints.maxWidth*0.05,
+                          ),
+                          Icon(CommunityMaterialIcons.language_cpp,color: Colors.white,size: 60,),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
-        )
-      ],
-    );
+          )
+        ],
+      );
+    });
   }
 }
 

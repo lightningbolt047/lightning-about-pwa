@@ -30,6 +30,8 @@ class _SocialMediaHandlesState extends State<SocialMediaHandles> with TickerProv
   void _isLowWidth(){
     if(MediaQuery.of(context).size.width<600){
       _lowWidth=true;
+    }else{
+      _lowWidth=false;
     }
     return;
   }
@@ -321,11 +323,12 @@ class _ProjectDialogState extends State<ProjectDialog> with SingleTickerProvider
 
 
 
-  void _isLowWidth(){
-    if(MediaQuery.of(context).size.width<600){
+  void _isLowWidth(BoxConstraints constraints){
+    if(constraints.maxWidth<600){
       _lowWidth=true;
+    }else{
+      _lowWidth=false;
     }
-    return;
   }
   List<Widget> handlesNormal=[];
   List<Widget> handlesLowWidth=[];
@@ -381,120 +384,123 @@ class _ProjectDialogState extends State<ProjectDialog> with SingleTickerProvider
 
   @override
   Widget build(BuildContext context) {
-    Size _fullSize=MediaQuery.of(context).size;
-    _isLowWidth();
-    return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(25)),
-      ),
-      elevation: 3,
-      backgroundColor: kFinalScaffoldColor,
-      child: Container(
-        height: _fullSize.height*0.75,
-        width: _lowWidth?_fullSize.width:_fullSize.width*0.5,
-        child: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              title: AutoSizeText("Info",minFontSize: 10,maxFontSize: 20,style: TextStyle(color: Colors.white,fontSize: 20),),
-              stretch: true,
-              automaticallyImplyLeading: true,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(topLeft:Radius.circular(25),topRight: Radius.circular(25))
-              ),
-              actions: [
-                GestureDetector(
-                  onTap: (){
-                    _launchURL(projectInfo['html_url']);
-                  },
-                  child: Container(
-                    padding: EdgeInsets.only(right: 8,top: 2,bottom: 2,left: 2),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left:4.0,right: 8),
-                          child: Text("Find it on",),
+    return LayoutBuilder(
+      builder: (context,constraints){
+        _isLowWidth(constraints);
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(25)),
+          ),
+          elevation: 3,
+          backgroundColor: kFinalScaffoldColor,
+          child: Container(
+            height: constraints.maxHeight*0.75,
+            width: _lowWidth?constraints.maxWidth:constraints.maxWidth*0.5,
+            child: CustomScrollView(
+              slivers: [
+                SliverAppBar(
+                  title: AutoSizeText("Info",minFontSize: 10,maxFontSize: 20,style: TextStyle(color: Colors.white,fontSize: 20),),
+                  stretch: true,
+                  automaticallyImplyLeading: true,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(topLeft:Radius.circular(25),topRight: Radius.circular(25))
+                  ),
+                  actions: [
+                    GestureDetector(
+                      onTap: (){
+                        _launchURL(projectInfo['html_url']);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.only(right: 8,top: 2,bottom: 2,left: 2),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left:4.0,right: 8),
+                              child: Text("Find it on",),
+                            ),
+                            VerticalDivider(
+                              color: Colors.white,
+                              thickness: 1,
+                              indent: 10,
+                              endIndent: 10,
+                              width: 1,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left:8.0,right:4),
+                              child: Icon(FontAwesomeIcons.github),
+                            )
+                          ],
                         ),
-                        VerticalDivider(
-                          color: Colors.white,
-                          thickness: 1,
-                          indent: 10,
-                          endIndent: 10,
-                          width: 1,
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.only(topLeft:Radius.circular(20),bottomLeft: Radius.circular(20),topRight: Radius.circular(25),),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left:8.0,right:4),
-                          child: Icon(FontAwesomeIcons.github),
-                        )
-                      ],
+                      ),
                     ),
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.only(topLeft:Radius.circular(20),bottomLeft: Radius.circular(20),topRight: Radius.circular(25),),
-                    ),
+                  ],
+                ),
+                SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: _lowWidth?constraints.maxHeight*0.1:0,
                   ),
                 ),
-              ],
-            ),
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: _lowWidth?_fullSize.height*0.1:0,
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: ScaleTransition(
-                scale: _headingScaleTransition,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    height: _lowWidth?_fullSize.width*0.2:_fullSize.width*0.1,
-                    width: _lowWidth?_fullSize.width*0.2:_fullSize.width*0.1,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.transparent,
-                      image: DecorationImage(
-                          image: AssetImage(getLanguageLogo(projectInfo['language'])),
-                          fit: BoxFit.scaleDown
+                SliverToBoxAdapter(
+                  child: ScaleTransition(
+                    scale: _headingScaleTransition,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        height: _lowWidth?constraints.maxWidth*0.2:constraints.maxWidth*0.1,
+                        width: _lowWidth?constraints.maxWidth*0.2:constraints.maxWidth*0.1,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.transparent,
+                          image: DecorationImage(
+                              image: AssetImage(getLanguageLogo(projectInfo['language'])),
+                              fit: BoxFit.scaleDown
+                          ),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: ScaleTransition(
-                scale: _headingScaleTransition,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    AutoSizeText(projectInfo['name'],style: TextStyle(color: Colors.white,fontSize: 22,fontWeight: FontWeight.w800),),
-                    AutoSizeText(projectInfo['language'],style: TextStyle(color: Colors.white,fontSize: 17,fontWeight: FontWeight.w600),),
-                  ],
-                ),
-              ),
-            ),
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: _lowWidth?_fullSize.height*0.07:_fullSize.height*0.05,
-              ),
-            ),
-            SliverFadeTransition(
-              opacity: _contentFadeTransition,
-              sliver: SliverToBoxAdapter(
-                child: Container(
-                  padding: EdgeInsets.all(16),
-                  child: AutoSizeText(
-                    (projectInfo['name']=="lightning-about-pwa")?projectInfo['description']+"\n\nCodebase for the Progressive Web App that you are currently using":(projectInfo['description']==null?" ":projectInfo['description']),
-                    maxLines: 40,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.w500,),
+                SliverToBoxAdapter(
+                  child: ScaleTransition(
+                    scale: _headingScaleTransition,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        AutoSizeText(projectInfo['name'],style: TextStyle(color: Colors.white,fontSize: 22,fontWeight: FontWeight.w800),),
+                        AutoSizeText(projectInfo['language'],style: TextStyle(color: Colors.white,fontSize: 17,fontWeight: FontWeight.w600),),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            )
-          ],
-        ),
-      ),
+                SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: _lowWidth?constraints.maxHeight*0.07:constraints.maxHeight*0.05,
+                  ),
+                ),
+                SliverFadeTransition(
+                  opacity: _contentFadeTransition,
+                  sliver: SliverToBoxAdapter(
+                    child: Container(
+                      padding: EdgeInsets.all(16),
+                      child: AutoSizeText(
+                        (projectInfo['name']=="lightning-about-pwa")?projectInfo['description']+"\n\nCodebase for the Progressive Web App that you are currently using":(projectInfo['description']==null?" ":projectInfo['description']),
+                        maxLines: 40,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.w500,),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
