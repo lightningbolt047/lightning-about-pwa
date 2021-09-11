@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:myresume/const.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
@@ -9,6 +10,7 @@ import 'fortnite_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'about_me_screen.dart';
 import 'package:myresume/content.dart';
+import 'dart:math' as math;
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -18,6 +20,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
 
   ScrollController _sliverScrollerController=ScrollController();
+
+  final _mouseScrollAnimationCurve=Curves.linearToEaseOut;
+  final _mouseScrollAnimationDuration=Duration(milliseconds: 200);
 
   double _appBarCurrentSize=200;
   bool _lowWidth=false;
@@ -65,211 +70,224 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
       body: LayoutBuilder(
         builder: (context,constraints){
           _isLowWidth(constraints);
-          return CustomScrollView(
-            controller: _sliverScrollerController,
-            slivers: [
-              SliverAppBar(
-                backgroundColor: Colors.black,
-                expandedHeight: constraints.maxHeight*0.7,
-                actions: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 16),
-                    child: Row(
-                      children: [
-                        IconButton(
-                          icon: Icon(FontAwesomeIcons.instagram,color: Colors.white,),
-                          onPressed: (){
-                            _launchURL(instagramProfileURL);
-                          },
-                        ),
-                        IconButton(
-                          icon: Icon(FontAwesomeIcons.linkedinIn,color: Colors.white,),
-                          onPressed: (){
-                            _launchURL(linkedInProfileURL);
-                          },
-                        ),
-                        IconButton(
-                          icon: Icon(FontAwesomeIcons.github,color: Colors.white,),
-                          onPressed: (){
-                            _launchURL(githubProfileURL);
-                          },
-                        ),
-                        IconButton(
-                            icon: Icon(FontAwesomeIcons.infoCircle,color: Colors.white,),
-                            onPressed:(){
-                              showDialog(
-                                context: context,
-                                builder: (context)=>AlertDialog(
-                                  title: Text("Alert"),
-                                  content: Text("Built with Flutter!\nFlutter: 2.2.1"),
-                                  contentPadding: EdgeInsets.all(16),
-                                  actionsPadding: EdgeInsets.all(8),
-                                  actions: [
-                                    TextButton(
-                                      child:Text("OK"),
-                                      onPressed: (){
-                                        Navigator.pop(context);
-                                      },
+          return Listener(
+            onPointerSignal: (pointerSignal){
+              if(pointerSignal is PointerScrollEvent){
+                final offset= _sliverScrollerController.offset + pointerSignal.scrollDelta.dy;
+                if(pointerSignal.scrollDelta.dy.isNegative){
+                  _sliverScrollerController.animateTo(math.max(offset,0),duration: _mouseScrollAnimationDuration,curve: _mouseScrollAnimationCurve);
+                }else{
+                  _sliverScrollerController.animateTo(math.min(_sliverScrollerController.position.maxScrollExtent,offset),duration: _mouseScrollAnimationDuration,curve: _mouseScrollAnimationCurve);
+                }
+              }
+            },
+            child: CustomScrollView(
+              physics: NeverScrollableScrollPhysics(),
+              controller: _sliverScrollerController,
+              slivers: [
+                SliverAppBar(
+                  backgroundColor: Colors.black,
+                  expandedHeight: constraints.maxHeight*0.7,
+                  actions: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 16),
+                      child: Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(FontAwesomeIcons.instagram,color: Colors.white,),
+                            onPressed: (){
+                              _launchURL(instagramProfileURL);
+                            },
+                          ),
+                          IconButton(
+                            icon: Icon(FontAwesomeIcons.linkedinIn,color: Colors.white,),
+                            onPressed: (){
+                              _launchURL(linkedInProfileURL);
+                            },
+                          ),
+                          IconButton(
+                            icon: Icon(FontAwesomeIcons.github,color: Colors.white,),
+                            onPressed: (){
+                              _launchURL(githubProfileURL);
+                            },
+                          ),
+                          IconButton(
+                              icon: Icon(FontAwesomeIcons.infoCircle,color: Colors.white,),
+                              onPressed:(){
+                                showDialog(
+                                  context: context,
+                                  builder: (context)=>AlertDialog(
+                                    title: Text("Alert"),
+                                    content: Text("Built with Flutter!\nFlutter: 2.5.0"),
+                                    contentPadding: EdgeInsets.all(16),
+                                    actionsPadding: EdgeInsets.all(8),
+                                    actions: [
+                                      TextButton(
+                                        child:Text("OK"),
+                                        onPressed: (){
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                  flexibleSpace: LayoutBuilder(
+                    builder: (context,constraints){
+                      _appBarCurrentSize=constraints.biggest.height;
+                      return Stack(
+                        children: [
+                          Positioned.fill(
+                            child: Container(
+                              child: Container(
+                                padding:EdgeInsets.all(8),
+                                child: Row(
+                                  children: [
+                                    Hero(
+                                      tag:"SplashIcon",
+                                      child: CircleAvatar(
+                                        backgroundImage: AssetImage("assets/me.jpg"),
+                                        maxRadius: MediaQuery.of(context).size.width*0.1,
+                                        minRadius: 20,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: constraints.maxWidth*0.1,
+                                    ),
+                                    AnimatedTextKit(
+                                      animatedTexts: [
+                                        TypewriterAnimatedText("Sashank Visweshwaran", textStyle:TextStyle(
+                                            color: Colors.white,
+                                            fontSize: constraints.maxWidth*0.05,
+                                            fontFamily: "Josefin"
+                                        )),
+                                        TypewriterAnimatedText("LightningBolt047", textStyle:TextStyle(
+                                            color: Colors.white,
+                                            fontSize: constraints.maxWidth*0.05,
+                                            fontFamily: "Josefin"
+                                        )),
+                                      ],
+                                      isRepeatingAnimation: true,
                                     ),
                                   ],
                                 ),
-                              );
-                            }
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-                flexibleSpace: LayoutBuilder(
-                  builder: (context,constraints){
-                    _appBarCurrentSize=constraints.biggest.height;
-                    return Stack(
-                      children: [
-                        Positioned.fill(
-                          child: Container(
-                            child: Container(
-                              padding:EdgeInsets.all(8),
-                              child: Row(
-                                children: [
-                                  Hero(
-                                    tag:"SplashIcon",
-                                    child: CircleAvatar(
-                                      backgroundImage: AssetImage("assets/me.jpg"),
-                                      maxRadius: MediaQuery.of(context).size.width*0.1,
-                                      minRadius: 20,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: constraints.maxWidth*0.1,
-                                  ),
-                                  AnimatedTextKit(
-                                    animatedTexts: [
-                                      TypewriterAnimatedText("Sashank Visweshwaran", textStyle:TextStyle(
-                                          color: Colors.white,
-                                          fontSize: constraints.maxWidth*0.05,
-                                          fontFamily: "Josefin"
-                                      )),
-                                      TypewriterAnimatedText("LightningBolt047", textStyle:TextStyle(
-                                          color: Colors.white,
-                                          fontSize: constraints.maxWidth*0.05,
-                                          fontFamily: "Josefin"
-                                      )),
-                                    ],
-                                    isRepeatingAnimation: true,
-                                  ),
-                                ],
                               ),
-                            ),
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage('assets/home_screen_sliver_appbar_image.jpg',),
-                                  fit: BoxFit.cover,
-                                  colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.darken)
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage('assets/home_screen_sliver_appbar_image.jpg',),
+                                    fit: BoxFit.cover,
+                                    colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.darken)
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    );
-                  },
-                ),
-                bottom: PreferredSize(
-                  preferredSize: Size(0,0),
-                  child: Transform.translate(
-                    offset: Offset(0,15),
-                    child: RawMaterialButton(
-                      shape: CircleBorder(),
-                      padding: EdgeInsets.all(16),
-                      elevation: 10,
-                      fillColor: Colors.white,
-                      splashColor: Colors.grey,
-                      onPressed: (){
-                        //Navigator.push(context, CupertinoPageRoute(builder: (context)=>FortniteScreen()));
-                        _sliverScrollerController.animateTo(_appBarCurrentSize,duration: Duration(seconds: 1),curve: Curves.easeInExpo);
-                      },
-                      child: Icon(Icons.keyboard_arrow_down),
+                        ],
+                      );
+                    },
+                  ),
+                  bottom: PreferredSize(
+                    preferredSize: Size(0,0),
+                    child: Transform.translate(
+                      offset: Offset(0,15),
+                      child: RawMaterialButton(
+                        shape: CircleBorder(),
+                        padding: EdgeInsets.all(16),
+                        elevation: 10,
+                        fillColor: Colors.white,
+                        splashColor: Colors.grey,
+                        onPressed: (){
+                          //Navigator.push(context, CupertinoPageRoute(builder: (context)=>FortniteScreen()));
+                          _sliverScrollerController.animateTo(_appBarCurrentSize,duration: Duration(seconds: 1),curve: Curves.easeInExpo);
+                        },
+                        child: Icon(Icons.keyboard_arrow_down),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SliverFillRemaining(
-                hasScrollBody: true,
-                child: Card(
-                  color: Colors.black,
-                  child: Stack(
-                    children: [
-                      Container(
-                        child: Image.asset('assets/home_screen_about_me_card_image.jpg',fit: BoxFit.cover,),
-                        width: constraints.maxWidth,
-                        height: constraints.maxHeight,
-                      ),
-                      Positioned.fill(
-                        child: Container(
+                SliverFillRemaining(
+                  hasScrollBody: true,
+                  child: Card(
+                    color: Colors.black,
+                    child: Stack(
+                      children: [
+                        Container(
+                          child: Image.asset('assets/home_screen_about_me_card_image.jpg',fit: BoxFit.cover,),
+                          width: constraints.maxWidth,
+                          height: constraints.maxHeight,
+                        ),
+                        Positioned.fill(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [Colors.black,Colors.transparent],
+                                begin: _lowWidth?Alignment.bottomCenter:Alignment.centerRight,
+                                end: _lowWidth?Alignment.topCenter:Alignment.centerLeft,
+                              ),
+                            ),
+                            child: AboutMeSection(),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: Card(
+                    color: Colors.black,
+                    child: Stack(
+                      children: [
+                        Container(
+                          child: Image.asset('assets/fortnite_home_screen_card_image.jpg',fit: BoxFit.cover,),
+                          height: constraints.maxHeight*0.3,
+                          width: constraints.maxWidth,
+                        ),
+                        Container(
+                          height: constraints.maxHeight*0.3,
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
                               colors: [Colors.black,Colors.transparent],
-                              begin: _lowWidth?Alignment.bottomCenter:Alignment.centerRight,
-                              end: _lowWidth?Alignment.topCenter:Alignment.centerLeft,
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
                             ),
                           ),
-                          child: AboutMeSection(),
-                        ),
-                      )
-                    ],
+                          child: FortniteCardSection(_lowWidth,_fullSize),
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              SliverToBoxAdapter(
-                child: Card(
-                  color: Colors.black,
-                  child: Stack(
-                    children: [
-                      Container(
-                        child: Image.asset('assets/fortnite_home_screen_card_image.jpg',fit: BoxFit.cover,),
-                        height: constraints.maxHeight*0.3,
-                        width: constraints.maxWidth,
-                      ),
-                      Container(
-                        height: constraints.maxHeight*0.3,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [Colors.black,Colors.transparent],
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
+                SliverToBoxAdapter(
+                  child: Card(
+                    color: Colors.black,
+                    child: Stack(
+                      children: [
+                        Container(
+                          child: Image.asset('assets/home_screen_contact_me_card_image.jpg',fit: BoxFit.cover,),
+                          height: constraints.maxHeight*0.3,
+                          width: constraints.maxWidth,
+                        ),
+                        Container(
+                          height: constraints.maxHeight*0.3,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [Colors.black,Colors.transparent],
+                              begin: Alignment.centerRight,
+                              end: Alignment.centerLeft,
+                            ),
                           ),
-                        ),
-                        child: FortniteCardSection(_lowWidth,_fullSize),
-                      )
-                    ],
+                          child: ContactMeCardSection(),
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              SliverToBoxAdapter(
-                child: Card(
-                  color: Colors.black,
-                  child: Stack(
-                    children: [
-                      Container(
-                        child: Image.asset('assets/home_screen_contact_me_card_image.jpg',fit: BoxFit.cover,),
-                        height: constraints.maxHeight*0.3,
-                        width: constraints.maxWidth,
-                      ),
-                      Container(
-                        height: constraints.maxHeight*0.3,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [Colors.black,Colors.transparent],
-                            begin: Alignment.centerRight,
-                            end: Alignment.centerLeft,
-                          ),
-                        ),
-                        child: ContactMeCardSection(),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           );
         },
       ),
