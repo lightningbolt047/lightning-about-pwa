@@ -25,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   final _mouseScrollAnimationDuration=Duration(milliseconds: 200);
 
   double _appBarCurrentSize=200;
+  bool _touchInput=true;
   bool _lowWidth=false;
 
 
@@ -72,8 +73,18 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
           _isLowWidth(constraints);
           return Listener(
             onPointerSignal: (pointerSignal){
+              if(pointerSignal.kind != PointerDeviceKind.mouse){
+                setState(() {
+                  _touchInput=true;
+                });
+              }else{
+                setState(() {
+                  _touchInput=false;
+                });
+              }
               if(pointerSignal is PointerScrollEvent){
-                final offset= _sliverScrollerController.offset + pointerSignal.scrollDelta.dy;
+                final offset= _sliverScrollerController.offset + (pointerSignal.scrollDelta.dy.abs()<100?(pointerSignal.scrollDelta.dy*150):pointerSignal.scrollDelta.dy);
+                print(pointerSignal.scrollDelta.dy);
                 if(pointerSignal.scrollDelta.dy.isNegative){
                   _sliverScrollerController.animateTo(math.max(offset,0),duration: _mouseScrollAnimationDuration,curve: _mouseScrollAnimationCurve);
                 }else{
@@ -82,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
               }
             },
             child: CustomScrollView(
-              physics: NeverScrollableScrollPhysics(),
+              physics: _touchInput?null:NeverScrollableScrollPhysics(),
               controller: _sliverScrollerController,
               slivers: [
                 SliverAppBar(
