@@ -385,10 +385,12 @@ class _AboutMeSectionState extends State<AboutMeSection> with SingleTickerProvid
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CircleAvatar(
-                    backgroundImage: AssetImage("assets/me.jpg"),
-                    maxRadius: constraints.maxHeight*0.07,
-                    minRadius: 10,
+                  SafeArea(
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage("assets/me.jpg"),
+                      maxRadius: constraints.maxHeight*0.07,
+                      minRadius: 10,
+                    ),
                   ),
                   SizedBox(
                     width: constraints.maxHeight*0.05,
