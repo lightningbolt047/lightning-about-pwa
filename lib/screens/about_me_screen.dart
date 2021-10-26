@@ -307,7 +307,7 @@ class _MySkillsState extends State<MySkills> with SingleTickerProviderStateMixin
                                   ],
                                 ),
                                 SizedBox(
-                                  height: constraints.maxWidth*0.08,
+                                  height: _lowWidth?constraints.maxWidth*0.08:constraints.maxWidth*0.04,
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -316,7 +316,7 @@ class _MySkillsState extends State<MySkills> with SingleTickerProviderStateMixin
                                       crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
                                         Icon(CommunityMaterialIcons.nodejs,color: Colors.white,size: 60,),
-                                        Text("NodeJS",style: TextStyle(color: Colors.white),)
+                                        Text("NodeJS",style: TextStyle(color: Colors.white,fontSize: _lowWidth?8:15),)
                                       ],
                                     ),
                                     SizedBox(
@@ -325,7 +325,7 @@ class _MySkillsState extends State<MySkills> with SingleTickerProviderStateMixin
                                     Column(
                                       children: [
                                         Icon(CommunityMaterialIcons.language_php,color: Colors.white,size: 60,),
-                                        Text("PHP",style: TextStyle(color: Colors.white),)
+                                        Text("PHP",style: TextStyle(color: Colors.white,fontSize: _lowWidth?8:15),)
                                       ],
                                     ),
 
