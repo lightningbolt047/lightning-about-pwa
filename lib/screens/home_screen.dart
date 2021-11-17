@@ -84,7 +84,6 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
               }
               if(pointerSignal is PointerScrollEvent){
                 final offset= _sliverScrollerController.offset + (pointerSignal.scrollDelta.dy.abs()<100?(pointerSignal.scrollDelta.dy*150):pointerSignal.scrollDelta.dy);
-                print(pointerSignal.scrollDelta.dy);
                 if(pointerSignal.scrollDelta.dy.isNegative){
                   _sliverScrollerController.animateTo(math.max(offset,0),duration: _mouseScrollAnimationDuration,curve: _mouseScrollAnimationCurve);
                 }else{
@@ -129,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                                   context: context,
                                   builder: (context)=>AlertDialog(
                                     title: Text("Alert"),
-                                    content: Text("Built with Flutter!\nFlutter: 2.5.2"),
+                                    content: Text("Built with Flutter!\nFlutter: 2.5.3"),
                                     contentPadding: EdgeInsets.all(16),
                                     actionsPadding: EdgeInsets.all(8),
                                     actions: [
