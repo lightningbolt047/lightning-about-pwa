@@ -128,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                                   context: context,
                                   builder: (context)=>AlertDialog(
                                     title: Text("Alert"),
-                                    content: Text("Built with Flutter!\nFlutter: 2.5.8"),
+                                    content: Text("Built with Flutter!\nFlutter: 2.8.1"),
                                     contentPadding: EdgeInsets.all(16),
                                     actionsPadding: EdgeInsets.all(8),
                                     actions: [
