@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 
-final Color kFinalScaffoldColor=Colors.grey[900];
+final Color? kFinalScaffoldColor=Colors.grey[900];
 final Color kInitialScaffoldColor=Colors.white;
 
 final kGameScreenBackgroundColor=Colors.black.withOpacity(0.25);

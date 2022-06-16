@@ -12,11 +12,11 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMixin{
 
-  AnimationController _animationController;
-  AnimationController _colorAnimationController;
+  late AnimationController _animationController;
+  late AnimationController _colorAnimationController;
 
-  Animation<double> _scaleAnimation;
-  Animation<Color> _scaffoldColorAnimation;
+  late Animation<double> _scaleAnimation;
+  late Animation<Color> _scaffoldColorAnimation;
   bool _circleContainer=false;
 
 
@@ -48,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       curve: Curves.easeInOutExpo
     ));
 
-    _scaffoldColorAnimation=ColorTween(
+    _scaffoldColorAnimation=Tween<Color>(
       begin: kInitialScaffoldColor,
       end: kFinalScaffoldColor
     ).animate(CurvedAnimation(

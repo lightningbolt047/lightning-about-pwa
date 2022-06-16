@@ -14,9 +14,9 @@ class GitProjectCard extends StatefulWidget {
 }
 
 class _GitProjectCardState extends State<GitProjectCard> with SingleTickerProviderStateMixin {
-  AnimationController _controller;
+  late AnimationController _controller;
 
-  Animation<Offset> _contentSlideTransition;
+  late Animation<Offset> _contentSlideTransition;
 
   bool _lowWidth=false;
   final Map projectInfo;

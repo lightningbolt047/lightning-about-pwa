@@ -19,7 +19,7 @@ class AboutMe extends StatefulWidget {
 
 class _AboutMeState extends State<AboutMe> with SingleTickerProviderStateMixin {
 
-  TabController _tabController;
+  late TabController _tabController;
   double bottomNavBarOptionTextSize=20;
 
   bool _lowWidth=false;
@@ -130,14 +130,14 @@ class MySkills extends StatefulWidget {
 }
 
 class _MySkillsState extends State<MySkills> with SingleTickerProviderStateMixin {
-  AnimationController _controller;
+  late AnimationController _controller;
 
   bool _lowWidth=false;
 
-  Animation<Offset> _stackNameSlideAnimation;
-  Animation<Offset> _frameworkSlideAnimation;
-  Animation<Offset> _otherSkillsAnimation;
-  Animation<double> _dividerScaleAnimation;
+  late Animation<Offset> _stackNameSlideAnimation;
+  late Animation<Offset> _frameworkSlideAnimation;
+  late Animation<Offset> _otherSkillsAnimation;
+  late Animation<double> _dividerScaleAnimation;
 
 
 
@@ -419,7 +419,7 @@ class _MyProjectsState extends State<MyProjects> {
 
   GitServices _gitServices=GitServices();
 
-  Future<List<dynamic>> _projectList;
+  Future<List<dynamic>>? _projectList;
 
   void populateData() async{
     _projectList=_gitServices.getGithubProjects();
@@ -450,14 +450,14 @@ class _MyProjectsState extends State<MyProjects> {
         width: _lowWidth?_fullSize.width*0.9:_fullSize.width*0.7,
         child: FutureBuilder(
           future: _projectList,
-          builder: (context,snapshot){
+          builder: (BuildContext context,AsyncSnapshot<List> snapshot){
             if(snapshot.data==null){
               return LinearProgressIndicator();
             }
             return ListView.builder(
-              itemCount: snapshot.data.length,
+              itemCount: snapshot.data!.length,
               itemBuilder: (context,index){
-                  return GitProjectCard(snapshot.data[index]);
+                  return GitProjectCard(snapshot.data![index]);
               },
             );
           },
@@ -476,7 +476,7 @@ class MoreAboutMe extends StatefulWidget {
 }
 
 class _MoreAboutMeState extends State<MoreAboutMe> with SingleTickerProviderStateMixin {
-  AnimationController _controller;
+  late AnimationController _controller;
 
   bool _lowWidth=false;
 

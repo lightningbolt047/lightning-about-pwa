@@ -12,11 +12,11 @@ class FortniteScreen extends StatefulWidget {
 }
 
 class _FortniteScreenState extends State<FortniteScreen> with SingleTickerProviderStateMixin {
-  AnimationController _controller;
+  late AnimationController _controller;
 
   GameStats _gameStats=GameStats();
 
-  Future<Map> _gameStatsResult;
+  Future<Map>? _gameStatsResult;
 
   final assetsAudioPlayer=AssetsAudioPlayer();
 
@@ -109,7 +109,7 @@ class _FortniteScreenState extends State<FortniteScreen> with SingleTickerProvid
               ),
               FutureBuilder(
                 future: _gameStatsResult,
-                builder: (context,snapshot){
+                builder: (BuildContext context,AsyncSnapshot<Map<dynamic,dynamic>> snapshot){
                   if(snapshot.data==null){
                     return SliverToBoxAdapter(
                       child: LinearProgressIndicator(),
@@ -121,24 +121,24 @@ class _FortniteScreenState extends State<FortniteScreen> with SingleTickerProvid
                   double soloMatchesPlayed,duoMatchesPlayed,squadMatchesPlayed,totalMatchesPlayed;
                   double soloPlayHours,duoPlayHours,squadPlayHours,totalPlayHours;
 
-                  soloWins=snapshot.data['solo']['placetop1'];
-                  duoWins=snapshot.data['duo']['placetop1'];
-                  squadWins=snapshot.data['squad']['placetop1'];
+                  soloWins=snapshot.data!['solo']['placetop1'];
+                  duoWins=snapshot.data!['duo']['placetop1'];
+                  squadWins=snapshot.data!['squad']['placetop1'];
                   totalWins=soloWins+duoWins+squadWins;
 
-                  soloElims=snapshot.data['solo']['kills'];
-                  duoElims=snapshot.data['duo']['kills'];
-                  squadElims=snapshot.data['squad']['kills'];
+                  soloElims=snapshot.data!['solo']['kills'];
+                  duoElims=snapshot.data!['duo']['kills'];
+                  squadElims=snapshot.data!['squad']['kills'];
                   totalElims=soloElims+duoElims+squadElims;
 
-                  soloMatchesPlayed=snapshot.data['solo']['matchesplayed'];
-                  duoMatchesPlayed=snapshot.data['duo']['matchesplayed'];
-                  squadMatchesPlayed=snapshot.data['squad']['matchesplayed'];
+                  soloMatchesPlayed=snapshot.data!['solo']['matchesplayed'];
+                  duoMatchesPlayed=snapshot.data!['duo']['matchesplayed'];
+                  squadMatchesPlayed=snapshot.data!['squad']['matchesplayed'];
                   totalMatchesPlayed=soloMatchesPlayed+duoMatchesPlayed+squadMatchesPlayed;
 
-                  soloPlayHours=snapshot.data['solo']['minutesplayed']/60;
-                  duoPlayHours=snapshot.data['duo']['minutesplayed']/60;
-                  squadPlayHours=snapshot.data['squad']['minutesplayed']/60;
+                  soloPlayHours=snapshot.data!['solo']['minutesplayed']/60;
+                  duoPlayHours=snapshot.data!['duo']['minutesplayed']/60;
+                  squadPlayHours=snapshot.data!['squad']['minutesplayed']/60;
                   totalPlayHours=soloPlayHours+duoPlayHours+squadPlayHours;
 
 
@@ -184,9 +184,9 @@ class GlobalStatCard extends StatefulWidget {
 }
 
 class _GlobalStatCardState extends State<GlobalStatCard> with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  Animation _headingSlideAnimation,_contentSlideAnimation;
-  Animation<double> _fadeAnimation;
+  late AnimationController _controller;
+  late Animation<Offset> _headingSlideAnimation,_contentSlideAnimation;
+  late Animation<double> _fadeAnimation;
   bool _lowWidth=false;
 
   String gameMode;

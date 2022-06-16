@@ -15,10 +15,10 @@ class SocialMediaHandles extends StatefulWidget {
 }
 
 class _SocialMediaHandlesState extends State<SocialMediaHandles> with TickerProviderStateMixin {
-  AnimationController _controller,_emailCopyAnimationController;
-  Animation<Offset> _emailSlideTransition;
-  Animation<Offset> _handleSlideTransition;
-  Animation<double> _dividerAnimation;
+  late AnimationController _controller,_emailCopyAnimationController;
+  late Animation<Offset> _emailSlideTransition;
+  late Animation<Offset> _handleSlideTransition;
+  late Animation<double> _dividerAnimation;
 
 
   bool _lowWidth=false;
@@ -297,9 +297,8 @@ class ProjectDialog extends StatefulWidget {
 }
 
 class _ProjectDialogState extends State<ProjectDialog> with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  Animation<double> _headingScaleTransition;
-  Animation<double> _contentFadeTransition;
+  late AnimationController _controller;
+  late Animation<double> _contentLoadTransition;
 
   bool _lowWidth=false;
 
@@ -330,20 +329,12 @@ class _ProjectDialogState extends State<ProjectDialog> with SingleTickerProvider
   void initState() {
     _controller = AnimationController(vsync: this,duration: Duration(milliseconds: 500));
 
-    _headingScaleTransition=Tween<double>(
+    _contentLoadTransition=Tween<double>(
       begin: 0,
       end: 1,
     ).animate(CurvedAnimation(
       parent: _controller,
       curve: Curves.easeIn
-    ));
-
-    _contentFadeTransition=Tween<double>(
-      begin: 0,
-      end: 1
-    ).animate(CurvedAnimation(
-        parent: _controller,
-        curve: Curves.easeInOutExpo
     ));
 
     _controller.forward().orCancel;
@@ -422,7 +413,7 @@ class _ProjectDialogState extends State<ProjectDialog> with SingleTickerProvider
                 ),
                 SliverToBoxAdapter(
                   child: ScaleTransition(
-                    scale: _headingScaleTransition,
+                    scale: _contentLoadTransition,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
@@ -442,7 +433,7 @@ class _ProjectDialogState extends State<ProjectDialog> with SingleTickerProvider
                 ),
                 SliverToBoxAdapter(
                   child: ScaleTransition(
-                    scale: _headingScaleTransition,
+                    scale: _contentLoadTransition,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -458,7 +449,7 @@ class _ProjectDialogState extends State<ProjectDialog> with SingleTickerProvider
                   ),
                 ),
                 SliverFadeTransition(
-                  opacity: _contentFadeTransition,
+                  opacity: _contentLoadTransition,
                   sliver: SliverToBoxAdapter(
                     child: Container(
                       padding: EdgeInsets.all(16),

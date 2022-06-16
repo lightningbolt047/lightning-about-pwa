@@ -312,8 +312,8 @@ class _AboutMeSectionState extends State<AboutMeSection> with SingleTickerProvid
   String buttonText="More info";
 
 
-  AnimationController _animationController;
-  Animation<double> _aboutTextAnimation;
+  late AnimationController _animationController;
+  late Animation<double> _aboutTextAnimation;
 
   TextStyle _landscapeAboutTextStyle=TextStyle(color: Colors.white,fontSize: 20,);
 
@@ -541,11 +541,11 @@ class FortniteCardSection extends StatefulWidget {
 }
 
 class _FortniteCardSectionState extends State<FortniteCardSection> with SingleTickerProviderStateMixin {
-  AnimationController _controller;
+  late AnimationController _controller;
   final bool _lowWidth;
   final Size _fullSize;
 
-  double _minFontSize,_maxFontSize;
+  late double _minFontSize,_maxFontSize;
 
   _FortniteCardSectionState(this._lowWidth,this._fullSize);
 
@@ -628,10 +628,10 @@ class ContactMeCardSection extends StatefulWidget {
 }
 
 class _ContactMeCardSectionState extends State<ContactMeCardSection> with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  bool _lowWidth;
+  late AnimationController _controller;
+  bool _lowWidth=false;
 
-  double _minFontSize,_maxFontSize;
+  late double _minFontSize,_maxFontSize;
 
   _ContactMeCardSectionState();
 
