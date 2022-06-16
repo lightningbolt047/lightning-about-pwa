@@ -1,11 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:myresume/const.dart';
-import 'package:clipboard/clipboard.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:animated_icon_button/animated_icon_button.dart';
-
+import 'package:flutter/services.dart';
 import '../content.dart';
 import '../services/url_launcher.dart';
 
@@ -223,8 +222,8 @@ class _SocialMediaHandlesState extends State<SocialMediaHandles> with TickerProv
                         animationController: _emailCopyAnimationController,
                         enableFeedback: true,
                         onPressed: () async{
-                          await FlutterClipboard.copy(email);
-                          _emailCopyAnimationController.forward();
+                          Clipboard.setData(ClipboardData(text: email));
+                          await _emailCopyAnimationController.reverse();
                           Timer(Duration(seconds: 5), (){
                             if(mounted){
                               _emailCopyAnimationController.reverse();
