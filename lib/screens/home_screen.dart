@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:myresume/const.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:myresume/widgets/dialog_boxes.dart';
-import 'package:url_launcher/url_launcher.dart';
+import '../services/url_launcher.dart';
 import 'fortnite_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'about_me_screen.dart';
@@ -36,18 +36,6 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
       _lowWidth=true;
     }else{
       _lowWidth=false;
-    }
-  }
-
-
-
-  void _launchURL(String url) async{
-    if(await canLaunch(url)){
-      launch(url);
-    }
-    else{
-      print("Couldn\'t launch URL ");
-      throw "Can\'t launch $url";
     }
   }
 
@@ -106,19 +94,19 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                           IconButton(
                             icon: Icon(FontAwesomeIcons.instagram,color: Colors.white,),
                             onPressed: (){
-                              _launchURL(instagramProfileURL);
+                              launchURL(instagramProfileURL);
                             },
                           ),
                           IconButton(
                             icon: Icon(FontAwesomeIcons.linkedinIn,color: Colors.white,),
                             onPressed: (){
-                              _launchURL(linkedInProfileURL);
+                              launchURL(linkedInProfileURL);
                             },
                           ),
                           IconButton(
                             icon: Icon(FontAwesomeIcons.github,color: Colors.white,),
                             onPressed: (){
-                              _launchURL(githubProfileURL);
+                              launchURL(githubProfileURL);
                             },
                           ),
                           IconButton(

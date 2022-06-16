@@ -1,15 +1,13 @@
 import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myresume/const.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:animated_icon_button/animated_icon_button.dart';
 
 import '../content.dart';
+import '../services/url_launcher.dart';
 
 
 class SocialMediaHandles extends StatefulWidget {
@@ -37,17 +35,6 @@ class _SocialMediaHandlesState extends State<SocialMediaHandles> with TickerProv
   }
   List<Widget> handlesNormal=[];
   List<Widget> handlesLowWidth=[];
-
-
-  void _launchURL(String url) async{
-    if(await canLaunch(url)){
-      launch(url);
-    }
-    else{
-      print("Couldn\'t launch URL ");
-      throw "Can\'t launch $url";
-    }
-  }
 
   @override
   void setState(fn) {
@@ -105,7 +92,7 @@ class _SocialMediaHandlesState extends State<SocialMediaHandles> with TickerProv
       handlesLowWidth=[
         GestureDetector(
           onTap: (){
-            _launchURL(instagramProfileURL);
+            launchURL(instagramProfileURL);
           },
           child: CircleAvatar(
             backgroundImage: AssetImage('assets/instagram_icon.png'),
@@ -120,7 +107,7 @@ class _SocialMediaHandlesState extends State<SocialMediaHandles> with TickerProv
             radius: _fullSize.width*0.03,
           ),
           onTap: (){
-            _launchURL(linkedInProfileURL);
+            launchURL(linkedInProfileURL);
           },
         ),
         GestureDetector(
@@ -130,7 +117,7 @@ class _SocialMediaHandlesState extends State<SocialMediaHandles> with TickerProv
             radius: _fullSize.width*0.03,
           ),
           onTap: (){
-            _launchURL(githubProfileURL);
+            launchURL(githubProfileURL);
           },
         ),
         GestureDetector(
@@ -140,7 +127,7 @@ class _SocialMediaHandlesState extends State<SocialMediaHandles> with TickerProv
             radius: _fullSize.width*0.03,
           ),
           onTap: (){
-            _launchURL(twitterProfileURL);
+            launchURL(twitterProfileURL);
           },
         ),
       ];
@@ -156,7 +143,7 @@ class _SocialMediaHandlesState extends State<SocialMediaHandles> with TickerProv
             radius: _fullSize.width*0.03,
           ),
           onPressed: (){
-            _launchURL(instagramProfileURL);
+            launchURL(instagramProfileURL);
           },
         ),
         MaterialButton(
@@ -168,7 +155,7 @@ class _SocialMediaHandlesState extends State<SocialMediaHandles> with TickerProv
             radius: _fullSize.width*0.03,
           ),
           onPressed: (){
-            _launchURL(linkedInProfileURL);
+            launchURL(linkedInProfileURL);
           },
         ),
         MaterialButton(
@@ -180,7 +167,7 @@ class _SocialMediaHandlesState extends State<SocialMediaHandles> with TickerProv
             radius: _fullSize.width*0.03,
           ),
           onPressed: (){
-            _launchURL(githubProfileURL);
+            launchURL(githubProfileURL);
           },
         ),
         MaterialButton(
@@ -192,7 +179,7 @@ class _SocialMediaHandlesState extends State<SocialMediaHandles> with TickerProv
             radius: _fullSize.width*0.03,
           ),
           onPressed: (){
-            _launchURL(twitterProfileURL);
+            launchURL(twitterProfileURL);
           },
         ),
       ];
@@ -333,17 +320,6 @@ class _ProjectDialogState extends State<ProjectDialog> with SingleTickerProvider
   List<Widget> handlesNormal=[];
   List<Widget> handlesLowWidth=[];
 
-
-  void _launchURL(String url) async{
-    if(await canLaunch(url)){
-      launch(url);
-    }
-    else{
-      print("Couldn\'t launch URL ");
-      throw "Can\'t launch $url";
-    }
-  }
-
   @override
   void setState(fn) {
     if(mounted){
@@ -408,7 +384,7 @@ class _ProjectDialogState extends State<ProjectDialog> with SingleTickerProvider
                   actions: [
                     GestureDetector(
                       onTap: (){
-                        _launchURL(projectInfo['html_url']);
+                        launchURL(projectInfo['html_url']);
                       },
                       child: Container(
                         padding: EdgeInsets.only(right: 8,top: 2,bottom: 2,left: 2),

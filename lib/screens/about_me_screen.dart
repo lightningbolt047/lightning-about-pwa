@@ -2,15 +2,15 @@ import 'dart:async';
 import 'dart:math';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:community_material_icon/community_material_icon.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:myresume/const.dart';
 import 'package:myresume/services/http_services.dart';
 import 'package:myresume/widgets/cards.dart';
 import 'package:myresume/widgets/my_updates_expandable.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:myresume/content.dart';
+
+import '../services/url_launcher.dart';
 
 class AboutMe extends StatefulWidget {
   @override
@@ -486,16 +486,6 @@ class _MoreAboutMeState extends State<MoreAboutMe> with SingleTickerProviderStat
     }
     return;
   }
-  
-  void _launchURL(String url) async{
-    if(await canLaunch(url)){
-      launch(url);
-    }
-    else{
-      print("Couldn\'t launch URL ");
-      throw "Can\'t launch $url";
-    }
-  }
 
   @override
   void initState() {
@@ -528,7 +518,7 @@ class _MoreAboutMeState extends State<MoreAboutMe> with SingleTickerProviderStat
                   fillColor: Colors.white,
                   hoverElevation: 7,
                   onPressed: (){
-                    _launchURL(websiteURL+'assets/assets/SashankVisweshwaran-Resume.pdf');
+                    launchURL(websiteURL+'assets/assets/SashankVisweshwaran-Resume.pdf');
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),

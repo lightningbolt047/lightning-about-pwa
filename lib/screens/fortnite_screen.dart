@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myresume/const.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
@@ -338,7 +337,7 @@ class _GlobalStatCardState extends State<GlobalStatCard> with SingleTickerProvid
                                     padding: EdgeInsets.only(left: 8,right: 8),
                                     width:_lowWidth?_fullSize.width*0.25:_fullSize.width*0.1,
                                     child: FAProgressBar(
-                                      currentValue: (wins*100)~/totalWins,
+                                      currentValue: (wins*100)/totalWins,
                                       maxValue: 100,
                                       size: 5,
                                       direction: Axis.horizontal,
@@ -366,7 +365,7 @@ class _GlobalStatCardState extends State<GlobalStatCard> with SingleTickerProvid
                                     padding: EdgeInsets.only(left: 8,right: 8),
                                     width:_lowWidth?_fullSize.width*0.25:_fullSize.width*0.1,
                                     child: FAProgressBar(
-                                      currentValue: (elims*100)~/totalElims,
+                                      currentValue: (elims*100)/totalElims,
                                       maxValue: 100,
                                       size: 5,
                                       direction: Axis.horizontal,
@@ -394,7 +393,7 @@ class _GlobalStatCardState extends State<GlobalStatCard> with SingleTickerProvid
                                     padding: EdgeInsets.only(left: 8,right: 8),
                                     width:_lowWidth?_fullSize.width*0.25:_fullSize.width*0.1,
                                     child: FAProgressBar(
-                                      currentValue: (matchesPlayed*100)~/totalMatchesPlayed,
+                                      currentValue: (matchesPlayed*100)/totalMatchesPlayed,
                                       maxValue: 100,
                                       size: 5,
                                       direction: Axis.horizontal,
@@ -422,7 +421,7 @@ class _GlobalStatCardState extends State<GlobalStatCard> with SingleTickerProvid
                                     padding: EdgeInsets.only(left: 8,right: 8),
                                     width:_lowWidth?_fullSize.width*0.25:_fullSize.width*0.1,
                                     child: FAProgressBar(
-                                      currentValue: ((playHours*100)~/totalPlayHours),
+                                      currentValue: ((playHours*100)/totalPlayHours),
                                       maxValue: 100,
                                       size: 5,
                                       direction: Axis.horizontal,
