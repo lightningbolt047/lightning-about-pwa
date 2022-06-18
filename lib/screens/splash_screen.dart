@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   late AnimationController _colorAnimationController;
 
   late Animation<double> _scaleAnimation;
-  late Animation<Color> _scaffoldColorAnimation;
+  late Animation<Color?> _scaffoldColorAnimation;
   bool _circleContainer=false;
 
 
@@ -48,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       curve: Curves.easeInOutExpo
     ));
 
-    _scaffoldColorAnimation=Tween<Color>(
+    _scaffoldColorAnimation=ColorTween(
       begin: kInitialScaffoldColor,
       end: kFinalScaffoldColor
     ).animate(CurvedAnimation(
