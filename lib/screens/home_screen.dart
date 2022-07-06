@@ -66,15 +66,19 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     child: Stack(
                       children: [
                         Positioned(
-                          child: Container(
-                            height: (MediaQuery.of(context).size.height*0.5)-27,
-                            child: TabBarView(
-                              controller: _bannerTabController,
-                              children: [
-                                BioBanner(),
-                                AndroidToolboxBanner(),
-                                FallbackBanner(),
-                              ],
+                          child: Material(
+                            elevation: 10,
+                            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
+                            child: Container(
+                              height: (MediaQuery.of(context).size.height*0.5)-27,
+                              child: TabBarView(
+                                controller: _bannerTabController,
+                                children: [
+                                  BioBanner(),
+                                  AndroidToolboxBanner(),
+                                  FallbackBanner(),
+                                ],
+                              ),
                             ),
                           ),
                         ),

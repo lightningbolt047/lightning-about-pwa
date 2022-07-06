@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../const.dart';
 import '../../services/ui_services.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -11,7 +10,8 @@ class FallbackBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Color(0xFFE8E7D1)
+        color: Color(0xFFE8E7D1),
+        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
       ),
       child: LayoutBuilder(
         builder: (context,constraints){

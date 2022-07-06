@@ -15,6 +15,7 @@ class BioBanner extends StatelessWidget {
           end: Alignment.topRight,
           colors: homeScreenAppBarGradientColors,
         ),
+        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
       ),
       child: LayoutBuilder(
         builder: (context,constraints){

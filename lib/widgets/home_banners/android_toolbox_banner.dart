@@ -14,7 +14,8 @@ class AndroidToolboxBanner extends StatelessWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [Color(0xFF1b1d21),Color(0xFF181d2b)]
-        )
+        ),
+        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
       ),
       child: LayoutBuilder(
         builder: (context,constraints){
