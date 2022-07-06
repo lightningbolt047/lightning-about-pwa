@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../const.dart';
 import '../../services/ui_services.dart';
-import '../github_releases_download_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class FallbackBanner extends StatelessWidget {
