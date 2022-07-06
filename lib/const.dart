@@ -18,6 +18,10 @@ final String instagramProfileURL="https://www.instagram.com/sashankvisweshwaran/
 final String twitterProfileURL="https://www.twitter.com/Sashank47";
 final String email="sashankvisweshwaran@gmail.com";
 
+final String androidToolboxReleasesURL="https://github.com/lightningbolt047/Android-Toolbox/releases/latest";
+final String fallbackGooglePlayStoreBadgeHTML="<a href='https://play.google.com/store/apps/details?id=com.lightning.fallback&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>";
+final String fallbackGooglePlayStoreLink="https://play.google.com/store/apps/details?id=com.lightning.fallback&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1";
+final List<Color> homeScreenAppBarGradientColors=[Colors.black,Color(0xFF2195f1)];
 
 
 final String websiteURL="https://lightningbolt047.github.io/";
