@@ -73,143 +73,129 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       child: Scaffold(
         body: WebSmoothScroll(
           controller: _scrollController,
-          child: CustomScrollView(
-            shrinkWrap: true,
+          child: NestedScrollView(
             controller: _scrollController,
             physics: mousePresent?NeverScrollableScrollPhysics():null,
-            slivers: [
-              SliverToBoxAdapter(
-                child: Container(
-                  height: MediaQuery.of(context).size.height*0.5,
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        child: Stack(
-                          children: [
-                            Positioned(
-                              child: Material(
-                                elevation: 10,
-                                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
-                                child: Container(
-                                  height: (MediaQuery.of(context).size.height*0.5)-27,
-                                  child: TabBarView(
-                                    controller: _bannerTabController,
-                                    children: [
-                                      BioBanner(),
-                                      AndroidToolboxBanner(),
-                                      FallbackBanner(),
-                                    ],
+            headerSliverBuilder: (context,boolValue){
+              return [
+                SliverToBoxAdapter(
+                  child: Container(
+                    height: MediaQuery.of(context).size.height*0.5,
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          child: Stack(
+                            children: [
+                              Positioned(
+                                child: Material(
+                                  elevation: 10,
+                                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
+                                  child: Container(
+                                    height: (MediaQuery.of(context).size.height*0.5)-27,
+                                    child: TabBarView(
+                                      controller: _bannerTabController,
+                                      children: [
+                                        BioBanner(),
+                                        AndroidToolboxBanner(),
+                                        FallbackBanner(),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Positioned.fill(
-                              child: MouseRegion(
-                                opaque: false,
-                                onEnter: (pointerEvent){
-                                  _automaticallySwitchBanner=false;
-                                  Timer(Duration(seconds: 10),() {
-                                    _automaticallySwitchBanner=true;
-                                  });
-                                  _animationController.forward();
-                                },
-                                onExit: (pointerEvent){
-                                  _automaticallySwitchBanner=false;
-                                  Timer(Duration(seconds: 10),() {
-                                    _automaticallySwitchBanner=true;
-                                  });
-                                  _animationController.reverse();
-                                },
-                                child: FadeTransition(
-                                  opacity: _bannerControlsAnimation,
-                                  child: Row(
-                                    children: [
-                                      SmallRoundMaterialButton(
-                                        child: Icon(Icons.keyboard_arrow_left,color: Colors.blue,),
-                                        onPressed: (){
-                                          _bannerTabController.index=(_bannerTabController.index-1)%_maxAppBarBanners;
-                                        },
-                                      ),
-                                      Spacer(),
-                                      SmallRoundMaterialButton(
-                                        child: Icon(Icons.keyboard_arrow_right,color: Colors.blue,),
-                                        onPressed: (){
-                                          _bannerTabController.index=(_bannerTabController.index+1)%_maxAppBarBanners;
-                                        },
-                                      ),
-                                    ],
+                              Positioned.fill(
+                                child: MouseRegion(
+                                  opaque: false,
+                                  onEnter: (pointerEvent){
+                                    _automaticallySwitchBanner=false;
+                                    Timer(Duration(seconds: 10),() {
+                                      _automaticallySwitchBanner=true;
+                                    });
+                                    _animationController.forward();
+                                  },
+                                  onExit: (pointerEvent){
+                                    _automaticallySwitchBanner=false;
+                                    Timer(Duration(seconds: 10),() {
+                                      _automaticallySwitchBanner=true;
+                                    });
+                                    _animationController.reverse();
+                                  },
+                                  child: FadeTransition(
+                                    opacity: _bannerControlsAnimation,
+                                    child: Row(
+                                      children: [
+                                        SmallRoundMaterialButton(
+                                          child: Icon(Icons.keyboard_arrow_left,color: Colors.blue,),
+                                          onPressed: (){
+                                            _bannerTabController.index=(_bannerTabController.index-1)%_maxAppBarBanners;
+                                          },
+                                        ),
+                                        Spacer(),
+                                        SmallRoundMaterialButton(
+                                          child: Icon(Icons.keyboard_arrow_right,color: Colors.blue,),
+                                          onPressed: (){
+                                            _bannerTabController.index=(_bannerTabController.index+1)%_maxAppBarBanners;
+                                          },
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      Positioned(
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Material(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25)
-                            ),
-                            elevation: 20,
-                            child: Padding(
-                              padding: const EdgeInsets.all(4.0),
-                              child: TabBar(
-                                controller: _pageContentTabController,
-                                indicator: BoxDecoration(
-                                    color: Color(0xFF1973BA),
-                                    borderRadius: BorderRadius.circular(25)
+                        Positioned(
+                          left: 0,
+                          right: 0,
+                          bottom: 0,
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Material(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25)
+                              ),
+                              elevation: 20,
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: TabBar(
+                                  controller: _pageContentTabController,
+                                  indicator: BoxDecoration(
+                                      color: Color(0xFF1973BA),
+                                      borderRadius: BorderRadius.circular(25)
+                                  ),
+                                  unselectedLabelColor: Colors.black,
+                                  isScrollable: true,
+                                  splashBorderRadius: BorderRadius.circular(25),
+                                  splashFactory: InkRipple.splashFactory,
+                                  tabs: [
+                                    Tab(text: "Blog Posts",),
+                                    Tab(text: "GitHub Repo(s)",),
+                                  ],
                                 ),
-                                unselectedLabelColor: Colors.black,
-                                isScrollable: true,
-                                splashBorderRadius: BorderRadius.circular(25),
-                                splashFactory: InkRipple.splashFactory,
-                                tabs: [
-                                  Tab(text: "Blog Posts",),
-                                  Tab(text: "GitHub Repo(s)",),
-                                ],
                               ),
                             ),
                           ),
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
+              ];
+            },
+            body: Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)
               ),
-              SliverToBoxAdapter(
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)
-                  ),
-                  elevation: 4,
-                  child: Container(
-                    // height: MediaQuery.of(context).size.height,
-                    child: GithubRepoSection(),
-                  ),
-                ),
+              elevation: 4,
+              child: TabBarView(
+                controller: _pageContentTabController,
+                children: [
+                  Container(),
+                  GithubRepoSection(),
+                ],
               ),
-              SliverToBoxAdapter(
-                child: Container(
-                  padding: EdgeInsets.all(8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("* Google Play and the Google Play logo are trademarks of Google LLC.",style: TextStyle(
-                        fontSize: 12,
-                      ),),
-                      Text("* GitHub and the GitHub logo are trademarks of GitHub",style: TextStyle(
-                        fontSize: 12,
-                      ),),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),

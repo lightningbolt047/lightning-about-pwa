@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:url_launcher/url_launcher.dart';
+
+import '../../services/url_launcher.dart';
 
 class GithubReleasesDownloadButton extends StatelessWidget {
 
@@ -35,11 +36,7 @@ class GithubReleasesDownloadButton extends StatelessWidget {
           ),
         ),
         onPressed: () async{
-          try{
-            await launchUrl(Uri.parse(releasesURL));
-          }catch(e){
-            return Future.error(e);
-          }
+          launchURL(releasesURL);
         },
       ),
     );

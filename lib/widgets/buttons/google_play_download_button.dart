@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:myresume/services/url_launcher.dart';
 
 class GooglePlayDownloadButton extends StatelessWidget {
   final String link;
@@ -10,11 +10,7 @@ class GooglePlayDownloadButton extends StatelessWidget {
     return MaterialButton(
       child: Image.asset("assets/google-play-badge.png",scale: 4,),
       onPressed: () async{
-        try{
-          await launchUrl(Uri.parse(link));
-        }catch(e){
-          Future.error(e);
-        }
+        launchURL(link);
       },
     );
   }
