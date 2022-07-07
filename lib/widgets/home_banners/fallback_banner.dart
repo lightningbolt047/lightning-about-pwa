@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myresume/widgets/buttons/google_play_download_button.dart';
 import '../../const.dart';
 import '../../services/ui_services.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -39,16 +40,7 @@ class FallbackBanner extends StatelessWidget {
                       ),),
                     ),
                     SizedBox(height: 8,),
-                    GestureDetector(
-                      child: Image.asset("assets/google-play-badge.png",scale: 4,),
-                      onTap: () async{
-                        try{
-                          await launchUrl(Uri.parse(fallbackGooglePlayStoreLink));
-                        }catch(e){
-                          Future.error(e);
-                        }
-                      },
-                    )
+                    GooglePlayDownloadButton(link: fallbackGooglePlayStoreLink),
                   ],
                 ),
               ),

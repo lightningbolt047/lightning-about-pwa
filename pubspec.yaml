@@ -35,6 +35,7 @@ dependencies:
   url_launcher: ^6.1.4
   google_fonts: ^3.0.1
   firebase_core: ^1.19.1
+  web_smooth_scroll: ^1.0.0
 
 dev_dependencies:
   flutter_test:

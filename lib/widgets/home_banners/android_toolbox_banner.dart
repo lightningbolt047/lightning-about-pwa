@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myresume/const.dart';
-import 'package:myresume/widgets/github_releases_download_button.dart';
+import 'package:myresume/widgets/buttons/github_releases_download_button.dart';
 import '../../services/ui_services.dart';
 
 class AndroidToolboxBanner extends StatelessWidget {
