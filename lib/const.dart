@@ -23,5 +23,15 @@ final String fallbackGooglePlayStoreBadgeHTML="<a href='https://play.google.com/
 final String fallbackGooglePlayStoreLink="https://play.google.com/store/apps/details?id=com.lightning.fallback&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1";
 final List<Color> homeScreenAppBarGradientColors=[Colors.black,Color(0xFF2195f1)];
 
-
 final String websiteURL="https://lightningbolt047.github.io/";
+
+
+final Color flutterBlue=Color(0xFF32B9F6);
+final Color reactBlue=Color(0xFF00CDF2);
+final Color htmlOrange=Color(0xFFF25320);
+final Color nodeJSGreen=Color(0xFF71AD56);
+final Color mongoDBGreen=Color(0xFF0F9E4C);
+final Color firebaseYellow=Color(0xFFFCCA3F);
+final Color javaOrange=Color(0xFFE76F00);
+final Color sqlYellow=Color(0xFFFFDA44);
+final Color pythonBlue=Color(0xFF376F9D);

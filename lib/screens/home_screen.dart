@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       vsync: this,
     );
     _pageContentTabController=TabController(
-      length: 2,
+      length: 3,
       vsync: this,
     );
 
@@ -171,6 +171,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   tabs: [
                                     Tab(text: "Blog Posts",),
                                     Tab(text: "GitHub Repo(s)",),
+                                    Tab(text: "About Me",),
                                   ],
                                 ),
                               ),
@@ -183,18 +184,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 ),
               ];
             },
-            body: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)
-              ),
-              elevation: 4,
-              child: TabBarView(
-                controller: _pageContentTabController,
-                children: [
-                  Container(),
-                  GithubRepoSection(),
-                ],
-              ),
+            body: TabBarView(
+              controller: _pageContentTabController,
+              children: [
+                Container(),
+                GithubRepoSection(),
+                AboutMeSection(),
+              ],
             ),
           ),
         ),

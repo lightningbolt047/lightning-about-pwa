@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-
-import '../content.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:myresume/const.dart';
+import 'package:myresume/widgets/indicators/language_icon_indicator.dart';
+import 'package:colorful_iconify_flutter/icons/vscode_icons.dart';
+import 'package:colorful_iconify_flutter/icons/logos.dart';
 
 class AboutMeSection extends StatelessWidget {
   const AboutMeSection({Key? key}) : super(key: key);
@@ -9,90 +12,24 @@ class AboutMeSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context,constraints){
-        if(constraints.maxWidth<600){
-          return Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SafeArea(
-                  child: CircleAvatar(
-                    backgroundImage: AssetImage("assets/me.jpg"),
-                    maxRadius: constraints.maxHeight*0.07,
-                    minRadius: 10,
-                  ),
-                ),
-                SizedBox(
-                  width: constraints.maxHeight*0.05,
-                ),
-                Flexible(
-                  child: LayoutBuilder(
-                    builder: (context,constraints){
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Center(
-                              child: Text(
-                                aboutText,
-                                style: TextStyle(
-                                  fontSize: 20
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 25,
-                              ),
-                            ),
-                          ),
-                        ],
-                      );
-                    },
-                  ),
-                ),
-              ],
-            ),
-          );
-        }
-        return Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        return SingleChildScrollView(
+          child: Column(
             children: [
-              CircleAvatar(
-                backgroundImage: AssetImage("assets/me.jpg"),
-                maxRadius: MediaQuery.of(context).size.width*0.05,
-                minRadius: 10,
-              ),
-              SizedBox(
-                width: constraints.maxWidth*0.1,
-              ),
-              Flexible(
-                child: LayoutBuilder(
-                  builder: (context,constraints){
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Center(
-                            child: Text(
-                              aboutText,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: 20
-                              ),
-                              maxLines: 25,
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              ),
-              SizedBox(
-                width: constraints.maxWidth*0.1,
-              ),
+              Wrap(
+                alignment: WrapAlignment.center,
+                children: [
+                  LanguageIconIndicator(iconifyString: VscodeIcons.file_type_flutter, text: "Flutter",color: flutterBlue,logoMultiColor: true,),
+                  LanguageIconIndicator(iconData: FontAwesomeIcons.react, text: "React",color: reactBlue,),
+                  LanguageIconIndicator(iconData: FontAwesomeIcons.html5, text: "HTML",color: htmlOrange,),
+                  LanguageIconIndicator(iconData: FontAwesomeIcons.nodeJs, text: "NodeJS",color: nodeJSGreen,),
+                  LanguageIconIndicator(iconifyString: VscodeIcons.file_type_mongo,text: "MongoDB",color: mongoDBGreen,logoMultiColor: true,),
+                  LanguageIconIndicator(iconifyString: VscodeIcons.file_type_firebase,text: "Firebase",color: firebaseYellow,logoMultiColor: true,),
+                  LanguageIconIndicator(iconifyString: VscodeIcons.file_type_sql,text: "MySQL",color: sqlYellow,logoMultiColor: true,),
+                  LanguageIconIndicator(iconifyString: Logos.java,text: "Java",color: javaOrange,logoMultiColor: true,),
+                  LanguageIconIndicator(iconifyString: VscodeIcons.file_type_python,text: "Python",color: pythonBlue,logoMultiColor: true,),
+
+                ],
+              )
             ],
           ),
         );
