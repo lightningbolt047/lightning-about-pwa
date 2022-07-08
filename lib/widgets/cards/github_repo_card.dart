@@ -62,7 +62,7 @@ class _GithubRepoCardState extends State<GithubRepoCard> {
                           child: AnimatedDefaultTextStyle(
                             duration: Duration(milliseconds: 150),
                             style: TextStyle(
-                              color: _mousePresent?Colors.blue:null,
+                              color: _mousePresent?Colors.blue:Colors.black,
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
