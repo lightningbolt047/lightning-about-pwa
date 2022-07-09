@@ -35,3 +35,5 @@ final Color firebaseYellow=Color(0xFFFCCA3F);
 final Color javaOrange=Color(0xFFE76F00);
 final Color sqlYellow=Color(0xFFFFDA44);
 final Color pythonBlue=Color(0xFF376F9D);
+
+final Color accentColor=Color(0xFF1973BA);

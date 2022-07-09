@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../../const.dart';
 
 class CountIndicator extends StatelessWidget {
   final Color? textColor;
@@ -11,7 +11,7 @@ class CountIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(leadingIconData,color: Colors.blue,size: 14,),
+        Icon(leadingIconData,color: accentColor,size: 14,),
         SizedBox(
           width: 8,
         ),

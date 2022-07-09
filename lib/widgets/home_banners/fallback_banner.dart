@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:myresume/widgets/buttons/google_play_download_button.dart';
 import '../../const.dart';
 import '../../services/ui_services.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class FallbackBanner extends StatelessWidget {
   const FallbackBanner({Key? key}) : super(key: key);

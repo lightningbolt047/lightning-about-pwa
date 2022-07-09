@@ -24,7 +24,7 @@ class AboutMeSection extends StatelessWidget {
                   LanguageIconIndicator(iconData: FontAwesomeIcons.nodeJs, text: "NodeJS",color: nodeJSGreen,),
                   LanguageIconIndicator(iconifyString: VscodeIcons.file_type_mongo,text: "MongoDB",color: mongoDBGreen,logoMultiColor: true,),
                   LanguageIconIndicator(iconifyString: VscodeIcons.file_type_firebase,text: "Firebase",color: firebaseYellow,logoMultiColor: true,),
-                  LanguageIconIndicator(iconifyString: VscodeIcons.file_type_sql,text: "MySQL",color: sqlYellow,logoMultiColor: true,),
+                  LanguageIconIndicator(iconifyString: VscodeIcons.file_type_sql,text: "SQL",color: sqlYellow,logoMultiColor: true,),
                   LanguageIconIndicator(iconifyString: Logos.java,text: "Java",color: javaOrange,logoMultiColor: true,),
                   LanguageIconIndicator(iconifyString: VscodeIcons.file_type_python,text: "Python",color: pythonBlue,logoMultiColor: true,),
 

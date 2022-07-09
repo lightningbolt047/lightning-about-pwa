@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:myresume/const.dart';
 import 'package:myresume/services/date_services.dart';
 import 'package:myresume/services/project_language_logo.dart';
 import 'package:myresume/services/url_launcher.dart';
@@ -54,7 +55,7 @@ class _GithubRepoCardState extends State<GithubRepoCard> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         CircleAvatar(
-                          child: Icon(getIconFromLanguage(projectInfo['language']),color: Colors.blue,size: 35,),
+                          child: Icon(getIconFromLanguage(projectInfo['language']),color: accentColor,size: 35,),
                           backgroundColor: Colors.transparent,
                           radius: 40,
                         ),
@@ -62,7 +63,7 @@ class _GithubRepoCardState extends State<GithubRepoCard> {
                           child: AnimatedDefaultTextStyle(
                             duration: Duration(milliseconds: 150),
                             style: TextStyle(
-                              color: _mousePresent?Colors.blue:Colors.black,
+                              color: _mousePresent?accentColor:Colors.black,
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -77,7 +78,7 @@ class _GithubRepoCardState extends State<GithubRepoCard> {
                                     CountIndicator(
                                       value: projectInfo['language'],
                                       leadingIconData: FontAwesomeIcons.code,
-                                      textColor: _mousePresent?Colors.blue:Colors.black54,
+                                      textColor: _mousePresent?accentColor:Colors.black54,
                                     ),
                                     // CountIndicator(
                                     //   value: projectInfo['stargazers_count'].toString(),
@@ -97,7 +98,7 @@ class _GithubRepoCardState extends State<GithubRepoCard> {
                                     CountIndicator(
                                       leadingIconData: Icons.calendar_month_rounded,
                                       value: getDifferenceInTimeString(projectInfo['created_at']),
-                                      textColor: _mousePresent?Colors.blue:Colors.black54,
+                                      textColor: _mousePresent?accentColor:Colors.black54,
                                     ),
                                   ],
                                 ),
