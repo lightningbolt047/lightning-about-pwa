@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:myresume/const.dart';
+import 'package:myresume/widgets/indicators/horizontal_text_divider.dart';
 import 'package:myresume/widgets/indicators/language_icon_indicator.dart';
 import 'package:colorful_iconify_flutter/icons/vscode_icons.dart';
 import 'package:colorful_iconify_flutter/icons/logos.dart';
@@ -15,6 +16,13 @@ class AboutMeSection extends StatelessWidget {
         return SingleChildScrollView(
           child: Column(
             children: [
+              SizedBox(
+                height: 8,
+              ),
+              HorizontalTextDivider(text: "My Skills"),
+              SizedBox(
+                height: 4,
+              ),
               Wrap(
                 alignment: WrapAlignment.center,
                 children: [
@@ -27,9 +35,8 @@ class AboutMeSection extends StatelessWidget {
                   LanguageIconIndicator(iconifyString: VscodeIcons.file_type_sql,text: "SQL",color: sqlYellow,logoMultiColor: true,),
                   LanguageIconIndicator(iconifyString: Logos.java,text: "Java",color: javaOrange,logoMultiColor: true,),
                   LanguageIconIndicator(iconifyString: VscodeIcons.file_type_python,text: "Python",color: pythonBlue,logoMultiColor: true,),
-
                 ],
-              )
+              ),
             ],
           ),
         );
