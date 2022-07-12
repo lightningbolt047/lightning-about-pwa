@@ -31,6 +31,8 @@
 
   <title>myresume</title>
   <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="progressBar.css">
+  <link rel="stylesheet" href="styles.css">
 
   <script>
     // The value below is injected by flutter build, do not touch.
@@ -43,16 +45,23 @@
   <script>
     window.addEventListener('load', function(ev) {
       // Download main.dart.js
+      loadingStatusText.textContent="Starting Worker";
       _flutter.loader.loadEntrypoint({
         serviceWorker: {
           serviceWorkerVersion: serviceWorkerVersion,
         }
       }).then(function(engineInitializer) {
+        loadingStatusText.textContent="Initializing Engine";
         return engineInitializer.initializeEngine();
       }).then(function(appRunner) {
+        loadingStatusText.textContent="Starting App";
         return appRunner.runApp();
       });
     });
   </script>
+  <div class="center">
+    <progress class="pure-material-progress-linear"/>
+  </div>
+  <div class="center" id="loadingStatusText">Loading</div>
 </body>
 </html>
