@@ -39,6 +39,7 @@ dependencies:
   card_loading: ^0.2.1
   timeline_tile: ^2.0.0
   iconify_flutter: ^0.0.4
+  package_info_plus: ^1.4.2
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ic.dart';
@@ -17,6 +16,7 @@ import 'package:web_smooth_scroll/web_smooth_scroll.dart';
 import 'package:iconify_flutter/icons/ph.dart';
 import '../widgets/home_banners/bio_banner.dart';
 import 'package:iconify_flutter/icons/ant_design.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -161,7 +161,26 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                               mobileContactsOpen=!mobileContactsOpen;
                                                             });
                                                           },
+                                                        )
+                                                      else...[
+                                                        FutureBuilder(
+                                                          future: PackageInfo.fromPlatform(),
+                                                          builder: (BuildContext context, AsyncSnapshot<PackageInfo> snapshot){
+                                                            if(snapshot.connectionState==ConnectionState.waiting){
+                                                              return Container();
+                                                            }
+                                                            return Row(
+                                                              children: [
+                                                                Image.asset("assets/site_logo.png"),
+                                                                Text(snapshot.data!.version,style: TextStyle(
+                                                                    color: Colors.white
+                                                                ),),
+                                                              ],
+                                                            );
+                                                          },
                                                         ),
+                                                        Spacer(),
+                                                      ],
                                                       if(!isMobileDevice(constraints) || (isMobileDevice(constraints) && mobileContactsOpen))...[
                                                         IconButton(
                                                           icon: Iconify(Ic.baseline_email,color: Colors.white,size: 30,),
