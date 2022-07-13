@@ -64,7 +64,7 @@ class _LanguageIconIndicatorState extends State<LanguageIconIndicator> {
                   color: _mouseInside?Colors.white:color,
                   fontSize: 12
                 ),),
-              )
+              ),
             ],
           ),
         ),

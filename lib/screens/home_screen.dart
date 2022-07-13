@@ -1,14 +1,22 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:iconify_flutter/icons/ic.dart';
+import 'package:iconify_flutter/icons/mdi.dart';
+import 'package:myresume/const.dart';
 import 'package:myresume/screens/about_me_section.dart';
 import 'package:myresume/screens/github_repo_section.dart';
+import 'package:myresume/services/ui_services.dart';
+import 'package:myresume/services/url_launcher.dart';
+import 'package:myresume/widgets/buttons/label_icon_button.dart';
 import 'package:myresume/widgets/home_banners/android_toolbox_banner.dart';
 import 'package:myresume/widgets/home_banners/fallback_banner.dart';
 import 'package:myresume/widgets/buttons/small_round_material_button.dart';
 import 'package:web_smooth_scroll/web_smooth_scroll.dart';
-
+import 'package:iconify_flutter/icons/ph.dart';
 import '../widgets/home_banners/bio_banner.dart';
+import 'package:iconify_flutter/icons/ant_design.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -26,6 +34,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late Animation<double> _bannerControlsAnimation;
   final ScrollController _scrollController=ScrollController();
   bool mousePresent=false;
+  bool mobileContactsOpen=false;
 
   @override
   void initState() {
@@ -92,12 +101,118 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
                                   child: Container(
                                     height: (MediaQuery.of(context).size.height*0.5)-27,
-                                    child: TabBarView(
-                                      controller: _bannerTabController,
+                                    child: Stack(
                                       children: [
-                                        BioBanner(),
-                                        AndroidToolboxBanner(),
-                                        FallbackBanner(),
+                                        Positioned(
+                                          child: TabBarView(
+                                            controller: _bannerTabController,
+                                            children: [
+                                              BioBanner(),
+                                              AndroidToolboxBanner(),
+                                              FallbackBanner(),
+                                            ],
+                                          ),
+                                        ),
+                                        Positioned(
+                                          child: Container(
+                                            color: Colors.transparent.withOpacity(0.4),
+                                            height: 50,
+                                            child: LayoutBuilder(
+                                              builder: (context,constraints) {
+                                                // if(isMobileDevice(constraints)){
+                                                //   return Row(
+                                                //     mainAxisAlignment: mobileContactsOpen?MainAxisAlignment.spaceEvenly:MainAxisAlignment.spaceBetween,
+                                                //     children: [
+                                                //       if(mobileContactsOpen)...[
+                                                //
+                                                //       ],
+                                                //       if(!mobileContactsOpen)
+                                                //         LabelIconButton(
+                                                //           label: "Download Resume",
+                                                //           iconData: Icons.download,
+                                                //         ),
+                                                //     ],
+                                                //   );
+                                                // }
+                                                return AnimatedSwitcher(
+                                                  duration: Duration(milliseconds: 250),
+                                                  transitionBuilder: (child,animation){
+                                                    return ScaleTransition(
+                                                      scale: animation,
+                                                      child: FadeTransition(
+                                                        opacity: animation,
+                                                        child: child,
+                                                      ),
+                                                    );
+                                                  },
+                                                  child: Row(
+                                                    key: ValueKey<bool>(mobileContactsOpen),
+                                                    mainAxisAlignment: isMobileDevice(constraints)?mobileContactsOpen?MainAxisAlignment.spaceEvenly:MainAxisAlignment.spaceBetween:MainAxisAlignment.end,
+                                                    children: [
+                                                      // Text("",style: TextStyle(
+                                                      //   color: Colors.white,
+                                                      //   fontSize: 18,
+                                                      // ),),
+                                                      if(isMobileDevice(constraints))
+                                                        IconButton(
+                                                          icon: Icon(mobileContactsOpen?Icons.arrow_back:Icons.menu,color: Colors.white,),
+                                                          onPressed: (){
+                                                            setState((){
+                                                              mobileContactsOpen=!mobileContactsOpen;
+                                                            });
+                                                          },
+                                                        ),
+                                                      if(!isMobileDevice(constraints) || (isMobileDevice(constraints) && mobileContactsOpen))...[
+                                                        IconButton(
+                                                          icon: Iconify(Ic.baseline_email,color: Colors.white,size: 30,),
+                                                          onPressed: (){
+                                                            launchURL("mailto:$email");
+                                                          },
+                                                        ),
+                                                        IconButton(
+                                                          icon: Iconify(Ph.instagram_logo_bold,color: Colors.white,size: 30,),
+                                                          onPressed: (){
+                                                            launchURL(instagramProfileURL);
+                                                          },
+                                                        ),
+                                                        IconButton(
+                                                          icon: Iconify(Ic.round_discord,color: Colors.white,size: 30,),
+                                                          onPressed: (){
+                                                            launchURL(discordProfileURL);
+                                                          },
+                                                        ),
+                                                        IconButton(
+                                                          icon: Iconify(Mdi.github,color: Colors.white,size: 30,),
+                                                          onPressed: (){
+                                                            launchURL(githubProfileURL);
+                                                          },
+                                                        ),
+                                                        IconButton(
+                                                          icon: Iconify(AntDesign.linkedin_filled,color: Colors.white,size: 30,),
+                                                          onPressed: (){
+                                                            launchURL(linkedInProfileURL);
+                                                          },
+                                                        ),
+                                                      ],
+                                                      if(!isMobileDevice(constraints) || (isMobileDevice(constraints) && !mobileContactsOpen))
+                                                        LabelIconButton(
+                                                          label: "Download Resume",
+                                                          iconData: Icons.download,
+                                                          onPressed: (){
+                                                            launchURL(resumeURL);
+                                                          },
+                                                        ),
+                                                      if(!isMobileDevice(constraints))
+                                                        SizedBox(
+                                                          width: 8,
+                                                        ),
+                                                    ],
+                                                  ),
+                                                );
+                                              }
+                                            ),
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ),

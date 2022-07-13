@@ -17,6 +17,8 @@ final String linkedInProfileURL="https://www.linkedin.com/in/sashank-visweshwara
 final String instagramProfileURL="https://www.instagram.com/sashankvisweshwaran/";
 final String twitterProfileURL="https://www.twitter.com/Sashank47";
 final String email="sashankvisweshwaran@gmail.com";
+final String resumeURL=websiteURL+'assets/assets/SashankVisweshwaran-Resume.pdf';
+final String discordProfileURL="https://discord.com/users/LightningBolt47#1319";
 
 final String androidToolboxReleasesURL="https://github.com/lightningbolt047/Android-Toolbox/releases/latest";
 final String fallbackGooglePlayStoreBadgeHTML="<a href='https://play.google.com/store/apps/details?id=com.lightning.fallback&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>";
