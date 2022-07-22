@@ -4,8 +4,6 @@ import 'package:myresume/const.dart';
 import 'package:myresume/services/date_services.dart';
 import 'package:myresume/services/project_language_logo.dart';
 import 'package:myresume/services/url_launcher.dart';
-
-import '../../services/ui_services.dart';
 import '../indicators/count_indicator.dart';
 
 class GithubRepoCard extends StatefulWidget {
