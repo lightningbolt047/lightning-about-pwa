@@ -27,7 +27,7 @@ class GitServices{
     if(response.statusCode==200){
       List<dynamic> data=jsonDecode(response.body);
       for(int i=0;i<data.length;i++){
-        if(data[i]['name']=="lightningbolt047.github.io"){
+        if(data[i]['name']=="lightningbolt047.github.io" || data[i]['name']=="lightning-about-pwa"){
           data.removeAt(i);
         }
       }

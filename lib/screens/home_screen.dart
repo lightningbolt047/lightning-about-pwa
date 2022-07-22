@@ -5,6 +5,7 @@ import 'package:iconify_flutter/icons/ic.dart';
 import 'package:iconify_flutter/icons/mdi.dart';
 import 'package:myresume/const.dart';
 import 'package:myresume/screens/about_me_section.dart';
+import 'package:myresume/screens/blog_posts.dart';
 import 'package:myresume/screens/github_repo_section.dart';
 import 'package:myresume/services/ui_services.dart';
 import 'package:myresume/services/url_launcher.dart';
@@ -35,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   final ScrollController _scrollController=ScrollController();
   bool mousePresent=false;
   bool mobileContactsOpen=false;
+  Function? pageSetState;
 
   @override
   void initState() {
@@ -63,6 +65,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         _bannerTabController.index=(_bannerTabController.index+1)%_bannerTabController.length;
       }
     });
+
+    _pageContentTabController.addListener(() {
+      if(pageSetState!=null){
+        pageSetState!((){});
+      }
+    });
   }
 
 
@@ -82,42 +90,41 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       child: Scaffold(
         body: WebSmoothScroll(
           controller: _scrollController,
-          child: NestedScrollView(
+          child: CustomScrollView(
             controller: _scrollController,
             physics: mousePresent?NeverScrollableScrollPhysics():null,
-            headerSliverBuilder: (context,boolValue){
-              return [
-                SliverToBoxAdapter(
-                  child: Container(
-                    height: MediaQuery.of(context).size.height*0.5,
-                    child: Stack(
-                      children: [
-                        Positioned(
-                          child: Stack(
-                            children: [
-                              Positioned(
-                                child: Material(
-                                  elevation: 10,
-                                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
-                                  child: Container(
-                                    height: (MediaQuery.of(context).size.height*0.5)-27,
-                                    child: Stack(
-                                      children: [
-                                        Positioned(
-                                          child: TabBarView(
-                                            controller: _bannerTabController,
-                                            children: [
-                                              BioBanner(),
-                                              AndroidToolboxBanner(),
-                                              FallbackBanner(),
-                                            ],
-                                          ),
+            slivers: [
+              SliverToBoxAdapter(
+                child: Container(
+                  height: MediaQuery.of(context).size.height*0.5,
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        child: Stack(
+                          children: [
+                            Positioned(
+                              child: Material(
+                                elevation: 10,
+                                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
+                                child: Container(
+                                  height: (MediaQuery.of(context).size.height*0.5)-27,
+                                  child: Stack(
+                                    children: [
+                                      Positioned(
+                                        child: TabBarView(
+                                          controller: _bannerTabController,
+                                          children: [
+                                            BioBanner(),
+                                            AndroidToolboxBanner(),
+                                            FallbackBanner(),
+                                          ],
                                         ),
-                                        Positioned(
-                                          child: Container(
-                                            color: Colors.transparent.withOpacity(0.4),
-                                            height: 50,
-                                            child: LayoutBuilder(
+                                      ),
+                                      Positioned(
+                                        child: Container(
+                                          color: Colors.transparent.withOpacity(0.4),
+                                          height: 50,
+                                          child: LayoutBuilder(
                                               builder: (context,constraints) {
                                                 // if(isMobileDevice(constraints)){
                                                 //   return Row(
@@ -229,103 +236,109 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                   ),
                                                 );
                                               }
-                                            ),
                                           ),
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                              ),
-                              Positioned.fill(
-                                child: MouseRegion(
-                                  opaque: false,
-                                  onEnter: (pointerEvent){
-                                    _automaticallySwitchBanner=false;
-                                    Timer(Duration(seconds: 10),() {
-                                      _automaticallySwitchBanner=true;
-                                    });
-                                    _animationController.forward();
-                                  },
-                                  onExit: (pointerEvent){
-                                    _automaticallySwitchBanner=false;
-                                    Timer(Duration(seconds: 10),() {
-                                      _automaticallySwitchBanner=true;
-                                    });
-                                    _animationController.reverse();
-                                  },
-                                  child: FadeTransition(
-                                    opacity: _bannerControlsAnimation,
-                                    child: Row(
-                                      children: [
-                                        SmallRoundMaterialButton(
-                                          child: Icon(Icons.keyboard_arrow_left,color: Colors.blue,),
-                                          onPressed: (){
-                                            _bannerTabController.index=(_bannerTabController.index-1)%_maxAppBarBanners;
-                                          },
-                                        ),
-                                        Spacer(),
-                                        SmallRoundMaterialButton(
-                                          child: Icon(Icons.keyboard_arrow_right,color: Colors.blue,),
-                                          onPressed: (){
-                                            _bannerTabController.index=(_bannerTabController.index+1)%_maxAppBarBanners;
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Positioned(
-                          left: 0,
-                          right: 0,
-                          bottom: 0,
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Material(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(25)
-                              ),
-                              elevation: 20,
-                              child: Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: TabBar(
-                                  controller: _pageContentTabController,
-                                  indicator: BoxDecoration(
-                                      color: Color(0xFF1973BA),
-                                      borderRadius: BorderRadius.circular(25)
-                                  ),
-                                  unselectedLabelColor: Colors.black,
-                                  isScrollable: true,
-                                  splashBorderRadius: BorderRadius.circular(25),
-                                  splashFactory: InkRipple.splashFactory,
-                                  tabs: [
-                                    Tab(text: "Blog Posts",),
-                                    Tab(text: "GitHub Repo(s)",),
-                                    Tab(text: "About Me",),
-                                  ],
                                 ),
                               ),
                             ),
+                            Positioned.fill(
+                              child: MouseRegion(
+                                opaque: false,
+                                onEnter: (pointerEvent){
+                                  _automaticallySwitchBanner=false;
+                                  Timer(Duration(seconds: 10),() {
+                                    _automaticallySwitchBanner=true;
+                                  });
+                                  _animationController.forward();
+                                },
+                                onExit: (pointerEvent){
+                                  _automaticallySwitchBanner=false;
+                                  Timer(Duration(seconds: 10),() {
+                                    _automaticallySwitchBanner=true;
+                                  });
+                                  _animationController.reverse();
+                                },
+                                child: FadeTransition(
+                                  opacity: _bannerControlsAnimation,
+                                  child: Row(
+                                    children: [
+                                      SmallRoundMaterialButton(
+                                        child: Icon(Icons.keyboard_arrow_left,color: Colors.blue,),
+                                        onPressed: (){
+                                          _bannerTabController.index=(_bannerTabController.index-1)%_maxAppBarBanners;
+                                        },
+                                      ),
+                                      Spacer(),
+                                      SmallRoundMaterialButton(
+                                        child: Icon(Icons.keyboard_arrow_right,color: Colors.blue,),
+                                        onPressed: (){
+                                          _bannerTabController.index=(_bannerTabController.index+1)%_maxAppBarBanners;
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Positioned(
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Material(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(25)
+                            ),
+                            elevation: 20,
+                            child: Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: TabBar(
+                                controller: _pageContentTabController,
+                                indicator: BoxDecoration(
+                                    color: Color(0xFF1973BA),
+                                    borderRadius: BorderRadius.circular(25)
+                                ),
+                                unselectedLabelColor: Colors.black,
+                                isScrollable: true,
+                                splashBorderRadius: BorderRadius.circular(25),
+                                splashFactory: InkRipple.splashFactory,
+                                tabs: [
+                                  Tab(text: "Blog Posts",),
+                                  Tab(text: "GitHub Repo(s)",),
+                                  Tab(text: "About Me",),
+                                ],
+                              ),
+                            ),
                           ),
-                        )
-                      ],
-                    ),
+                        ),
+                      )
+                    ],
                   ),
                 ),
-              ];
-            },
-            body: TabBarView(
-              controller: _pageContentTabController,
-              children: [
-                Container(),
-                GithubRepoSection(),
-                AboutMeSection(),
-              ],
-            ),
+              ),
+              Builder(
+                builder: (context){
+                  return StatefulBuilder(
+                    builder: (context,setState){
+                      pageSetState=setState;
+                      switch(_pageContentTabController.index){
+                        case 0: return BlogPosts();
+                        case 1: return GithubRepoSection();
+                        case 2: return AboutMeSection();
+                        default: return Container();
+                      }
+                    },
+                  );
+                },
+              )
+            ],
           ),
         ),
       ),

@@ -11,36 +11,32 @@ class AboutMeSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context,constraints){
-        return SingleChildScrollView(
-          child: Column(
+    return SliverToBoxAdapter(
+      child: Column(
+        children: [
+          SizedBox(
+            height: 8,
+          ),
+          HorizontalTextDivider(text: "My Skills"),
+          SizedBox(
+            height: 4,
+          ),
+          Wrap(
+            alignment: WrapAlignment.center,
             children: [
-              SizedBox(
-                height: 8,
-              ),
-              HorizontalTextDivider(text: "My Skills"),
-              SizedBox(
-                height: 4,
-              ),
-              Wrap(
-                alignment: WrapAlignment.center,
-                children: [
-                  LanguageIconIndicator(iconifyString: VscodeIcons.file_type_flutter, text: "Flutter",color: flutterBlue,logoMultiColor: true,),
-                  LanguageIconIndicator(iconData: FontAwesomeIcons.react, text: "React",color: reactBlue,),
-                  LanguageIconIndicator(iconData: FontAwesomeIcons.html5, text: "HTML",color: htmlOrange,),
-                  LanguageIconIndicator(iconData: FontAwesomeIcons.nodeJs, text: "NodeJS",color: nodeJSGreen,),
-                  LanguageIconIndicator(iconifyString: VscodeIcons.file_type_mongo,text: "MongoDB",color: mongoDBGreen,logoMultiColor: true,),
-                  LanguageIconIndicator(iconifyString: VscodeIcons.file_type_firebase,text: "Firebase",color: firebaseYellow,logoMultiColor: true,),
-                  LanguageIconIndicator(iconifyString: VscodeIcons.file_type_sql,text: "SQL",color: sqlYellow,logoMultiColor: true,),
-                  LanguageIconIndicator(iconifyString: Logos.java,text: "Java",color: javaOrange,logoMultiColor: true,),
-                  LanguageIconIndicator(iconifyString: VscodeIcons.file_type_python,text: "Python",color: pythonBlue,logoMultiColor: true,),
-                ],
-              ),
+              LanguageIconIndicator(iconifyString: VscodeIcons.file_type_flutter, text: "Flutter",color: flutterBlue,logoMultiColor: true,),
+              LanguageIconIndicator(iconData: FontAwesomeIcons.react, text: "React",color: reactBlue,),
+              LanguageIconIndicator(iconData: FontAwesomeIcons.html5, text: "HTML",color: htmlOrange,),
+              LanguageIconIndicator(iconData: FontAwesomeIcons.nodeJs, text: "NodeJS",color: nodeJSGreen,),
+              LanguageIconIndicator(iconifyString: VscodeIcons.file_type_mongo,text: "MongoDB",color: mongoDBGreen,logoMultiColor: true,),
+              LanguageIconIndicator(iconifyString: VscodeIcons.file_type_firebase,text: "Firebase",color: firebaseYellow,logoMultiColor: true,),
+              LanguageIconIndicator(iconifyString: VscodeIcons.file_type_sql,text: "SQL",color: sqlYellow,logoMultiColor: true,),
+              LanguageIconIndicator(iconifyString: Logos.java,text: "Java",color: javaOrange,logoMultiColor: true,),
+              LanguageIconIndicator(iconifyString: VscodeIcons.file_type_python,text: "Python",color: pythonBlue,logoMultiColor: true,),
             ],
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 }
