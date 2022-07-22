@@ -23,7 +23,7 @@ class FallbackBanner extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: isMobileDevice(constraints)?CrossAxisAlignment.center:CrossAxisAlignment.start,
+                  crossAxisAlignment: isMobileDevice(constraints: constraints)?CrossAxisAlignment.center:CrossAxisAlignment.start,
                   children: [
                     Text("Fallback",style: TextStyle(
                         fontSize: 40,
@@ -31,9 +31,9 @@ class FallbackBanner extends StatelessWidget {
                     ),),
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: isMobileDevice(constraints)?constraints.maxWidth*0.75:constraints.maxWidth*0.35,
+                        maxWidth: isMobileDevice(constraints: constraints)?constraints.maxWidth*0.75:constraints.maxWidth*0.35,
                       ),
-                      child: Text("Now store your backup keys securely with a beautiful UI",textAlign: isMobileDevice(constraints)?TextAlign.center:TextAlign.left,maxLines: 3,overflow: TextOverflow.ellipsis,style: TextStyle(
+                      child: Text("Now store your backup keys securely with a beautiful UI",textAlign: isMobileDevice(constraints: constraints)?TextAlign.center:TextAlign.left,maxLines: 3,overflow: TextOverflow.ellipsis,style: TextStyle(
                         color: Color(0xFF686750),
                         fontSize: 16,
                       ),),
@@ -43,7 +43,7 @@ class FallbackBanner extends StatelessWidget {
                   ],
                 ),
               ),
-              if(!isMobileDevice(constraints))
+              if(!isMobileDevice(constraints: constraints))
                 AnimatedContainer(
                   duration: Duration(milliseconds: 150),
                   constraints: BoxConstraints(

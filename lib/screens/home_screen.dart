@@ -154,13 +154,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                   },
                                                   child: Row(
                                                     key: ValueKey<bool>(mobileContactsOpen),
-                                                    mainAxisAlignment: isMobileDevice(constraints)?mobileContactsOpen?MainAxisAlignment.spaceEvenly:MainAxisAlignment.spaceBetween:MainAxisAlignment.end,
+                                                    mainAxisAlignment: isMobileDevice(constraints: constraints)?mobileContactsOpen?MainAxisAlignment.spaceEvenly:MainAxisAlignment.spaceBetween:MainAxisAlignment.end,
                                                     children: [
                                                       // Text("",style: TextStyle(
                                                       //   color: Colors.white,
                                                       //   fontSize: 18,
                                                       // ),),
-                                                      if(isMobileDevice(constraints))
+                                                      if(isMobileDevice(constraints: constraints))
                                                         IconButton(
                                                           icon: Icon(mobileContactsOpen?Icons.arrow_back:Icons.menu,color: Colors.white,),
                                                           onPressed: (){
@@ -188,7 +188,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                         ),
                                                         Spacer(),
                                                       ],
-                                                      if(!isMobileDevice(constraints) || (isMobileDevice(constraints) && mobileContactsOpen))...[
+                                                      if(!isMobileDevice(constraints: constraints) || (isMobileDevice(constraints: constraints) && mobileContactsOpen))...[
                                                         IconButton(
                                                           icon: Iconify(Ic.baseline_email,color: Colors.white,size: 30,),
                                                           onPressed: (){
@@ -220,7 +220,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                           },
                                                         ),
                                                       ],
-                                                      if(!isMobileDevice(constraints) || (isMobileDevice(constraints) && !mobileContactsOpen))
+                                                      if(!isMobileDevice(constraints: constraints) || (isMobileDevice(constraints: constraints) && !mobileContactsOpen))
                                                         LabelIconButton(
                                                           label: "Download Resume",
                                                           iconData: Icons.download,
@@ -228,7 +228,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                                             launchURL(resumeURL);
                                                           },
                                                         ),
-                                                      if(!isMobileDevice(constraints))
+                                                      if(!isMobileDevice(constraints: constraints))
                                                         SizedBox(
                                                           width: 8,
                                                         ),
@@ -310,9 +310,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 splashBorderRadius: BorderRadius.circular(25),
                                 splashFactory: InkRipple.splashFactory,
                                 tabs: [
-                                  Tab(text: "Blog Posts",),
-                                  Tab(text: "GitHub Repo(s)",),
                                   Tab(text: "About Me",),
+                                  Tab(text: "GitHub Repo(s)",),
+                                  Tab(text: "Blog Posts",),
                                 ],
                               ),
                             ),
@@ -329,9 +329,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     builder: (context,setState){
                       pageSetState=setState;
                       switch(_pageContentTabController.index){
-                        case 0: return BlogPosts();
+                        case 0: return AboutMeSection();
                         case 1: return GithubRepoSection();
-                        case 2: return AboutMeSection();
+                        case 2: return BlogPosts();
                         default: return Container();
                       }
                     },

@@ -26,7 +26,7 @@ class BioBanner extends StatelessWidget {
                 repeatForever: true,
                 animatedTexts: [
                   TypewriterAnimatedText("Sashank Visweshwaran",textStyle: TextStyle(
-                      fontSize: isMobileDevice(constraints)?30:40,
+                      fontSize: isMobileDevice(constraints: constraints)?30:40,
                       color: Colors.white70
                   )),
                   TypewriterAnimatedText("LightningBolt047",textStyle: TextStyle(

@@ -41,7 +41,6 @@ class _GithubRepoCardState extends State<GithubRepoCard> {
           builder: (context,constraints) {
             return Container(
               padding: const EdgeInsets.all(8.0),
-              width:isMobileDevice(constraints)?constraints.maxWidth:constraints.maxWidth*0.75,
               child: MaterialButton(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),

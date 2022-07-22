@@ -27,7 +27,7 @@ class AndroidToolboxBanner extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: isMobileDevice(constraints)?CrossAxisAlignment.center:CrossAxisAlignment.start,
+                  crossAxisAlignment: isMobileDevice(constraints: constraints)?CrossAxisAlignment.center:CrossAxisAlignment.start,
                   children: [
                     Text("Android Toolbox",style: TextStyle(
                         fontSize: 40,
@@ -35,9 +35,9 @@ class AndroidToolboxBanner extends StatelessWidget {
                     ),),
                     ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: isMobileDevice(constraints)?constraints.maxWidth*0.75:constraints.maxWidth*0.35,
+                        maxWidth: isMobileDevice(constraints: constraints)?constraints.maxWidth*0.75:constraints.maxWidth*0.35,
                       ),
-                      child: Text("An opensource desktop tool to access hidden features on your Android device",maxLines: 3,textAlign: isMobileDevice(constraints)?TextAlign.center:TextAlign.left,overflow: TextOverflow.ellipsis,style: TextStyle(
+                      child: Text("An opensource desktop tool to access hidden features on your Android device",maxLines: 3,textAlign: isMobileDevice(constraints: constraints)?TextAlign.center:TextAlign.left,overflow: TextOverflow.ellipsis,style: TextStyle(
                         color: Colors.white70,
                         fontSize: 16,
                       ),),
@@ -48,7 +48,7 @@ class AndroidToolboxBanner extends StatelessWidget {
                   ],
                 ),
               ),
-              if(!isMobileDevice(constraints))
+              if(!isMobileDevice(constraints: constraints))
                 AnimatedContainer(
                   duration: Duration(milliseconds: 150),
                   constraints: BoxConstraints(

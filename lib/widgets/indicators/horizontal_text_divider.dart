@@ -18,7 +18,7 @@ class HorizontalTextDivider extends StatelessWidget {
               Expanded(
                 child: Divider(
                   thickness: 1,
-                  indent: isMobileDevice(constraints)?null:constraints.maxWidth*0.1,
+                  indent: isMobileDevice(constraints: constraints)?null:constraints.maxWidth*0.1,
                   color: textStyle.color,
                 ),
               ),
@@ -29,7 +29,7 @@ class HorizontalTextDivider extends StatelessWidget {
               Expanded(
                 child: Divider(
                   thickness: 1,
-                  endIndent: isMobileDevice(constraints)?null:constraints.maxWidth*0.1,
+                  endIndent: isMobileDevice(constraints: constraints)?null:constraints.maxWidth*0.1,
                   color: textStyle.color,
                 ),
               ),
