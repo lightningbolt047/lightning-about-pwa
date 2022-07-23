@@ -40,8 +40,9 @@ dependencies:
   timeline_tile: ^2.0.0
   iconify_flutter: ^0.0.4
   package_info_plus: ^1.4.2
-  simple_html_css: ^4.0.0
   xml_parser: ^1.0.0
+  flutter_widget_from_html_core: ^0.8.5+3
+  animations: ^2.0.3
 
 dev_dependencies:
   flutter_test:

@@ -13,7 +13,7 @@ class BlogPosts extends StatelessWidget {
       future: BlogServices.getBlogPostMetadata(),
       builder: (BuildContext context,AsyncSnapshot<List<dynamic>> snapshot) {
 
-        if(snapshot.connectionState==ConnectionState.waiting || !snapshot.hasData){
+        if(!snapshot.hasData){
           return SliverList(
             delegate: SliverChildBuilderDelegate((context,i){
               return LayoutBuilder(
