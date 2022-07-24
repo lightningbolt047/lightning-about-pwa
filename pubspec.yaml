@@ -63,7 +63,7 @@ flutter:
   assets:
     - assets/
     - blog_posts.json
-    - assets/blog_posts/samplepost/
+    - assets/blog_posts/more_about_me/
 #    - assets/blog_posts.json
 #    - assets/blog_posts/
 

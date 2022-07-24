@@ -76,12 +76,13 @@ class _BlogPostCardState extends State<BlogPostCard> {
                       children: [
                         Row(
                           children: [
-                            Icon(FontAwesomeIcons.clock,size: 20,),
+                            Icon(FontAwesomeIcons.clock,size: 20,color: Colors.black54),
                             SizedBox(
                               width: 8,
                             ),
                             Text(getNiceStringDateFromISO(createdOn),style: TextStyle(
-                                fontWeight: FontWeight.w200
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black54
                             ),)
                           ],
                         ),
@@ -90,12 +91,13 @@ class _BlogPostCardState extends State<BlogPostCard> {
                         ),
                         Row(
                           children: [
-                            Icon(FontAwesomeIcons.circleUser,size: 20,),
+                            Icon(FontAwesomeIcons.circleUser,size: 20,color: Colors.black54),
                             SizedBox(
                               width: 8,
                             ),
                             Text(user,style: TextStyle(
-                                fontWeight: FontWeight.w200
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black54
                             ),)
                           ],
                         ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:myresume/const.dart';
-import 'package:myresume/widgets/indicators/horizontal_text_divider.dart';
+import 'package:myresume/widgets/indicators/animated_horizontal_text_divider.dart';
 import 'package:myresume/widgets/indicators/language_icon_indicator.dart';
 import 'package:colorful_iconify_flutter/icons/vscode_icons.dart';
 import 'package:colorful_iconify_flutter/icons/logos.dart';
@@ -17,7 +17,7 @@ class AboutMeSection extends StatelessWidget {
           SizedBox(
             height: 8,
           ),
-          HorizontalTextDivider(text: "My Skills"),
+          AnimatedHorizontalTextDivider(text: "My Skills"),
           SizedBox(
             height: 4,
           ),

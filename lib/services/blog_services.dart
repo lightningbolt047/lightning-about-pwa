@@ -8,7 +8,6 @@ class BlogServices{
   }
 
   static Future<String> getHTMLString(String postName) async{
-    return rootBundle.loadString('assets/blog_posts/$postName/index.html');
+    return rootBundle.loadString('assets/blog_posts/$postName/index.htm');
   }
-
 }
