@@ -10,10 +10,11 @@ class BlogPostCard extends StatefulWidget {
   final String greeting;
   final String createdOn;
   final String user;
-  const BlogPostCard({Key? key,required this.heading,required this.greeting,required this.createdOn,required this.user}) : super(key: key);
+  final String postName;
+  const BlogPostCard({Key? key,required this.heading,required this.greeting,required this.createdOn,required this.user,required this.postName}) : super(key: key);
 
   @override
-  State<BlogPostCard> createState() => _BlogPostCardState(heading,greeting,createdOn,user);
+  State<BlogPostCard> createState() => _BlogPostCardState(heading,greeting,createdOn,user,postName);
 }
 
 class _BlogPostCardState extends State<BlogPostCard> {
@@ -22,8 +23,9 @@ class _BlogPostCardState extends State<BlogPostCard> {
   final String greeting;
   final String createdOn;
   final String user;
+  final String postName;
 
-  _BlogPostCardState(this.heading,this.greeting,this.createdOn,this.user);
+  _BlogPostCardState(this.heading,this.greeting,this.createdOn,this.user,this.postName);
 
   bool _mousePresent=false;
 
@@ -117,7 +119,7 @@ class _BlogPostCardState extends State<BlogPostCard> {
                 ),
               ),
             ),
-            openBuilder: (context,closeContainer)=>BlogPage(),
+            openBuilder: (context,closeContainer)=>BlogPage(postName: postName,heading: heading,),
           ),
         );
       }

@@ -7,4 +7,8 @@ class BlogServices{
     return jsonDecode(await rootBundle.loadString('blog_posts.json'));
   }
 
+  static Future<String> getHTMLString(String postName) async{
+    return rootBundle.loadString('assets/blog_posts/$postName/index.html');
+  }
+
 }

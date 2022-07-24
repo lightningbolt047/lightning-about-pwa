@@ -33,7 +33,7 @@ class BlogPosts extends StatelessWidget {
         return SliverList(
           delegate: SliverChildBuilderDelegate(
             (context,index){
-              return BlogPostCard(createdOn: snapshot.data![index]['createdOn']!, greeting: snapshot.data![index]['greeting']!, heading: snapshot.data![index]['heading']!,user: snapshot.data![index]['user'],);
+              return BlogPostCard(createdOn: snapshot.data![index]['createdOn']!, greeting: snapshot.data![index]['greeting']!, heading: snapshot.data![index]['heading']!,user: snapshot.data![index]['user'],postName: snapshot.data![index]['name'],);
             },
             childCount: snapshot.data!.length
           ),
